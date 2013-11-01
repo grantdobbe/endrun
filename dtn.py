@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  untitled.py
+#  dtn.py
 #  
 #  Copyright 2013 Grant Dobbe <grant@binarysprocket.com>
 #  
@@ -23,35 +23,61 @@
 #  
 
 #import pynacl
-import time, base64, os, nacl.utils
+import time, os, nacl.utils, pickle
 from nacl.public import PrivateKey, Box
 
+NONCE_SIZE = 24
+
 class Payload:
-  # time-to-live - unix timestamp of now + 24 hours 
+  
   ttl = int(time.time()+86400)
-  # source - a hash of the source's public key
-  # TODO: figure this out more later
-  source = "me"
-  # destination - a hash of the source's private key
-  # TODO: figure this out more later
-  destination = "you"
+  # origin - a unique identifier that can be used to pull up my public key
+  origin = ''
+  # destination - a unique identifier that can be used to pull up their private key
+  destination = ''
   # nonce = a number used once for purposes of encryption and decryption
-  # TODO: research better methods of generating nonces
-  nonce = nacl.utils.random(Box.NONCE_SIZE)
+  nonce = nacl.utils.random(NONCE_SIZE)
   # payload - nacl encrypted bzipped tarball 
   # empty by default
-  payload = ""
+  payload = ''
   
-  # encrypt a tarball and save it to the payload
+  # encrypts data and saves it to the payload
   # args:
-  def serialize():
-    # use pynacl for this
- 
-    
-  def deserialize():
-    # use pynacl for this
-    
-    
+  #   origin: a string representing the origin node's unique identifier
+  #   destination: a string representing the destination node's unique identifier
+  #   contents: binary data to be encrypted and assigned to the payload object
+  def serialize(self, origin, destination, payload_contents ):
+    # address the payload
+    self.origin = origin
+    self.destination = destination
+    # look up the public and private keys
+    with open( origin + '.private', 'r' ) as originPrivateKey:
+      originKey = pickle.load(originPrivateKey)
+    with open( destination + '.public', 'r' ) as destinationPublicKey:
+      destinationKey = pickle.load(destinationPublicKey)
+    # make payload a NaCL box
+    container = Box( originKey, destinationKey )
+    # put contents in the payload
+    self.payload = container.encrypt( payload_contents, self.nonce )
+  
+  # decrypt a payload and return the contents
+  # args:
+  #   none
+  # return:
+  #   a decrypted tarball containing a git bundle or False otherwise
+  def deserialize(self):
+    # grab my private key
+    with open( self.destination + '.private', 'r' ) as destinationPrivateKey:
+      destinationKey = pickle.load(destinationPrivateKey)
+    # grab the origin's public key
+    with open( self.origin + '.public', 'r' ) as originPublicKey:
+      originKey = pickle.load(originPublicKey)
+    # create a box to decrypt this sucker
+    container = Box(destinationKey, originKey)
+    # decrypt it
+    result = container.decrypt(self.payload)
+    return result
+            
   # grab a git bundle from a repo and create a payload
   # args: 
   #   repo: the fully qualified path to a git repo
@@ -70,9 +96,10 @@ class Payload:
     # run it through base64 and pipe it into self.payload
     # clean up after ourselves (delete the .bundle file and the encrypted tarball)
     # export the entire payload with headers into a file
-    
-  # import a payload, decrypt the git payload inside, and perform a git pull
-  def unpack(repo, source):
+    # import a payload, decrypt the git payload inside, and perform a git pull
+    return 0
+  
+  def unpack(self, repo, source):
     # decrypt the tarball using our private key (call deserialize() )
     # untar and decompress the bundle
     # if a remote for the source doesn't exist in our repo, create one
@@ -82,13 +109,5 @@ class Payload:
     # if we are missing the necessary commits, die and say which ones
     # otherwise, do a git pull from the bundle file
     # clean up after ourselves (delete the encrypted payload and the tarball)
-    
-    
+    return 0
   
-
-def main():
-	return 0
-
-if __name__ == '__main__':
-	main()
-

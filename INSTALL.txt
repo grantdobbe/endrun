@@ -1,0 +1,9 @@
+download libsodium and install according to instructions
+
+install the following packages:
+- python-dev
+- python-pip
+- libffi-dev
+
+then run
+sudo pip install pynacl
