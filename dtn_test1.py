@@ -49,8 +49,9 @@ def main():
     keyMake('node1')
     keyMake('node2')
 
+  data = raw_input('Enter some text: ')
   print 'making a payload and saving it to file'
-  output = createPayload('node1', 'node2', 'Hello, world')
+  output = createPayload('node1', 'node2', data)
   with open('payload.dtn', 'w+') as payloadFile:
     pickle.dump(output, payloadFile)
   return 0
