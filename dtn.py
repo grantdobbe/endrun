@@ -65,8 +65,11 @@ class Payload:
       destinationKey = self.deserialize(destinationPublicKey)
     # make payload a NaCL box
     container = Box( originKey, destinationKey )
+    # sign the contents
+    
     # put contents in the payload
     self.payload = container.encrypt( payload_contents, self.nonce )
+    # sign the payload
   
   # decrypt a payload and return the contents
   # args:
