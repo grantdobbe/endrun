@@ -41,20 +41,28 @@ class Payload:
   # empty by default
   payload = ''
   
+  # serializes whatever is fed to it
+  def serialize(self, material):
+    return pickle.dump(material)
+    
+  #deserializes whatever is fed to it
+  def deserialize(self, material):
+    return pickle.load(material)
+  
   # encrypts data and saves it to the payload
   # args:
   #   origin: a string representing the origin node's unique identifier
   #   destination: a string representing the destination node's unique identifier
   #   contents: binary data to be encrypted and assigned to the payload object
-  def serialize(self, origin, destination, payload_contents ):
+  def wrap(self, origin, destination, payload_contents ):
     # address the payload
     self.origin = origin
     self.destination = destination
     # look up the public and private keys
     with open( origin + '.private', 'r' ) as originPrivateKey:
-      originKey = pickle.load(originPrivateKey)
+      originKey = deserialize(originPrivateKey)
     with open( destination + '.public', 'r' ) as destinationPublicKey:
-      destinationKey = pickle.load(destinationPublicKey)
+      destinationKey = deserialize(destinationPublicKey)
     # make payload a NaCL box
     container = Box( originKey, destinationKey )
     # put contents in the payload
@@ -65,13 +73,13 @@ class Payload:
   #   none
   # return:
   #   a decrypted tarball containing a git bundle or False otherwise
-  def deserialize(self):
+  def unwrap(self):
     # grab my private key
     with open( self.destination + '.private', 'r' ) as destinationPrivateKey:
-      destinationKey = pickle.load(destinationPrivateKey)
+      destinationKey = deserialize(destinationPrivateKey)
     # grab the origin's public key
     with open( self.origin + '.public', 'r' ) as originPublicKey:
-      originKey = pickle.load(originPublicKey)
+      originKey = deserialize(originPublicKey)
     # create a box to decrypt this sucker
     container = Box(destinationKey, originKey)
     # decrypt it
