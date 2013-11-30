@@ -2,4 +2,4 @@
 *.private
 *.dtn
 *.pyc
-
+*.conf

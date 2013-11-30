@@ -23,7 +23,7 @@
 #  
 
 #import pynacl
-import time, os, nacl.utils, pickle
+import time, os, nacl.utils, pickle, ConfigParser
 from nacl.public import PrivateKey, Box
 
 NONCE_SIZE = 24
