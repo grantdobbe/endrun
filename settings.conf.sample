@@ -1,6 +1,4 @@
 [global]
 nodename:     node1
 repopath:     /path/to/repo
-pubkey:       /path/to/publickey.public
-privkey:      /path/to/privatekey.private
-
+keypath:      /path/to/keys
