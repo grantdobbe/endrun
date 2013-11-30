@@ -60,9 +60,9 @@ class Payload:
     self.destination = destination
     # look up the public and private keys
     with open( origin + '.private', 'r' ) as originPrivateKey:
-      originKey = deserialize(originPrivateKey)
+      originKey = self.deserialize(originPrivateKey)
     with open( destination + '.public', 'r' ) as destinationPublicKey:
-      destinationKey = deserialize(destinationPublicKey)
+      destinationKey = self.deserialize(destinationPublicKey)
     # make payload a NaCL box
     container = Box( originKey, destinationKey )
     # put contents in the payload
@@ -76,10 +76,10 @@ class Payload:
   def unwrap(self):
     # grab my private key
     with open( self.destination + '.private', 'r' ) as destinationPrivateKey:
-      destinationKey = deserialize(destinationPrivateKey)
+      destinationKey = self.deserialize(destinationPrivateKey)
     # grab the origin's public key
     with open( self.origin + '.public', 'r' ) as originPublicKey:
-      originKey = deserialize(originPublicKey)
+      originKey = self.deserialize(originPublicKey)
     # create a box to decrypt this sucker
     container = Box(destinationKey, originKey)
     # decrypt it

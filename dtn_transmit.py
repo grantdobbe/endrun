@@ -40,7 +40,7 @@ def keyMake(node):
 
 def createPayload(source, destination, message):
   payload = Payload()
-  payload.serialize(source, destination, message)
+  payload.wrap(source, destination, message)
   return payload
 
 def main():
