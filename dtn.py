@@ -3,7 +3,7 @@
 #
 #  dtn.py
 #  
-#  Copyright 2013 Grant Dobbe <grant@binarysprocket.com>
+#  Copyright 2013 Grant Dobbe <grant@dobbe.us>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,8 @@
 #  
 
 #import pynacl
-import time, os, nacl.utils, pickle, ConfigParser
+import time, os, pickle, ConfigParser
+import nacl.utils, nacl.encoding, nacl.signing
 from nacl.public import PrivateKey, Box
 
 NONCE_SIZE = 24
@@ -58,6 +59,9 @@ class Payload:
     # address the payload
     self.origin = origin
     self.destination = destination
+    # look up the signature key
+    with open( origin + '.sig', 'r') as originSigKey:
+      originSig = self.deserialize(originSigKey)
     # look up the public and private keys
     with open( origin + '.private', 'r' ) as originPrivateKey:
       originKey = self.deserialize(originPrivateKey)
@@ -66,11 +70,12 @@ class Payload:
     # make payload a NaCL box
     container = Box( originKey, destinationKey )
     # sign the contents
+    signedContents = originSig.sign(payload_contents)
+    # encrypt the payload
+    rawPayload = container.encrypt( signedContents, self.nonce )
+    # sign the payload and attach it to the object
+    self.payload = originSig.sign( rawPayload )
     
-    # put contents in the payload
-    self.payload = container.encrypt( payload_contents, self.nonce )
-    # sign the payload
-  
   # decrypt a payload and return the contents
   # args:
   #   none
@@ -83,10 +88,20 @@ class Payload:
     # grab the origin's public key
     with open( self.origin + '.public', 'r' ) as originPublicKey:
       originKey = self.deserialize(originPublicKey)
+    # grab the origin's verification key
+    with open( self.origin + '.sighex', 'r' ) as originSigHex:
+      originSigKey = self.deserialize(originSigHex)
+      originVerify = nacl.signing.VerifyKey(originSigKey, encoder=nacl.encoding.HexEncoder)
+    
     # create a box to decrypt this sucker
     container = Box(destinationKey, originKey)
+    # verify the signature
+   # rawResult = originVerify.verify(self.payload)
+    rawResult = self.payload
     # decrypt it
-    result = container.decrypt(self.payload)
+    rawResult = container.decrypt(rawResult)
+    # verify the signature again
+    result = originVerify.verify(rawResult)
     return result
             
   # grab a git bundle from a repo and create a payload
@@ -122,3 +137,39 @@ class Payload:
     # clean up after ourselves (delete the encrypted payload and the tarball)
     return 0
   
+    
+def keyCheck(node):
+  # check for a valid key pair and return true if found, false otherwise    
+  result = False
+  if os.path.exists(node + '.public') and os.path.exists(node + '.private') and os.path.exists(node + '.sig') and os.path.exists(node + '.sighex'):
+    result = True
+  return result
+  
+def keyMake(node):
+  # create a public, private, and signature key set
+
+  # generate the encryption keypair
+  key = PrivateKey.generate()
+  # generate the signature key
+  sig = nacl.signing.SigningKey.generate()
+  
+  verify = sig.verify_key
+  sig_hex = verify.encode(encoder=nacl.encoding.HexEncoder)
+  
+  with open(node + '.sig', 'w+') as signing_key:
+    pickle.dump(sig, signing_key) 
+  with open(node + '.sighex', 'w+') as verify_hex:
+    pickle.dump(sig_hex, verify_hex)
+  with open(node + '.private', 'w+') as private:
+    pickle.dump(key, private)
+  with open(node + '.public', 'w+') as public:
+    pickle.dump(key.public_key, public)
+    
+def createPayload(source, destination, message):
+  payload = Payload()
+  payload.wrap(source, destination, message)
+  return payload
+  
+def openPayload(payload):
+  return payload.unwrap()
+

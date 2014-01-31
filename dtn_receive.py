@@ -21,43 +21,20 @@
 #  MA 02110-1301, USA.
 #  
 #  
-import pickle, os
-from nacl.public import PrivateKey, Box
-from dtn import Payload
-
-def keyCheck(node):
-  result = False
-  if os.path.exists(node + '.public') and os.path.exists(node + '.private'):
-    result = True
-  return result
-
-def keyMake(node):
-  key = PrivateKey.generate()
-  with open(node + '.private', 'w+') as private:
-    pickle.dump(key, private)
-  with open(node + '.public', 'w+') as public:
-    pickle.dump(key.public_key, public)
-
-def createPayload(source, destination, message):
-  payload = Payload()
-  payload.wrap(source, destination, message)
-  return payload
-  
-def openPayload(payload):
-  return payload.unwrap()
+import pickle, os, dtn
 
 def main():
   # generate keys
-  if keyCheck('node1') == False and keyCheck('node2') == False:
-    keyMake('node1')
-    keyMake('node2')
+  if dtn.keyCheck('node1') == False and dtn.keyCheck('node2') == False:
+    dtn.keyMake('node1')
+    dtn.keyMake('node2')
 
   inputFile = raw_input('enter the name of the payload file: ')
   with open(inputFile, 'r') as payloadFile:
     output = pickle.load(payloadFile)
     
   print type(output)
-  print openPayload(output)
+  print dtn.openPayload(output)
   return 0
 
 if __name__ == '__main__':
