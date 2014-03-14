@@ -7,3 +7,4 @@ install the following packages:
 
 then run
 sudo pip install pynacl
+sudo easy-install GitPython

@@ -22,31 +22,42 @@
 #  
 #  
 
-import pickle, os, time
+import pickle, os, time, git
 from dtn import keyMake
 
-def generateKeys():
+# generate the DTN keys we need for each node
+def generateKeys(nodeTotal, path):
 	nodes = []
-	nodeTotal = int(raw_input("Enter the number of nodes to create: "))
+	keyPath = path + "/keys"
 	
-	if not os.path.exists('keys'):
-		os.makedirs('keys')
+	if not os.path.exists(keyPath):
+		os.makedirs(keyPath)
 	
-	os.chdir('keys')
+	os.chdir(keyPath)
 	
 	start = time.clock()
 	for node in range (1, nodeTotal + 1):
 		nodeName = 'node' + str(node)
 		keyMake(nodeName)
 	end = time.clock()
-	
+
 	difference = end - start
+	
 	print 
 	print "Setup complete. Generated " + str(nodeTotal) + " keys in " + str(difference) + " seconds."
-	print "Keys can be found in ./keys."
+	print "Keys can be found in " + str(keyPath)
+
+# generate an empty repo with the correct number of branches for each node
+def repoInit(nodeTotal, path):
+	# set up the actual deployment path
+	deployPath = path + '/repo'
+	repo = git.Repo(deployPath)
+	assert repo.bare == True
 
 def main():
-	generateKeys()
+	number = int(raw_input("Enter the number of nodes to create: "))
+	path = raw_input("Define the output path for the files and repos (no trailing slash): ")
+	generateKeys(number, path)
 	return 0
 
 if __name__ == '__main__':
