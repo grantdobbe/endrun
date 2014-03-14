@@ -23,7 +23,7 @@
 #  
 
 #import pynacl
-import time, os, pickle, ConfigParser, git
+import time, os, pickle, ConfigParser, git, shutil
 import nacl.utils, nacl.encoding, nacl.signing
 from nacl.public import PrivateKey, Box
 
@@ -247,7 +247,8 @@ def nodeInit(nodeTotal, path):
 
   for node in range(1, nodeTotal + 1):
     # define some variables we'll need
-    nodePath = path + '/node' + str(node) + '-deploy'
+    nodeName = "node" + str(node)
+    nodePath = path + '/' + nodeName + '-deploy'
     repoPath = nodePath + '/repo'
     keyPath = nodePath + '/keys'
     bundlePath = nodePath + '/bundles'
@@ -266,10 +267,17 @@ def nodeInit(nodeTotal, path):
     if not os.path.exists(keyPath):
       os.makedirs(keyPath)
     # copy in:
-    #  this node's public/private crypto key
-    #  this node's public/private sig key
-    #  everyone else's public crypto key
-    #  everyone else's public sig key
+    #  this node's private crypto key
+    shutil.copy(parentKeys + '/' + nodeName + '.private', keyPath)
+    #  this node's private sig key
+    shutil.copy(parentKeys + '/' + nodeName + '.sig', keyPath)
+    for files in os.listdir(parentKeys):
+      #  everyone's public crypto key
+      if files.endswith(".public"):
+        shutil.copy(parentKeys + '/' + files, keyPath)
+    #  everyone's public sig key
+      if files.endswith(".sighex"):
+        shutil.copy(parentKeys + '/' + files, keyPath)
   
 '''
 Payload functions
