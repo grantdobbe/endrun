@@ -23,12 +23,17 @@
 #  
 
 #import pynacl
-import time, os, pickle, ConfigParser
+import time, os, pickle, ConfigParser, git
 import nacl.utils, nacl.encoding, nacl.signing
 from nacl.public import PrivateKey, Box
 
 NONCE_SIZE = 24
 
+'''
+-----------------
+Class declaration
+-----------------
+'''
 class Payload:
   
   ttl = int(time.time()+86400)
@@ -136,8 +141,15 @@ class Payload:
     # otherwise, do a git pull from the bundle file
     # clean up after ourselves (delete the encrypted payload and the tarball)
     return 0
-  
-    
+'''
+---------------
+Helper Functions
+---------------
+'''  
+
+'''
+crypto initialization and checks
+'''
 def keyCheck(node):
   # check for a valid key pair and return true if found, false otherwise    
   result = False
@@ -146,16 +158,15 @@ def keyCheck(node):
   return result
   
 def keyMake(node):
-  # create a public, private, and signature key set
-
+  ## create a public, private, and signature key set
   # generate the encryption keypair
   key = PrivateKey.generate()
   # generate the signature key
   sig = nacl.signing.SigningKey.generate()
-  
   verify = sig.verify_key
   sig_hex = verify.encode(encoder=nacl.encoding.HexEncoder)
   
+  # write all of the keys to file
   with open(node + '.sig', 'w+') as signing_key:
     pickle.dump(sig, signing_key) 
   with open(node + '.sighex', 'w+') as verify_hex:
@@ -164,12 +175,79 @@ def keyMake(node):
     pickle.dump(key, private)
   with open(node + '.public', 'w+') as public:
     pickle.dump(key.public_key, public)
-    
+
+'''
+Node setup and configuration
+'''
+# generate the DTN keys we need for each node
+def generateKeys(nodeTotal, path):
+	nodes = []
+	keyPath = path + "/keys"
+	
+  # if the directory doesn't exist, create it
+	if not os.path.exists(keyPath):
+		os.makedirs(keyPath)
+
+  # switch to that directory
+	os.chdir(keyPath)
+  	
+  # create one key set for each node and time it
+	start = time.clock()
+	for node in range (1, nodeTotal + 1):
+		nodeName = 'node' + str(node)
+		keyMake(nodeName)
+	end = time.clock()
+  
+  # figure out how long it took
+	difference = end - start
+  
+  # print a progress message for the user
+	print "Setup complete. Generated " + str(nodeTotal) + " keys in " + str(difference) + " seconds."
+	print "Keys can be found in " + str(keyPath)
+
+# generate an empty repo with the correct number of branches for each node
+def repoInit(nodeTotal, path):
+	# set up the actual deployment path
+	deployPath = path + '/repo'
+	
+	# create the directory if it's not there yet
+	if not os.path.exists(deployPath):
+		os.makedirs(deployPath)
+
+	# init an empty repo
+	repo = git.Repo.init(deployPath)
+	
+	# write a file so that we have something to move around
+	filetext = "This is created during node configuration. Add any additional instructions here."
+	readmeName = deployPath + '/README.md'
+	with open(readmeName, 'w+') as readme:
+		readme.write(filetext)
+
+	# commit said file	
+	repo.git.add(readmeName)
+	repo.git.commit(m='initial commit to repo')
+	
+	# create a branch for each node we need to work with
+	for node in range(1, nodeTotal + 1):
+		nodeName = 'node' +	 str(node)
+		repo.git.checkout(b=nodeName)
+  # checkout the master branch again
+	repo.git.checkout('master')
+
+  # print a progress message for the user
+	print "Repo created with " + str(nodeTotal) + " branches."
+
+ 
+'''
+Payload functions
+'''
+# create a payload for the user 
 def createPayload(source, destination, message):
   payload = Payload()
   payload.wrap(source, destination, message)
   return payload
   
+# open a payload for the user
 def openPayload(payload):
   return payload.unwrap()
 

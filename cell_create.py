@@ -22,59 +22,8 @@
 #  
 #  
 
-import pickle, os, time, git
-from dtn import keyMake
+import os, dtn
 
-# generate the DTN keys we need for each node
-def generateKeys(nodeTotal, path):
-	nodes = []
-	keyPath = path + "/keys"
-	
-	if not os.path.exists(keyPath):
-		os.makedirs(keyPath)
-	
-	os.chdir(keyPath)
-	
-	start = time.clock()
-	for node in range (1, nodeTotal + 1):
-		nodeName = 'node' + str(node)
-		keyMake(nodeName)
-	end = time.clock()
-
-	difference = end - start
-	
-	print 
-	print "Setup complete. Generated " + str(nodeTotal) + " keys in " + str(difference) + " seconds."
-	print "Keys can be found in " + str(keyPath)
-
-# generate an empty repo with the correct number of branches for each node
-def repoInit(nodeTotal, path):
-	# set up the actual deployment path
-	deployPath = path + '/repo'
-	
-	# create the directory if it's not there yet
-	if not os.path.exists(deployPath):
-		os.makedirs(deployPath)
-
-	# init an empty repo
-	repo = git.Repo.init(deployPath)
-	
-	# write a file so that we have something to move around
-	filetext = "This is created during node configuration. Add any additional instructions here."
-	readmeName = deployPath + '/README.md'
-	with open(readmeName, 'w+') as readme:
-		readme.write(filetext)
-
-	# commit said file	
-	repo.git.add(readmeName)
-	repo.git.commit(m='initial commit to repo')
-	
-	# create a branch for each node we need to work with
-	for node in range(1, nodeTotal + 1):
-		nodeName = 'node' +	 str(node)
-		repo.git.checkout(b=nodeName)
-		
-	repo.git.checkout('master')
 	
 	
 def main():
@@ -83,8 +32,8 @@ def main():
 	number = int(raw_input("Enter the number of nodes to create (default is 5): ") or 5 ) 
 	path = raw_input("Define the output path for the files and repos (no trailing slash, default is ~/plp-test): ") or home
 	
-	generateKeys(number, path)
-	repoInit(number, path)
+	dtn.generateKeys(number, path)
+	dtn.repoInit(number, path)
 	return 0
 
 if __name__ == '__main__':
