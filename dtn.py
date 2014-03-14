@@ -237,7 +237,40 @@ def repoInit(nodeTotal, path):
   # print a progress message for the user
 	print "Repo created with " + str(nodeTotal) + " branches."
 
- 
+# create the node-specific config directories and run the "round robin"
+def nodeInit(nodeTotal, path):
+  
+  # define the parent repo
+  parentRepo = path + '/repo'
+  # define the parent key directory
+  parentKeys = path + '/keys'
+
+  for node in range(1, nodeTotal + 1):
+    # define some variables we'll need
+    nodePath = path + '/node' + str(node) + '-deploy'
+    repoPath = nodePath + '/repo'
+    keyPath = nodePath + '/keys'
+    bundlePath = nodePath + '/bundles'
+    # create a directory named nodeX-deploy for each node
+    if not os.path.exists(nodePath):
+      os.makedirs(nodePath)
+    # create a directory called repo
+    if not os.path.exists(repoPath):
+      os.makedirs(repoPath)    
+    # clone the repo in that directory
+    repo = git.Repo.clone_from(parentRepo, repoPath)
+    # create a directory called bundles (leave it empty for now)
+    if not os.path.exists(bundlePath):
+      os.makedirs(bundlePath)
+    # create a directory called keys
+    if not os.path.exists(keyPath):
+      os.makedirs(keyPath)
+    # copy in:
+    #  this node's public/private crypto key
+    #  this node's public/private sig key
+    #  everyone else's public crypto key
+    #  everyone else's public sig key
+  
 '''
 Payload functions
 '''

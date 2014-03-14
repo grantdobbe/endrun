@@ -23,17 +23,25 @@
 #  
 
 import os, dtn
-
-	
 	
 def main():
+	
+	# grab the user's home directory
 	home = os.path.expanduser("~") + "/plp-test"
 	
+	# fetch our intial config data
 	number = int(raw_input("Enter the number of nodes to create (default is 5): ") or 5 ) 
 	path = raw_input("Define the output path for the files and repos (no trailing slash, default is ~/plp-test): ") or home
 	
+	# generate the keys
 	dtn.generateKeys(number, path)
+	# create the repo
 	dtn.repoInit(number, path)
+	# create a directory for each node following the convention nodeX-deploy with the appropriate info
+	dtn.nodeInit(number, path)
+	# tell the user we're done
+	print "Node configuration complete. Output can be found in " + path + " ."
+	
 	return 0
 
 if __name__ == '__main__':
