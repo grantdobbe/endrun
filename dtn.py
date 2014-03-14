@@ -266,7 +266,9 @@ def nodeInit(nodeTotal, path):
     # clone the repo in that directory
     repo = git.Repo.clone_from(parentRepo, repoPath)
     # create a bundle of this repo and drop it in the parent folder
-    repo.git.bundle('create', parentBundles + '/' + nodeName + ".bundle", 'master')
+    repo.git.checkout(b=nodeName)
+    repo.git.bundle('create', parentBundles + '/' + nodeName + ".bundle", nodeName)
+    repo.create_tag('bundle-' + nodeName + '-0')
     # create a directory called bundles (leave it empty for now)
     if not os.path.exists(bundlePath):
       os.makedirs(bundlePath)
@@ -286,7 +288,28 @@ def nodeInit(nodeTotal, path):
       if files.endswith(".sighex"):
         shutil.copy(parentKeys + '/' + files, keyPath)
   # now create the bundles and set them up in each repo
-  
+  for node in range(1, nodeTotal + 1):
+    # define some variables we'll needcd ..
+    
+    nodeName = "node" + str(node)
+    nodePath = path + '/' + nodeName + '-deploy'
+    repoPath = nodePath + '/repo'
+    bundlePath = nodePath + '/bundles'  
+    
+    repo = git.Repo(repoPath)
+    # copy every bundle except yourself
+    for files in os.listdir(parentBundles):
+      if not files.startswith(nodeName):
+        shutil.copy(parentBundles + '/' + files, bundlePath)
+    # add a remote for every bundle you have
+    for files in os.listdir(bundlePath):
+      remoteName = files.split('.')
+      remote = repo.create_remote(remoteName[0] + '-remote', bundlePath + '/' + files)
+      remote.fetch()
+      trackingBranch = remoteName[0] + '-remote/' + remoteName[0]
+      repo.git.checkout(b=trackingBranch)
+    repo.git.checkout('master')
+    
 '''
 Payload functions
 '''
