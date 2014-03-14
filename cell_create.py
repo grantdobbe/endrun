@@ -52,12 +52,31 @@ def repoInit(nodeTotal, path):
 	# set up the actual deployment path
 	deployPath = path + '/repo'
 	
+	# create the directory if it's not there yet
 	if not os.path.exists(deployPath):
 		os.makedirs(deployPath)
 
+	# init an empty repo
 	repo = git.Repo.init(deployPath)
+	
+	# write a file so that we have something to move around
+	filetext = "This is created during node configuration. Add any additional instructions here."
+	readmeName = deployPath + '/README.md'
+	with open(readmeName, 'w+') as readme:
+		readme.write(filetext)
 
-
+	# commit said file	
+	repo.git.add(readmeName)
+	repo.git.commit(m='initial commit to repo')
+	
+	# create a branch for each node we need to work with
+	for node in range(1, nodeTotal + 1):
+		nodeName = 'node' +	 str(node)
+		repo.git.checkout(b=nodeName)
+		
+	repo.git.checkout('master')
+	
+	
 def main():
 	home = os.path.expanduser("~") + "/plp-test"
 	
