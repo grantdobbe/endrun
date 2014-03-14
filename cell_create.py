@@ -51,13 +51,21 @@ def generateKeys(nodeTotal, path):
 def repoInit(nodeTotal, path):
 	# set up the actual deployment path
 	deployPath = path + '/repo'
-	repo = git.Repo(deployPath)
-	assert repo.bare == True
+	
+	if not os.path.exists(deployPath):
+		os.makedirs(deployPath)
+
+	repo = git.Repo.init(deployPath)
+
 
 def main():
-	number = int(raw_input("Enter the number of nodes to create: "))
-	path = raw_input("Define the output path for the files and repos (no trailing slash): ")
+	home = os.path.expanduser("~") + "/plp-test"
+	
+	number = int(raw_input("Enter the number of nodes to create (default is 5): ") or 5 ) 
+	path = raw_input("Define the output path for the files and repos (no trailing slash, default is ~/plp-test): ") or home
+	
 	generateKeys(number, path)
+	repoInit(number, path)
 	return 0
 
 if __name__ == '__main__':
