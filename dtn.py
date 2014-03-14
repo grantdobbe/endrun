@@ -244,7 +244,12 @@ def nodeInit(nodeTotal, path):
   parentRepo = path + '/repo'
   # define the parent key directory
   parentKeys = path + '/keys'
+  # define the parent bundle path
+  parentBundles = path + '/bundles'
+  if not os.path.exists(parentBundles):
+    os.makedirs(parentBundles)
 
+  # set up the deploy directory and set up everything except bundles
   for node in range(1, nodeTotal + 1):
     # define some variables we'll need
     nodeName = "node" + str(node)
@@ -260,6 +265,8 @@ def nodeInit(nodeTotal, path):
       os.makedirs(repoPath)    
     # clone the repo in that directory
     repo = git.Repo.clone_from(parentRepo, repoPath)
+    # create a bundle of this repo and drop it in the parent folder
+    repo.git.bundle('create', parentBundles + '/' + nodeName + ".bundle", 'master')
     # create a directory called bundles (leave it empty for now)
     if not os.path.exists(bundlePath):
       os.makedirs(bundlePath)
@@ -278,6 +285,7 @@ def nodeInit(nodeTotal, path):
     #  everyone's public sig key
       if files.endswith(".sighex"):
         shutil.copy(parentKeys + '/' + files, keyPath)
+  # now create the bundles and set them up in each repo
   
 '''
 Payload functions
