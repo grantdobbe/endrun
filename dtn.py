@@ -32,9 +32,8 @@ NONCE_SIZE = 24
 '''
 Grab the config file (we're gonna need it later on)
 '''
-config = ConfigParser.RawConfigParser()
+config = ConfigParser.ConfigParser()
 config.read('settings.conf')
-
 
 '''
 -----------------
