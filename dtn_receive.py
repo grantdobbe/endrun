@@ -25,17 +25,17 @@ import pickle, os, dtn, sys
 
 def main():
   
- if len(sys.argv) != 2:
+  if len(sys.argv) != 2:
     print "usage: python dtn_receive.py payloadfile"
     exit()
-  
+    
   filename = sys.argv[1]
-  
   with open(filename, 'r') as payloadFile:
     output = pickle.load(payloadFile)
-
-  with open(filename[:-4], 'w+b' as bundleFile)
-    bundleFile.write(bytearray(output))
+    bundle = bytes(dtn.openPayload(output))
+    
+  with open(filename[:-4], 'wb') as bundleFile:
+    bundleFile.write(output)
     
   return 0
 

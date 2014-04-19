@@ -24,7 +24,7 @@ sudo easy-install GitPython
 Add the following to your path:
 
 ```
-PATH=$PATH:/path/to/libnatasha
+export PATH=$PATH:/path/to/libnatasha
 ```
 
 Finally, copy settings.conf.sample to settings.conf and change the settings to match your node's deployment schema
@@ -52,9 +52,9 @@ Reboot. After reboot:
 
 ```
 mv ~/nodeX-deploy ~/plp
-sudo cp ~/libnatasha/gollum-server /etc/init.d/
+sudo cp ~/libnatasha/install/gollum-server /etc/init.d/
 sudo chmod 755 /etc/init.d/gollum-server
-cp ~/libnatasha/config.rb ~/plp/config.rb
+cp ~/libnatasha/install/config.rb ~/plp/config.rb
 sudo update-rc.d gollum-server defaults
 
 ```
