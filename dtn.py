@@ -108,8 +108,7 @@ class Payload:
     # create a box to decrypt this sucker
     container = Box(destinationKey, originKey)
     # verify the signature
-   # rawResult = originVerify.verify(self.payload)
-    rawResult = self.payload
+    rawResult = originVerify.verify(self.payload)
     # decrypt it
     rawResult = container.decrypt(rawResult)
     # verify the signature again
