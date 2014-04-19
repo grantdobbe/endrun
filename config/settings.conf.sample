@@ -1,4 +1,0 @@
-[global]
-nodename:     node1
-repopath:     /path/to/repo
-keypath:      /path/to/keys

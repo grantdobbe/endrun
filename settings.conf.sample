@@ -1,0 +1,4 @@
+[global]
+nodename:     nodeX
+repopath:     /home/pi/plp/repo
+keypath:      /home/pi/plp/keys

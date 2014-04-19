@@ -30,6 +30,13 @@ from nacl.public import PrivateKey, Box
 NONCE_SIZE = 24
 
 '''
+Grab the config file (we're gonna need it later on)
+'''
+config = ConfigParser.RawConfigParser()
+config.read('settings.conf')
+
+
+'''
 -----------------
 Class declaration
 -----------------
@@ -60,17 +67,17 @@ class Payload:
   #   origin: a string representing the origin node's unique identifier
   #   destination: a string representing the destination node's unique identifier
   #   contents: binary data to be encrypted and assigned to the payload object
-  def wrap(self, origin, destination, payload_contents ):
+  def wrap(self, origin=config.get('global', 'nodename'), destination, payload_contents ):
     # address the payload
     self.origin = origin
     self.destination = destination
     # look up the signature key
-    with open( origin + '.sig', 'r') as originSigKey:
+    with open( config.get('global', 'keypath') + '/' + origin + '.sig', 'r') as originSigKey:
       originSig = self.deserialize(originSigKey)
     # look up the public and private keys
-    with open( origin + '.private', 'r' ) as originPrivateKey:
+    with open( config.get('global', 'keypath') + '/' + origin + '.private', 'r' ) as originPrivateKey:
       originKey = self.deserialize(originPrivateKey)
-    with open( destination + '.public', 'r' ) as destinationPublicKey:
+    with open( config.get('global', 'keypath') + '/' + destination + '.public', 'r' ) as destinationPublicKey:
       destinationKey = self.deserialize(destinationPublicKey)
     # make payload a NaCL box
     container = Box( originKey, destinationKey )
@@ -88,13 +95,13 @@ class Payload:
   #   a decrypted tarball containing a git bundle or False otherwise
   def unwrap(self):
     # grab my private key
-    with open( self.destination + '.private', 'r' ) as destinationPrivateKey:
+    with open( config.get('global', 'keypath') + '/' + self.destination + '.private', 'r' ) as destinationPrivateKey:
       destinationKey = self.deserialize(destinationPrivateKey)
     # grab the origin's public key
-    with open( self.origin + '.public', 'r' ) as originPublicKey:
+    with open( config.get('global', 'keypath') + '/' + self.origin + '.public', 'r' ) as originPublicKey:
       originKey = self.deserialize(originPublicKey)
     # grab the origin's verification key
-    with open( self.origin + '.sighex', 'r' ) as originSigHex:
+    with open( config.get('global', 'keypath') + '/' + self.origin + '.sighex', 'r' ) as originSigHex:
       originSigKey = self.deserialize(originSigHex)
       originVerify = nacl.signing.VerifyKey(originSigKey, encoder=nacl.encoding.HexEncoder)
     
@@ -153,7 +160,7 @@ crypto initialization and checks
 def keyCheck(node):
   # check for a valid key pair and return true if found, false otherwise    
   result = False
-  if os.path.exists(node + '.public') and os.path.exists(node + '.private') and os.path.exists(node + '.sig') and os.path.exists(node + '.sighex'):
+  if os.path.exists(config.get('global', 'keypath') + '/' + node + '.public') and os.path.exists(config.get('global', 'keypath') + '/' + node + '.private') and os.path.exists(node + '.sig') and os.path.exists(node + '.sighex'):
     result = True
   return result
   
@@ -167,13 +174,13 @@ def keyMake(node):
   sig_hex = verify.encode(encoder=nacl.encoding.HexEncoder)
   
   # write all of the keys to file
-  with open(node + '.sig', 'w+') as signing_key:
-    pickle.dump(sig, signing_key) 
-  with open(node + '.sighex', 'w+') as verify_hex:
+  with open(config.get('global', 'keypath') + '/' + node + '.sig', 'w+') as signing_key:
+    pickle.dump(config.get('global', 'keypath') + '/' + sig, signing_key) 
+  with open(config.get('global', 'keypath') + '/' + node + '.sighex', 'w+') as verify_hex:
     pickle.dump(sig_hex, verify_hex)
-  with open(node + '.private', 'w+') as private:
+  with open(config.get('global', 'keypath') + '/' + node + '.private', 'w+') as private:
     pickle.dump(key, private)
-  with open(node + '.public', 'w+') as public:
+  with open(config.get('global', 'keypath') + '/' + node + '.public', 'w+') as public:
     pickle.dump(key.public_key, public)
 
 '''
@@ -317,9 +324,9 @@ def nodeInit(nodeTotal, path):
 Payload functions
 '''
 # create a payload for the user 
-def createPayload(source, destination, message):
+def createPayload(source, destination, data):
   payload = Payload()
-  payload.wrap(source, destination, message)
+  payload.wrap(source, destination, data)
   return payload
   
 # open a payload for the user

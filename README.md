@@ -3,8 +3,35 @@ libnatasha
 
 Natasha - Network Able to Transmit Amid Severly Hostile Activity 
 
+
+Installation Instructions
+=======================
+
+download libsodium and install according to instructions
+
+Install the following packages:
+- python-dev
+- python-pip
+- libffi-dev
+
+Then run:
+```
+sudo pip install pynacl
+sudo easy-install GitPython
+```
+
+
+Add the following to your path:
+
+```
+PATH=$PATH:/path/to/libnatasha
+```
+
+Finally, copy settings.conf.sample to settings.conf and change the settings to match your node's deployment schema
+
+
 Manual Configuration Steps
-=================
+========================
 
 on host:
 ```

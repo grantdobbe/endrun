@@ -6,5 +6,13 @@ install the following packages:
 - libffi-dev
 
 then run
+```
 sudo pip install pynacl
 sudo easy-install GitPython
+```
+
+add the following to your path
+
+```
+PATH=$PATH:/path/to/libnatasha
+```

@@ -32,15 +32,16 @@ def main():
   # get nodes from command line path
   source = sys.argv[1]
   destination = sys.argv[2]
-  # get bundle file from command line path
 
+  # get bundle file from command line path
   #data = raw_input('Enter some text: ')
   data = sys.argv[3]
   
   print 'making a payload and saving it to file'
-  output = dtn.createPayload('node1', 'node2', data)
+  with open(data, 'r') as payloadInput:
+    output = dtn.createPayload('node1', 'node2', payloadInput)
   
-  with open(str(fileinput.filename() + '.dtn', 'w+') as payloadFile:
+  with open("~/" + data + '.dtn', 'w+') as payloadFile:
     pickle.dump(output, payloadFile)
   return 0
 
