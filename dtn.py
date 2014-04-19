@@ -72,12 +72,12 @@ class Payload:
     self.origin = config.get('global', 'nodename')
     self.destination = destination
     # look up the signature key
-    with open( config.get('global', 'keypath') + '/' + origin + '.sig', 'r') as originSigKey:
+    with open( config.get('global', 'keypath') + '/' + self.origin + '.sig', 'r') as originSigKey:
       originSig = self.deserialize(originSigKey)
     # look up the public and private keys
-    with open( config.get('global', 'keypath') + '/' + origin + '.private', 'r' ) as originPrivateKey:
+    with open( config.get('global', 'keypath') + '/' + self.origin + '.private', 'r' ) as originPrivateKey:
       originKey = self.deserialize(originPrivateKey)
-    with open( config.get('global', 'keypath') + '/' + destination + '.public', 'r' ) as destinationPublicKey:
+    with open( config.get('global', 'keypath') + '/' + self.destination + '.public', 'r' ) as destinationPublicKey:
       destinationKey = self.deserialize(destinationPublicKey)
     # make payload a NaCL box
     container = Box( originKey, destinationKey )
