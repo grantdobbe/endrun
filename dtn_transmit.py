@@ -21,18 +21,26 @@
 #  MA 02110-1301, USA.
 #  
 #  
-import pickle, os, dtn
+import pickle, os, dtn, sys
 
 def main():
-  # generate keys
-  if dtn.keyCheck('node1') == False and dtn.keyCheck('node2') == False:
-    dtn.keyMake('node1')
-    dtn.keyMake('node2')
+  
+  if len(sys.argv) != 2:
+    print "usage: python dtn_transmit.py source-node destination-node payloadfile"
+    exit()
+    
+  # get nodes from command line path
+  source = sys.argv[1]
+  destination = sys.argv[2]
+  # get bundle file from command line path
 
-  data = raw_input('Enter some text: ')
+  #data = raw_input('Enter some text: ')
+  data = sys.argv[3]
+  
   print 'making a payload and saving it to file'
   output = dtn.createPayload('node1', 'node2', data)
-  with open('payload.dtn', 'w+') as payloadFile:
+  
+  with open(str(fileinput.filename() + '.dtn', 'w+') as payloadFile:
     pickle.dump(output, payloadFile)
   return 0
 

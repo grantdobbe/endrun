@@ -18,7 +18,7 @@ WIKI="/home/pi/plp/repo"
 DEAMON="/usr/local/bin/gollum"
 # --port     : the port number gollum should listen on
 # --config   : the location of your config file
-DEAMON_OPT="--port 80 --config /home/pi/plp/config.rb"
+DEAMON_OPT="--config /home/pi/plp/config.rb"
 # The user the git repository belongs to
 USER="pi"
 # The group the git repository belongs to
