@@ -35,7 +35,7 @@ def main():
     bundle = bytes(dtn.openPayload(output))
     
   with open(filename[:-4], 'wb') as bundleFile:
-    bundleFile.write(output)
+    bundleFile.write(bundle)
     
   return 0
 
