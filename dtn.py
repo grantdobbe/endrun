@@ -67,9 +67,9 @@ class Payload:
   #   origin: a string representing the origin node's unique identifier
   #   destination: a string representing the destination node's unique identifier
   #   contents: binary data to be encrypted and assigned to the payload object
-  def wrap(self, origin=config.get('global', 'nodename'), destination, payload_contents ):
+  def wrap(self, destination, payload_contents ):
     # address the payload
-    self.origin = origin
+    self.origin = config.get('global', 'nodename')
     self.destination = destination
     # look up the signature key
     with open( config.get('global', 'keypath') + '/' + origin + '.sig', 'r') as originSigKey:

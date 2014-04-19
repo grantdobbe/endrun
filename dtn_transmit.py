@@ -25,21 +25,20 @@ import pickle, os, dtn, sys
 
 def main():
   
-  if len(sys.argv) != 2:
-    print "usage: python dtn_transmit.py source-node destination-node payloadfile"
+  if len(sys.argv) != 3:
+    print "usage: python dtn_transmit.py destination-node payloadfile"
     exit()
     
   # get nodes from command line path
-  source = sys.argv[1]
-  destination = sys.argv[2]
+  destination = sys.argv[1]
 
   # get bundle file from command line path
   #data = raw_input('Enter some text: ')
-  data = sys.argv[3]
+  data = sys.argv[2]
   
   print 'making a payload and saving it to file'
   with open(data, 'r') as payloadInput:
-    output = dtn.createPayload('node1', 'node2', payloadInput)
+    output = dtn.createPayload(destination, payloadInput)
   
   with open("~/" + data + '.dtn', 'w+') as payloadFile:
     pickle.dump(output, payloadFile)
