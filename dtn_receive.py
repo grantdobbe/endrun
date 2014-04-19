@@ -21,20 +21,22 @@
 #  MA 02110-1301, USA.
 #  
 #  
-import pickle, os, dtn
+import pickle, os, dtn, sys
 
 def main():
-  # generate keys
-  if dtn.keyCheck('node1') == False and dtn.keyCheck('node2') == False:
-    dtn.keyMake('node1')
-    dtn.keyMake('node2')
-
-  inputFile = raw_input('enter the name of the payload file: ')
-  with open(inputFile, 'r') as payloadFile:
+  
+ if len(sys.argv) != 2:
+    print "usage: python dtn_receive.py payloadfile"
+    exit()
+  
+  filename = sys.argv[1]
+  
+  with open(filename, 'r') as payloadFile:
     output = pickle.load(payloadFile)
+
+  with open(filename[:-4], 'w+b' as bundleFile)
+    bundleFile.write(bytearray(output))
     
-  print type(output)
-  print dtn.openPayload(output)
   return 0
 
 if __name__ == '__main__':

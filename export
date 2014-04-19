@@ -7,4 +7,9 @@ git bundle create ../bundles/node1.bundle bundle-node2-0...HEAD
 git tag bundle-node2-1 HEAD
 git checkout master
 
+cd ../bundles
+dtn_transmit.py node1 node1.bundle
 
+node1:
+
+dtn_receive.py 
