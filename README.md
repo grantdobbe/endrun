@@ -58,3 +58,13 @@ cp ~/libnatasha/install/config.rb ~/plp/config.rb
 sudo update-rc.d gollum-server defaults
 
 ```
+
+Generate your certificate and key. (Add script to make this easier later.) Then:
+
+```
+cat the.pem the.key > server.pem
+sudo cp server.pem /etc/lighttpd/server.pem
+sudo cp /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.old
+sudo cp ~/libnatasha/install/lighttpd.conf /etc/lighttpd/lighttpd.conf
+sudo /etc/init.d/lighttpd restart
+```
