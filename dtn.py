@@ -33,7 +33,8 @@ NONCE_SIZE = 24
 Grab the config file (we're gonna need it later on)
 '''
 config = ConfigParser.ConfigParser()
-config.read('settings.conf')
+config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
+
 
 '''
 -----------------
