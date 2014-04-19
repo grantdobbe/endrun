@@ -38,7 +38,7 @@ def main():
   
   print 'making a payload and saving it to file'
   with open(data, 'r') as payloadInput:
-    output = dtn.createPayload(destination, payloadInput)
+    output = dtn.createPayload(destination, payloadInput.read())
   
   with open("~/" + data + '.dtn', 'w+') as payloadFile:
     pickle.dump(output, payloadFile)
