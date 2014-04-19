@@ -324,9 +324,9 @@ def nodeInit(nodeTotal, path):
 Payload functions
 '''
 # create a payload for the user 
-def createPayload(source, destination, data):
+def createPayload(destination, data):
   payload = Payload()
-  payload.wrap(source, destination, data)
+  payload.wrap(destination, data)
   return payload
   
 # open a payload for the user
