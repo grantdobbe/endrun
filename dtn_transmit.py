@@ -40,7 +40,7 @@ def main():
   with open(data, 'r') as payloadInput:
     output = dtn.createPayload(destination, payloadInput.read())
   
-  with open("~/" + data + '.dtn', 'w+') as payloadFile:
+  with open('/tmp/' + data + '.dtn', 'w+') as payloadFile:
     pickle.dump(output, payloadFile)
   return 0
 
