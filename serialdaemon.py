@@ -10,6 +10,8 @@ import time
 incoming_pipe_name = '/tmp/tobesent'
 outgoing_pipe_name = '/tmp/received'
 
+logfile = '/var/log/plp_serial.log'
+
 outgoing_data_global = []
 
 if len(sys.argv) != 2:
@@ -25,11 +27,17 @@ if not os.path.exists(outgoing_pipe_name):
 pipeinfd = os.open(incoming_pipe_name, os.O_RDONLY | os.O_NONBLOCK)
 pipeout = open(outgoing_pipe_name, 'w+')
 
+logout = open(logfile, 'a')
+
 ser = serial.Serial(sys.argv[1], 19200, timeout=1)
+
+def logthis(data):
+  logout.write("["+time.ctime()+"] "+data+"\n");
+  logout.flush()
 
 def handleincomingdata(data):
   #print data
-  print "Received "+str(sum(len(s) for s in data))+" bytes."
+  logthis("Received "+str(sum(len(s) for s in data))+" bytes.")
   for ditem in data:
     pipeout.write(ditem)
     pipeout.flush() # Write it out RIGHT NOW.
@@ -45,7 +53,7 @@ def listen():
 
 def speak(data):
   ser.write(data)
-  print "Shipped out "+str(len(data))+" bytes."
+  logthis("Shipped out "+str(len(data))+" bytes.")
 
 def wait_to_speak():
   while True:
@@ -54,6 +62,8 @@ def wait_to_speak():
       speak(data)
     else:
       time.sleep(1)
+
+logthis("Starting up.")
 
 listenthread = threading.Thread(target=listen)
 listenthread.daemon = True
@@ -75,7 +85,7 @@ while 1:
 
   if (d is not None and len(d) >= 1):
     #print d
-    print "Queuing for send "+str(len(d))+" bytes now."
+    logthis("Queuing for send "+str(len(d))+" bytes now.")
     outgoing_data_global.append(d)
   else:
     time.sleep(1)

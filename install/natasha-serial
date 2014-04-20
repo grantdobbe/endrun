@@ -29,8 +29,10 @@ GROUP="pi"
 case "$1" in
   start)
     echo "Starting Natasha Serial"
-    echo "--start --quiet -b -m -p $PID --chuid $USER:$GROUP --exec $DAEMON $DAEMON_OPT"
+    touch /var/log/plp_serial.log
+    chown $USER:$GROUP /var/log/plp_serial.log
     start-stop-daemon --start --quiet -b -m -p $PID --chuid $USER:$GROUP --exec $DAEMON $DAEMON_OPT
+    #$DAEMON $DAEMON_OPT
   ;;
   stop)
     echo "Stopping Natasha Serial"
