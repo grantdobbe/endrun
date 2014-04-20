@@ -99,7 +99,6 @@ class Payload:
     with open( config.get('global', 'keypath') + '/' + self.origin + '.sighex', 'r' ) as originSigHex:
       originSigKey = self.deserialize(originSigHex)
       originVerify = nacl.signing.VerifyKey(originSigKey, encoder=nacl.encoding.HexEncoder)
-    
     # create a box to decrypt this sucker
     container = Box(destinationKey, originKey)
     # verify the signature
@@ -139,15 +138,31 @@ class Payload:
    return 0
   
   def unpack(self):
-    # decrypt the bundle using our private key (call deserialize() )
-    payload = self.unwrap()
-    # if a remote for the source doesn't exist in our repo, create one
-    # otherwise, copy the bundle file to the destination specified in our .git/config file
-    # change to the git repo's directory
+    repo = git.Repo(config.get('global', 'repo'))
+    bundlePath = config.get('global', 'bundlepath')
+    trackingBranch = self.origin + '-remote/' + self.origin
+    bundleName = self.origin + '.bundle'
+    # decrypt the bundle using our private key 
+    payload = bytes(self.unwrap())
+    # save the bundle file in /tmp/
+
+    with open('/tmp/' +  bundleName, 'wb') as bundleFile:
+      bundleFile.write(payload)
     # run a verify against the bundle
-    # if we are missing the necessary commits, die and say which ones
-    # otherwise, do a git pull from the bundle file
+    print repo.git.bundle('verify', bundlePath + '/' + bundleName)
+    # copy the bundle file to the destination specified in our .git/config file
+    copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
+    # do a git pull from the bundle file
+    repo.git.checkout(trackingBranch)
+    repo.git.pull()
+    repo.git.checkout('master')
+    repo.git.merge(trackingBranch)
+    repo.git.gc()
+    repo.git.checkout(trackingBranch)
+    repo.git.merge('master')
+    repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
+    os.remove('/tmp/' + bundleName)
     return 0
 '''
 ---------------
