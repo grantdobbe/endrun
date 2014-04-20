@@ -163,7 +163,7 @@ class Payload:
     # run a verify against the bundle
     print repo.git.bundle('verify', bundlePath + '/' + bundleName)
     # copy the bundle file to the destination specified in our .git/config file
-    copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
+    shutil.copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
     # do a git pull from the bundle file
     repo.git.checkout(trackingBranch)
     repo.git.pull()
