@@ -1,3 +1,12 @@
+### BEGIN INIT INFO
+# Provides:          gollum-server
+# Required-Start:    $local_fs 
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: gollum-server is the git-based Wiki written by GitHub.
+### END INIT INFO
+
 #!/bin/bash
 #
 # place this file in /etc/init.d/gollum-server
