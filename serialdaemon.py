@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import serial
 import threading
 import sys

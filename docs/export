@@ -1,10 +1,24 @@
 export from node2 to node1
 
 node2:
-git checkout node1-remote/node1
-git merge --log -s octopus master
-git bundle create ../bundles/node1.bundle bundle-node2-0...HEAD
+git checkout node2
+git merge --log master
+git bundle create /tmp/node2.bundle HEAD
 git tag bundle-node2-1 HEAD
 git checkout master
+cd /tmp
+dtn_transmit.py node1 node2.bundle
 
+node1:
 
+dtn_receive.py node2.bundle.dtn
+git bundle verify node2.bundle
+cp node2.bundle ~/plp/bundles
+git checkout node2-remote node2
+git pull node2-remote node2
+git checkout master
+git merge --log node2-remote/node2
+git gc
+git checkout node2-remote node2
+git merge --log master
+git checkout master
