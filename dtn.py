@@ -165,8 +165,8 @@ class Payload:
     # copy the bundle file to the destination specified in our .git/config file
     shutil.copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
     # do a git pull from the bundle file
-    repo.git.checkout(self.origin + '-remote/' + self.origin)
-    repo.git.pull(self.origin + '-remote ' + self.origin)
+    repo.git.checkout(self.origin + '-remote', B=self.origin)
+    repo.pull(self.origin)
     repo.git.checkout('master')
     repo.git.merge(self.origin + '-remote/' + self.origin)
     repo.git.gc()
@@ -325,7 +325,7 @@ def nodeInit(nodeTotal, path):
   # now create the bundles and set them up in each repo 
   print "Adding bundles as remote repos and creating tracking branches: ",
   for node in range(1, nodeTotal + 1):
-    # define some variables we'll needcd ..
+    # define some variables we'll need ..
     nodeName = "node" + str(node)
     nodePath = path + '/' + nodeName + '-deploy'
     repoPath = nodePath + '/repo'
