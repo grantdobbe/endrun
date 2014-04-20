@@ -2,12 +2,12 @@
 #
 # place this file in /etc/init.d/gollum-server
 # change the file permission to executable:
-# $ sudo chmod +w /etc/init.d/gollum-server
+# $ sudo chmod +x /etc/init.d/gollum-server
 # add it to default run level
 # $ sudo update-rc.d gollum-server defaults
 
 ######################################################
-### Confuration
+### Configuration
 ######################################################
 PID="/var/run/gollum-server.pid"
 
