@@ -43,14 +43,14 @@ Class declaration
 '''
 class Payload:
   
-  ttl = int(time.time()+86400)
+  ttl = config.get('global', 'ttl')
   # origin - a unique identifier that can be used to pull up my public key
-  origin = ''
+  origin = config.get('global', 'nodename')
   # destination - a unique identifier that can be used to pull up their private key
   destination = ''
   # nonce = a number used once for purposes of encryption and decryption
   nonce = nacl.utils.random(NONCE_SIZE)
-  # payload - nacl encrypted bzipped tarball 
+  # payload - nacl encrypted git bundle 
   # empty by default
   payload = ''
   
@@ -64,13 +64,8 @@ class Payload:
   
   # encrypts data and saves it to the payload
   # args:
-  #   origin: a string representing the origin node's unique identifier
-  #   destination: a string representing the destination node's unique identifier
   #   contents: binary data to be encrypted and assigned to the payload object
-  def wrap(self, destination, payload_contents ):
-    # address the payload
-    self.origin = config.get('global', 'nodename')
-    self.destination = destination
+  def wrap(self, payload_contents ):
     # look up the signature key
     with open( config.get('global', 'keypath') + '/' + self.origin + '.sig', 'r') as originSigKey:
       originSig = self.deserialize(originSigKey)
@@ -113,6 +108,7 @@ class Payload:
     rawResult = container.decrypt(rawResult)
     # verify the signature again
     result = originVerify.verify(rawResult)
+    
     return result
             
   # grab a git bundle from a repo and create a payload
@@ -122,23 +118,29 @@ class Payload:
   # returns: 
   #   a payload for delivery
   def pack(self, destination):
+    self.destination = destination
     # change to the git repo's directory
+    repo = git.Repo(config.get('global', 'repo'))
     # if there is no $NODE-current branch, create $NODE-current wherever HEAD is
+    repo.git.checkout(B=self.origin)
+    repo.git.merge('master')
     # create a git bundle from master
-    #   if $NODE-current == HEAD, do everything from the first commit
-    #   otherwise, do everything from $NODE-current to HEAD
-    #     then, once we have successfully created a bundle, delete the $NODE-current tag and reassign it to HEAD
-    # tar and bzip the bundle
+    bundleName = self.origin + '.bundle'
+    repo.git.bundle('create', '/tmp/' + bundleName, self.origin)
     # encrypt the tarball using the destination's public key (call serialize() )
-    # run it through base64 and pipe it into self.payload
-    # clean up after ourselves (delete the .bundle file and the encrypted tarball)
+    with open('/tmp/' + bundleName, 'r') as payloadInput:
+       self.wrap(payloadInput.read())
     # export the entire payload with headers into a file
+    with open('/tmp/' + bundleName + '.dtn', 'w') as payloadFile:
+      pickle.dump(bundleName, payloadFile)
+    # clean up after ourselves (delete the .bundle file)
+    os.remove('/tmp/' + bundleName)
     # import a payload, decrypt the git payload inside, and perform a git pull
-    return 0
+   return 0
   
   def unpack(self):
-    # decrypt the tarball using our private key (call deserialize() )
-    # untar and decompress the bundle
+    # decrypt the bundle using our private key (call deserialize() )
+    payload = self.unwrap()
     # if a remote for the source doesn't exist in our repo, create one
     # otherwise, copy the bundle file to the destination specified in our .git/config file
     # change to the git repo's directory
@@ -325,10 +327,11 @@ Payload functions
 # create a payload for the user 
 def createPayload(destination, data):
   payload = Payload()
-  payload.wrap(destination, data)
-  return payload
+  payload.pack(destination)
   
 # open a payload for the user
 def openPayload(payload):
-  return payload.unwrap()
+  with open(payload, 'r') as payloadFile:
+    raw_payload = pickle.load(payloadFile) 
+    raw_payload.unpack()
 
