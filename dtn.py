@@ -119,7 +119,7 @@ class Payload:
   def pack(self, destination):
     self.destination = destination
     # change to the git repo's directory
-    repo = git.Repo(config.get('global', 'repo'))
+    repo = git.Repo(config.get('global', 'repopath'))
     # if there is no $NODE-current branch, create $NODE-current wherever HEAD is
     repo.git.checkout(B=self.origin)
     repo.git.merge('master')
@@ -131,14 +131,14 @@ class Payload:
        self.wrap(payloadInput.read())
     # export the entire payload with headers into a file
     with open('/tmp/' + bundleName + '.dtn', 'w') as payloadFile:
-      pickle.dump(bundleName, payloadFile)
+      pickle.dump(self, payloadFile)
     # clean up after ourselves (delete the .bundle file)
     os.remove('/tmp/' + bundleName)
     # import a payload, decrypt the git payload inside, and perform a git pull
     return 0
   
   def unpack(self):
-    repo = git.Repo(config.get('global', 'repo'))
+    repo = git.Repo(config.get('global', 'repopath'))
     bundlePath = config.get('global', 'bundlepath')
     trackingBranch = self.origin + '-remote/' + self.origin
     bundleName = self.origin + '.bundle'
@@ -162,7 +162,7 @@ class Payload:
     repo.git.merge('master')
     repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
-    os.remove('/tmp/' + bundleName)
+    #os.remove('/tmp/' + bundleName)
     return 0
 '''
 ---------------

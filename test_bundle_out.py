@@ -25,7 +25,7 @@
 import pickle, os, dtn, sys
 
 def bundle_out(destination):
-  payload = Payload()
+  payload = dtn.Payload()
   payload.pack(destination)
 
 def main():
