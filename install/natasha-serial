@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# place this file in /etc/init.d/natasha-serial
+# change the file permission to executable:
+# $ sudo chmod +x /etc/init.d/natasha-serial
+# add it to default run levels
+# $ sudo update-rc.d natasha-serial defaults
+
+######################################################
+### Configuration
+######################################################
+PID="/var/run/natasha-serial.pid"
+
+# The location of the serial daemon executable
+DAEMON="/home/pi/libnatasha/serialdaemon.py"
+
+# Set this to the serial port corresponding to the XBee Interface
+DAEMON_OPT="/dev/ttyAMA0"
+# The user the git repository belongs to
+USER="pi"
+# The group the git repository belongs to
+GROUP="pi"
+
+
+######################################################
+### Script
+######################################################
+
+case "$1" in
+  start)
+    echo "Starting Natasha Serial"
+    echo "--start --quiet -b -m -p $PID --chuid $USER:$GROUP --exec $DAEMON $DAEMON_OPT"
+    start-stop-daemon --start --quiet -b -m -p $PID --chuid $USER:$GROUP --exec $DAEMON $DAEMON_OPT
+  ;;
+  stop)
+    echo "Stopping Natasha Serial"
+    start-stop-daemon --stop --quiet --pidfile $PID
+    rm -f $PID
+  ;;
+  *)
+    echo "Usage: service natasha-serial {start|stop}"
+    exit 1
+  ;;
+esac
+exit 0
