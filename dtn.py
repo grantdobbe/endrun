@@ -133,7 +133,7 @@ class Payload:
     with open('/tmp/' + bundleName + '.dtn', 'w') as payloadFile:
       pickle.dump(self, payloadFile)
     # clean up after ourselves (delete the .bundle file)
-    #os.remove('/tmp/' + bundleName)
+    os.remove('/tmp/' + bundleName)
     # import a payload, decrypt the git payload inside, and perform a git pull
     return 0
   
@@ -162,7 +162,7 @@ class Payload:
     repo.git.merge('master')
     repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
-    os.remove('/tmp/' + bundleName)
+    #os.remove('/tmp/' + bundleName)
     return 0
 '''
 ---------------
