@@ -131,7 +131,7 @@ class Payload:
        self.wrap(payloadInput.read())
     # export the entire payload with headers into a file
     with open('/tmp/' + bundleName + '.dtn', 'w') as payloadFile:
-      pickle.dump(bundleName, payloadFile)
+      pickle.dump(self, payloadFile)
     # clean up after ourselves (delete the .bundle file)
     #os.remove('/tmp/' + bundleName)
     # import a payload, decrypt the git payload inside, and perform a git pull
