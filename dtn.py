@@ -43,7 +43,7 @@ Class declaration
 '''
 class Payload:
   
-  ttl = config.get('global', 'ttl')
+  ttl = 0
   # origin - a unique identifier that can be used to pull up my public key
   origin = config.get('global', 'nodename')
   # destination - a unique identifier that can be used to pull up their private key
@@ -54,6 +54,18 @@ class Payload:
   # empty by default
   payload = ''
   
+  def __init__(self):
+    self.ttl = config.get('global', 'ttl')
+    # origin - a unique identifier that can be used to pull up my public key
+    self.origin = config.get('global', 'nodename')
+    # destination - a unique identifier that can be used to pull up their private key
+    self.destination = ''
+    # nonce = a number used once for purposes of encryption and decryption
+    self.nonce = nacl.utils.random(NONCE_SIZE)
+    # payload - nacl encrypted git bundle 
+    # empty by default
+    self.payload = ''
+    
   # serializes whatever is fed to it
   def serialize(self, material):
     return pickle.dump(material)
