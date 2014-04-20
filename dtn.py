@@ -95,7 +95,7 @@ class Payload:
     # grab the origin's public key
     with open( config.get('global', 'keypath') + '/' + self.origin + '.public', 'r' ) as originPublicKey:
       originKey = self.deserialize(originPublicKey)
-    # grab the origin's verification key
+    # grab the origin's verification keyhg
     with open( config.get('global', 'keypath') + '/' + self.origin + '.sighex', 'r' ) as originSigHex:
       originSigKey = self.deserialize(originSigHex)
       originVerify = nacl.signing.VerifyKey(originSigKey, encoder=nacl.encoding.HexEncoder)
@@ -112,11 +112,11 @@ class Payload:
             
   # grab a git bundle from a repo and create a payload
   # args: 
-  #   repo: the fully qualified path to a git repo
   #   destination: the public key of the delivery target for the payload
   # returns: 
   #   a payload for delivery
   def pack(self, destination):
+    print self.origin
     self.destination = destination
     # change to the git repo's directory
     repo = git.Repo(config.get('global', 'repopath'))
