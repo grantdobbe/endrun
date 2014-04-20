@@ -11,6 +11,7 @@ incoming_pipe_name = '/tmp/tobesent'
 outgoing_pipe_name = '/tmp/received'
 
 logfile = '/var/log/plp_serial.log'
+plp_incoming_dir = '/tmp/plp_incoming'
 
 outgoing_data_global = []
 
@@ -23,6 +24,9 @@ if not os.path.exists(incoming_pipe_name):
 
 if not os.path.exists(outgoing_pipe_name):
   os.mkfifo(outgoing_pipe_name)
+
+if not os.path.exists(plp_incoming_dir):
+  os.makedirs(plp_incoming_dir)
 
 pipeinfd = os.open(incoming_pipe_name, os.O_RDONLY | os.O_NONBLOCK)
 pipeout = open(outgoing_pipe_name, 'w+')
@@ -38,9 +42,18 @@ def logthis(data):
 def handleincomingdata(data):
   #print data
   logthis("Received "+str(sum(len(s) for s in data))+" bytes.")
+  
+  randomname = 'incoming-'+str(time.time())+'.data'
+
+  outfile = open(plp_incoming_dir+'/'+randomname, 'w')
+
   for ditem in data:
-    pipeout.write(ditem)
-    pipeout.flush() # Write it out RIGHT NOW.
+    outfile.write(ditem)
+  
+  outfile.close()
+
+  pipeout.write(plp_incoming_dir+'/'+randomname+"\n")
+  pipeout.flush() # Write it out RIGHT NOW.
   # But you could do anything else you wanted here.
 
 def listen():
