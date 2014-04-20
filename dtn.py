@@ -165,12 +165,12 @@ class Payload:
     # copy the bundle file to the destination specified in our .git/config file
     shutil.copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
     # do a git pull from the bundle file
-    repo.git.checkout(trackingBranch)
-    repo.git.pull(trackingBranch)
+    repo.git.checkout(self.origin + '-remote/' + self.origin)
+    repo.git.pull(self.origin + '-remote ' + self.origin)
     repo.git.checkout('master')
-    repo.git.merge(trackingBranch)
+    repo.git.merge(self.origin + '-remote/' + self.origin)
     repo.git.gc()
-    repo.git.checkout(trackingBranch)
+    repo.git.checkout(self.origin + '-remote/' + self.originh)
     repo.git.merge('master')
     repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
