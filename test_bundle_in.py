@@ -27,6 +27,7 @@ import pickle, os, dtn, sys
 def bundle_in(payload):
   with open(payload, 'r') as payloadFile:
     raw_payload = pickle.load(payloadFile) 
+  print raw_payload
   raw_payload.unpack()
 
 def main():
