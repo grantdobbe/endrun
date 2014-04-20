@@ -24,8 +24,10 @@
 
 import pickle, os, dtn, sys
 
-def bundle_in(destination):
-  dtn.unpack(destination)
+def bundle_in(payload):
+  with (payload, 'r') as payloadFile:
+  raw_payload = pickle.load(payloadFile) 
+  raw.unpack()
 
 def main():
   
@@ -33,9 +35,9 @@ def main():
     print "usage: python test_bundle_in.py payload"
     exit()
     
-  destination = sys.argv[1]
+  payload = sys.argv[1]
   
-  bundle_out(destination)
+  bundle_in(payload)
 	
 if __name__ == '__main__':
 	main()
