@@ -150,8 +150,6 @@ class Payload:
     return 0
   
   def unpack(self):
-    print self.origin
-    print self.destination
     repo = git.Repo(config.get('global', 'repopath'))
     bundlePath = config.get('global', 'bundlepath')
     trackingBranch = self.origin + '-remote/' + self.origin
@@ -168,7 +166,7 @@ class Payload:
     shutil.copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
     # do a git pull from the bundle file
     repo.git.checkout(trackingBranch)
-    repo.git.pull()
+    repo.git.pull(trackingBranch)
     repo.git.checkout('master')
     repo.git.merge(trackingBranch)
     repo.git.gc()
