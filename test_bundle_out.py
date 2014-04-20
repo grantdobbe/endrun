@@ -28,15 +28,14 @@ def bundle_out(destination):
   dtn.pack(destination)
 
 def main():
-  
   if len(sys.argv) != 2:
     print "usage: python test_bundle_out.py destination"
     exit()
-    
+  
   destination = sys.argv[1]
   
   bundle_out(destination)
-	
+
 if __name__ == '__main__':
 	main()
 

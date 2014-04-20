@@ -30,7 +30,7 @@ def main():
     exit()
     
   filename = sys.argv[1]
-  with open(filename, 'r') as payloadFile:
+  5:
     
     bundle = bytes(dtn.openPayload(output))
     

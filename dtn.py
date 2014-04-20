@@ -135,7 +135,7 @@ class Payload:
     # clean up after ourselves (delete the .bundle file)
     os.remove('/tmp/' + bundleName)
     # import a payload, decrypt the git payload inside, and perform a git pull
-   return 0
+    return 0
   
   def unpack(self):
     repo = git.Repo(config.get('global', 'repo'))
