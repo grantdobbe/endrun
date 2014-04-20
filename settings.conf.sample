@@ -2,3 +2,9 @@
 nodename:     nodeX
 repopath:     /home/pi/plp/repo
 keypath:      /home/pi/plp/keys
+
+[transmission]
+; default transmission method -- options are currently xbee and sneakernet
+method:       xbee
+; define the transmission interval in minutes
+interval:     60

@@ -121,7 +121,7 @@ class Payload:
   #   destination: the public key of the delivery target for the payload
   # returns: 
   #   a payload for delivery
-  def pack(repo, destination):
+  def pack(self, destination):
     # change to the git repo's directory
     # if there is no $NODE-current branch, create $NODE-current wherever HEAD is
     # create a git bundle from master
@@ -136,7 +136,7 @@ class Payload:
     # import a payload, decrypt the git payload inside, and perform a git pull
     return 0
   
-  def unpack(self, repo, source):
+  def unpack(self):
     # decrypt the tarball using our private key (call deserialize() )
     # untar and decompress the bundle
     # if a remote for the source doesn't exist in our repo, create one
