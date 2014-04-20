@@ -119,7 +119,7 @@ class Payload:
   def pack(self, destination):
     self.destination = destination
     # change to the git repo's directory
-    repo = git.Repo(config.get('global', 'repo'))
+    repo = git.Repo(config.get('global', 'repopath'))
     # if there is no $NODE-current branch, create $NODE-current wherever HEAD is
     repo.git.checkout(B=self.origin)
     repo.git.merge('master')
