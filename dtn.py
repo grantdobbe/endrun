@@ -138,7 +138,7 @@ class Payload:
     return 0
   
   def unpack(self):
-    repo = git.Repo(config.get('global', 'repo'))
+    repo = git.Repo(config.get('global', 'repopath'))
     bundlePath = config.get('global', 'bundlepath')
     trackingBranch = self.origin + '-remote/' + self.origin
     bundleName = self.origin + '.bundle'
