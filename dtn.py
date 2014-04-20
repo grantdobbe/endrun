@@ -147,7 +147,7 @@ class Payload:
     # save the bundle file in /tmp/
 
     with open('/tmp/' +  bundleName, 'wb') as bundleFile:
-      bundleFile.write(payload))
+      bundleFile.write(payload)
     # run a verify against the bundle
     print repo.git.bundle('verify', bundlePath + '/' + bundleName)
     # copy the bundle file to the destination specified in our .git/config file
