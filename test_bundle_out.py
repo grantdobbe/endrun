@@ -25,7 +25,8 @@
 import pickle, os, dtn, sys
 
 def bundle_out(destination):
-  dtn.pack(destination)
+  payload = new Payload()
+  payload.pack(destination)
 
 def main():
   if len(sys.argv) != 2:
