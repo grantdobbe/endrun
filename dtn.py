@@ -24,17 +24,30 @@
 
 #import pynacl
 import time, os, pickle, ConfigParser, git, shutil
-import nacl.utils, nacl.encoding, nacl.signing
-from nacl.public import PrivateKey, Box
+import warnings
+
+with warnings.catch_warnings():
+    '''Suppress this warning (for now?):
+    /usr/local/lib/python2.7/dist-packages/cffi/vengine_cpy.py:166: UserWarning: reimporting '_cffi__xb217b92x9ad92d80' might overwrite older definitions
+    % (self.verifier.get_module_name()))
+    '''
+    warnings.simplefilter("ignore")
+    import nacl.utils, nacl.encoding, nacl.signing
+    from nacl.public import PrivateKey, Box
 
 NONCE_SIZE = 24
 
+    
 '''
 Grab the config file (we're gonna need it later on)
 '''
-config = ConfigParser.ConfigParser()
-config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
-
+try:
+  config = ConfigParser.ConfigParser()
+  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
+  assert(config.get('global', 'nodename'))
+except:
+  print "Your config file does not appear to be valid. Please verify that settings.conf exists and follows the syntax of settings.conf.sample"
+  exit()
 
 '''
 -----------------

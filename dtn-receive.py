@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  test_bundle_out.py
+#  dtn_test2.py
 #  
-#  Copyright 2014 Grant Dobbe <grant@dobbe.us>
+#  Copyright 2013 Grant Dobbe <grant@binarysprocket.com>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,22 +21,24 @@
 #  MA 02110-1301, USA.
 #  
 #  
-
 import pickle, os, dtn, sys
 
-def bundle_out(destination):
-  payload = dtn.Payload()
-  payload.pack(destination)
+def receive(payload):
+  with open(payload, 'r') as payloadFile:
+    raw_payload = pickle.load(payloadFile) 
+  print raw_payload
+  raw_payload.unpack()
 
 def main():
+  
   if len(sys.argv) != 2:
-    print "usage: python test_bundle_out.py destination"
+    print "usage: python dtn-receive.py payload"
     exit()
+    
+  payload = sys.argv[1]
   
-  destination = sys.argv[1]
-  
-  bundle_out(destination)
-
+  receive(payload)
+	
 if __name__ == '__main__':
 	main()
 
