@@ -23,7 +23,7 @@
 #  
 
 #import pynacl
-import time, os, pickle, ConfigParser, git, shutil
+import datetime, os, pickle, ConfigParser, git, shutil
 import warnings
 
 with warnings.catch_warnings():
@@ -56,7 +56,8 @@ Class declaration
 '''
 class Payload:
   
-  ttl = 0
+  # ttl = the ISO Date and time for when the payload becomes invalid.
+  ttl = datetime.datetime.now() + 86400
   # origin - a unique identifier that can be used to pull up my public key
   origin = config.get('global', 'nodename')
   # destination - a unique identifier that can be used to pull up their private key
@@ -68,15 +69,10 @@ class Payload:
   payload = ''
   
   def __init__(self):
-    self.ttl = config.get('global', 'ttl')
-    # origin - a unique identifier that can be used to pull up my public key
+    self.ttl = datetime.datetime.now() + config.get('global', 'ttl')
     self.origin = config.get('global', 'nodename')
-    # destination - a unique identifier that can be used to pull up their private key
     self.destination = ''
-    # nonce = a number used once for purposes of encryption and decryption
     self.nonce = nacl.utils.random(NONCE_SIZE)
-    # payload - nacl encrypted git bundle 
-    # empty by default
     self.payload = ''
     
   # serializes whatever is fed to it
@@ -89,7 +85,7 @@ class Payload:
   
   # encrypts data and saves it to the payload
   # args:
-  #   contents: binary data to be encrypted and assigned to the payload object
+  #   payload_contents: binary data to be encrypted and assigned to the payload object
   def wrap(self, payload_contents ):
     # look up the signature key
     with open( config.get('global', 'keypath') + '/' + self.origin + '.sig', 'r') as originSigKey:
@@ -112,7 +108,7 @@ class Payload:
   # args:
   #   none
   # return:
-  #   a decrypted tarball containing a git bundle or False otherwise
+  #   a decrypted git bundle or False otherwise
   def unwrap(self):
     # grab my private key
     with open( config.get('global', 'keypath') + '/' + self.destination + '.private', 'r' ) as destinationPrivateKey:
@@ -141,55 +137,65 @@ class Payload:
   # returns: 
   #   a payload for delivery
   def pack(self, destination):
-    print self.origin
+    # set the bundle name and output target upfront
+    bundleName = self.origin + '.bundle'
+    outputTarget = '/tmp/'
+    # set the destination
     self.destination = destination
     # change to the git repo's directory
     repo = git.Repo(config.get('global', 'repopath'))
     # if there is no $NODE-current branch, create $NODE-current wherever HEAD is
     repo.git.checkout(B=self.origin)
+    # merge master into it
     repo.git.merge('master')
     # create a git bundle from master
-    bundleName = self.origin + '.bundle'
-    repo.git.bundle('create', '/tmp/' + bundleName, self.origin)
-    # encrypt the tarball using the destination's public key (call serialize() )
-    with open('/tmp/' + bundleName, 'r') as payloadInput:
+    repo.git.bundle('create', outputTarget + bundleName, self.origin)
+    # encrypt the bundle using the destination's public key (call serialize() )
+    with open(outputTarget + bundleName, 'r') as payloadInput:
        self.wrap(payloadInput.read())
     # export the entire payload with headers into a file
-    with open('/tmp/' + bundleName + '.dtn', 'w') as payloadFile:
+    with open(outputTarget + bundleName + '.dtn', 'w') as payloadFile:
       pickle.dump(self, payloadFile)
     # clean up after ourselves (delete the .bundle file)
-    os.remove('/tmp/' + bundleName)
-    # import a payload, decrypt the git payload inside, and perform a git pull
+    os.remove(outputTarget + bundleName)
     return 0
   
+  # import a payload, decrypt the git payload inside, and perform a git pull
   def unpack(self):
+    # set a bunch of variables up front
     repo = git.Repo(config.get('global', 'repopath'))
     bundlePath = config.get('global', 'bundlepath')
     trackingBranch = self.origin + '-remote/' + self.origin
     bundleName = self.origin + '.bundle'
-    # decrypt the bundle using our private key 
-    payload = bytes(self.unwrap())
-    # save the bundle file in /tmp/
+    inputPath = '/tmp/'
 
-    with open('/tmp/' +  bundleName, 'wb') as bundleFile:
+    # decrypt the bundle as a bytestream 
+    payload = bytes(self.unwrap())
+    
+    # save the bundle file in /tmp/
+    with open(inputPath +  bundleName, 'wb') as bundleFile:
       bundleFile.write(payload)
     # run a verify against the bundle
-    print repo.git.bundle('verify', bundlePath + '/' + bundleName)
+    assert( repo.git.bundle('verify', bundlePath + '/' + bundleName) )
     # copy the bundle file to the destination specified in our .git/config file
-    shutil.copyfile('/tmp/' + bundleName, bundlePath + '/' + bundleName)
+    shutil.copyfile(inputPath + bundleName, bundlePath + '/' + bundleName)
     # do a git pull from the bundle file
     repo.git.checkout(self.origin + '-remote/' + self.origin)
     remote = repo.remote(self.origin + '-remote')
     remote.pull(self.origin)
+    # checkout master and merge it in
     repo.git.checkout('master')
     repo.git.merge(self.origin + '-remote/' + self.origin)
+    # do some clean up
     repo.git.gc()
+    # then merge the contents back into the bundle's branch
     repo.git.checkout(self.origin + '-remote/' + self.origin)
     repo.git.merge('master')
     repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
-    ##os.remove('/tmp/' + bundleName)
+    os.remove('/tmp/' + bundleName)
     return 0
+
 '''
 ---------------
 Helper Functions
