@@ -9,10 +9,6 @@ import time
 logfile = '/var/log/dtn_transfer.log'
 incoming_pipe = '/tmp/received'
 
-if len(sys.argv) != 2:
-  print "usage: python serialdaemon.py /path/to/serial"
-  exit()
-
 logout = open(logfile, 'a')
 
 def logthis(data):
@@ -20,11 +16,12 @@ def logthis(data):
   logout.flush()
 
 def processBundle(filename):
+  print "doing the thing!"
   logthis("Opened file " + filename +  " for processing by Natasha.")  
   dtn.receive(filename)
 
 def listen():
-  with open(incoming_pipe, 'r') as received:
+  
     while 1:
       incoming = received.readlines()
       
