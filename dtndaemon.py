@@ -11,6 +11,8 @@ incoming_pipe = '/tmp/received'
 
 logout = open(logfile, 'a')
 
+pipeinfd = os.open(incoming_pipe, os.O_RDONLY | os.O_NONBLOCK)
+
 def logthis(data):
   logout.write("["+time.ctime()+"] " + data + "\n");
   logout.flush()
@@ -23,7 +25,7 @@ def processBundle(filename):
 def listen():
   
     while 1:
-      incoming = received.readlines()
+      incoming = pipeinfd.readlines()
       
       if len(incoming) > 0:
         filename = incoming
@@ -37,4 +39,14 @@ logthis("Starting up.")
 listenthread = threading.Thread(target=listen)
 listenthread.daemon = True
 listenthread.start()
+
+while 1:
+  try:
+    d = os.read(pipeinfd, 1024*10)
+  except OSError as err:
+    if err.errno == errno.EAGAIN or err.errno == errno.EWOULDBLOCK:
+      d = None
+      # This is a fine condition; just means nothing this cycle
+    else:
+      raise
 
