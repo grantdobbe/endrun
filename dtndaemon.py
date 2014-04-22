@@ -27,11 +27,9 @@ def processBundle(filename):
 
 def listen():
     while 1:
-      print "foo"
-      incoming = ''
+      incoming = pipein.readlines()
       
       if len(incoming) > 0:
-        print "bar"
         filename = incoming
         if ".data" in filename:
           processBundle(filename)
@@ -46,4 +44,6 @@ listenthread = threading.Thread(target=listen)
 listenthread.daemon = True
 listenthread.start()
 
+while 1:
+  time.sleep(1)
 
