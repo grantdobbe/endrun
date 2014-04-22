@@ -32,7 +32,8 @@ def listen():
         filename = incoming
         if ".data" in filename:
           processBundle(filename)
-        else print "Nothing coming in, boss"
+        else:
+          print "Nothing coming in, boss"
       else:
         time.sleep(1)
 
