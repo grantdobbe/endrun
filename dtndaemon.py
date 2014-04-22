@@ -31,7 +31,7 @@ def listen():
         incoming = os.read(pipeinfd, 1024*10)
         
         if len(incoming) > 0:
-          filename = incoming
+          filename = rstrip(incoming)
           if ".data" in filename:
             processBundle(filename)
           else:
