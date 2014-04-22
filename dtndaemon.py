@@ -4,6 +4,7 @@ import dtn
 import threading
 import sys
 import os
+import errno
 import time
 
 logfile = '/var/log/dtn_transfer.log'
