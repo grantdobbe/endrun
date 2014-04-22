@@ -6,6 +6,7 @@ import sys
 import os
 import errno
 import time
+impoirt
 
 logfile = '/var/log/dtn_transfer.log'
 incoming_pipe = '/tmp/received'
@@ -31,7 +32,7 @@ def listen():
         incoming = os.read(pipeinfd, 1024*10)
         
         if len(incoming) > 0:
-          filename = rstrip(incoming)
+          filename = incoming.rstrip()
           if ".data" in filename:
             processBundle(filename)
           else:
