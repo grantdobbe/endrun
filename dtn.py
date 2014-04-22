@@ -43,11 +43,10 @@ Grab the config file (we're gonna need it later on)
 '''
 try:
   config = ConfigParser.ConfigParser()
-  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
+  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf.sample')
   assert(config.get('global', 'nodename'))
 except:
   print "Your config file does not appear to be valid. Please verify that settings.conf exists and follows the syntax of settings.conf.sample"
-  exit()
 
 '''
 -----------------
@@ -158,7 +157,6 @@ class Payload:
       pickle.dump(self, payloadFile)
     # clean up after ourselves (delete the .bundle file)
     os.remove(outputTarget + bundleName)
-    return 0
   
   # import a payload, decrypt the git payload inside, and perform a git pull
   def unpack(self):
@@ -194,7 +192,6 @@ class Payload:
     repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
     os.remove('/tmp/' + bundleName)
-    return 0
 
 '''
 ---------------

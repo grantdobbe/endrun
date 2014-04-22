@@ -14,6 +14,8 @@ logout = open(logfile, 'a')
 
 pipeinfd = os.open(incoming_pipe, os.O_RDONLY | os.O_NONBLOCK)
 
+pipein = os.fdopen(pipeinfd, 'r')
+
 def logthis(data):
   logout.write("["+time.ctime()+"] " + data + "\n");
   logout.flush()
@@ -24,11 +26,12 @@ def processBundle(filename):
   dtn.receive(filename)
 
 def listen():
-  
     while 1:
-      incoming = os.read(pipeinfd, 1024*10)
+      print "foo"
+      incoming = ''
       
       if len(incoming) > 0:
+        print "bar"
         filename = incoming
         if ".data" in filename:
           processBundle(filename)
