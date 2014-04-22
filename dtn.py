@@ -43,7 +43,7 @@ Grab the config file (we're gonna need it later on)
 '''
 try:
   config = ConfigParser.ConfigParser()
-  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
+  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf.sample')
   assert(config.get('global', 'nodename'))
 except:
   print "Your config file does not appear to be valid. Please verify that settings.conf exists and follows the syntax of settings.conf.sample"
@@ -57,7 +57,7 @@ Class declaration
 class Payload:
   
   # ttl = the ISO Date and time for when the payload becomes invalid.
-  ttl = datetime.datetime.now() + 86400
+  ttl = datetime.datetime.now() + datetime.timedelta(hours=24)
   # origin - a unique identifier that can be used to pull up my public key
   origin = config.get('global', 'nodename')
   # destination - a unique identifier that can be used to pull up their private key
@@ -69,7 +69,7 @@ class Payload:
   payload = ''
   
   def __init__(self):
-    self.ttl = datetime.datetime.now() + config.get('global', 'ttl')
+    self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=config.get('global', 'ttl'))
     self.origin = config.get('global', 'nodename')
     self.destination = ''
     self.nonce = nacl.utils.random(NONCE_SIZE)
@@ -382,3 +382,14 @@ def openPayload(payload):
     raw_payload = pickle.load(payloadFile) 
     raw_payload.unpack()
 
+# receive a payload
+def receive(payload):
+  with open(payload, 'r') as payloadFile:
+    raw_payload = pickle.load(payloadFile) 
+  print raw_payload
+  raw_payload.unpack()
+
+# transmit a payload
+def transmit(destination):
+  payload = dtn.Payload()
+  payload.pack(destination)

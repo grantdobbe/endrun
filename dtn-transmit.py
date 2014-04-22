@@ -21,11 +21,7 @@
 #  MA 02110-1301, USA.
 #  
 #  
-import pickle, os, dtn, sys
-
-def transmit(destination):
-  payload = dtn.Payload()
-  payload.pack(destination)
+import dtn, sys
 
 def main():
   if len(sys.argv) != 2:
