@@ -6,7 +6,6 @@ import sys
 import os
 import errno
 import time
-impoirt
 
 logfile = '/var/log/dtn_transfer.log'
 incoming_pipe = '/tmp/received'
