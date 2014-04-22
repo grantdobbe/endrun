@@ -43,7 +43,7 @@ Grab the config file (we're gonna need it later on)
 '''
 try:
   config = ConfigParser.ConfigParser()
-  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf.sample')
+  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
   assert(config.get('global', 'nodename'))
 except:
   print "Your config file does not appear to be valid. Please verify that settings.conf exists and follows the syntax of settings.conf.sample"
@@ -174,7 +174,11 @@ class Payload:
     with open(inputPath +  bundleName, 'wb') as bundleFile:
       bundleFile.write(payload)
     # run a verify against the bundle
-    assert( repo.git.bundle('verify', bundlePath + '/' + bundleName) )
+    try:
+      assert( repo.git.bundle('verify', bundlePath + '/' + bundleName) )
+    except: 
+      print "Git bundle is not valid."
+      return False      
     # copy the bundle file to the destination specified in our .git/config file
     shutil.copyfile(inputPath + bundleName, bundlePath + '/' + bundleName)
     # do a git pull from the bundle file
@@ -368,25 +372,22 @@ def nodeInit(nodeTotal, path):
 '''
 Payload functions
 '''
-# create a payload for the user 
-def createPayload(destination, data):
-  payload = Payload()
-  payload.pack(destination)
-  
-# open a payload for the user
-def openPayload(payload):
-  with open(payload, 'r') as payloadFile:
-    raw_payload = pickle.load(payloadFile) 
-    raw_payload.unpack()
 
 # receive a payload
 def receive(payload):
   with open(payload, 'r') as payloadFile:
-    raw_payload = pickle.load(payloadFile) 
-  print raw_payload
-  raw_payload.unpack()
+    try:
+      raw_payload = pickle.load(payloadFile) 
+      raw_payload.unpack()
+    except:
+      print "The payload is invalid. Please check the file's validity."
+      return False
 
 # transmit a payload
 def transmit(destination):
-  payload = dtn.Payload()
-  payload.pack(destination)
+  try:
+    payload = dtn.Payload()
+    payload.pack(destination)
+  except:
+    print "Error with creating payload. Please check repo integrity."
+    return False

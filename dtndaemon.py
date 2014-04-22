@@ -7,24 +7,30 @@ import os
 import errno
 import time
 
+# specify log file and incoming pipe
 logfile = '/var/log/dtn_transfer.log'
 incoming_pipe = '/tmp/received'
 
+# open the log file
 logout = open(logfile, 'a')
 
+# set up the pipe as a file descriptor with non-blocking I/O
 pipeinfd = os.open(incoming_pipe, os.O_RDONLY | os.O_NONBLOCK)
 
-pipein = os.fdopen(pipeinfd, 'r')
-
+# write stuff to log file
 def logthis(data):
   logout.write("["+time.ctime()+"] " + data + "\n");
   logout.flush()
 
+# the actual bundle processing
 def processBundle(filename):
-  print "doing the thing!"
   logthis("Opened file " + filename +  " for processing by Natasha.")  
-  dtn.receive(filename)
+  try:
+    dtn.receive(filename)
+  except:
+    logthis("Bundle processing for " + filename + " failed. Please check validity of file." )
 
+# wait for stuff to come in    
 def listen():
     while 1:
       try:
@@ -35,7 +41,8 @@ def listen():
           if ".data" in filename:
             processBundle(filename)
           else:
-            print "Nothing coming in, boss"
+            #print "Nothing coming in, boss"
+            pass
         else:
           time.sleep(1)
           
