@@ -21,13 +21,7 @@
 #  MA 02110-1301, USA.
 #  
 #  
-import pickle, os, dtn, sys
-
-def receive(payload):
-  with open(payload, 'r') as payloadFile:
-    raw_payload = pickle.load(payloadFile) 
-  print raw_payload
-  raw_payload.unpack()
+import dtn, sys
 
 def main():
   
@@ -37,7 +31,7 @@ def main():
     
   payload = sys.argv[1]
   
-  receive(payload)
+  dtn.receive(payload)
 	
 if __name__ == '__main__':
 	main()
