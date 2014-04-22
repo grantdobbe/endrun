@@ -43,7 +43,7 @@ Grab the config file (we're gonna need it later on)
 '''
 try:
   config = ConfigParser.ConfigParser()
-  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf.sample')
+  config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
   assert(config.get('global', 'nodename'))
 except:
   print "Your config file does not appear to be valid. Please verify that settings.conf exists and follows the syntax of settings.conf.sample"
