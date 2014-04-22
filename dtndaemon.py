@@ -31,7 +31,7 @@ def listen():
         incoming = os.read(pipeinfd, 1024*10)
       except OSError as err:
         if err.errno == errno.EAGAIN or err.errno == errno.EWOULDBLOCK:
-          d = None
+          incoming = None
           # This is a fine condition; just means nothing this cycle
         else:
           raise
