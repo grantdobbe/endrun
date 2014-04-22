@@ -29,21 +29,22 @@ def listen():
     while 1:
       try:
         incoming = os.read(pipeinfd, 1024*10)
+        
+        if len(incoming) > 0:
+          filename = incoming
+          if ".data" in filename:
+            processBundle(filename)
+          else:
+            print "Nothing coming in, boss"
+        else:
+          time.sleep(1)
+          
       except OSError as err:
         if err.errno == errno.EAGAIN or err.errno == errno.EWOULDBLOCK:
           incoming = None
           # This is a fine condition; just means nothing this cycle
         else:
           raise
-      
-      if len(incoming) > 0:
-        filename = incoming
-        if ".data" in filename:
-          processBundle(filename)
-        else:
-          print "Nothing coming in, boss"
-      else:
-        time.sleep(1)
 
 logthis("Starting up.")
 
