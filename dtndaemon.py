@@ -40,3 +40,14 @@ logthis("Starting up.")
 listenthread = threading.Thread(target=listen)
 listenthread.daemon = True
 listenthread.start()
+
+while 1:
+  try:
+    d = os.read(pipeinfd, 1024*10)
+  except OSError as err:
+    if err.errno == errno.EAGAIN or err.errno == errno.EWOULDBLOCK:
+      d = None
+      # This is a fine condition; just means nothing this cycle
+    else:
+      raise
+
