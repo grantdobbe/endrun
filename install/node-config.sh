@@ -6,6 +6,18 @@ SRC=$2
 
 HOSTNAME=$(hostname)
 
+if [ -z $1 ] 
+  then
+    echo "USE: node-config.sh nodename /path/containing/node-deploy"
+    exit
+fi
+
+if [ -z $2 ] 
+  then
+    echo "USE: node-config.sh nodename /path/containing/node-deploy"
+    exit
+fi
+
 echo "updating libnatasha repo"
 cd /home/$USER/libnatasha 
 git pull origin master
