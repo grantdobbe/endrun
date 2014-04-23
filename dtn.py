@@ -93,29 +93,29 @@ class Payload:
   #   a decrypted git bundle or False otherwise
   def unwrap(self):
     # don't process the bundle if it's not meant for us
-    if self.destination is not config.get('global', 'nodename'):
-      return False;
-    else:
-      # grab my private key
-      with open( config.get('global', 'keypath') + '/' + self.destination + '.private', 'r' ) as destinationPrivateKey:
-        destinationKey = self.deserialize(destinationPrivateKey)
-      # grab the origin's public key
-      with open( config.get('global', 'keypath') + '/' + self.origin + '.public', 'r' ) as originPublicKey:
-        originKey = self.deserialize(originPublicKey)
-      # grab the origin's verification keyhg
-      with open( config.get('global', 'keypath') + '/' + self.origin + '.sighex', 'r' ) as originSigHex:
-        originSigKey = self.deserialize(originSigHex)
-        originVerify = nacl.signing.VerifyKey(originSigKey, encoder=nacl.encoding.HexEncoder)
-      # create a box to decrypt this sucker
-      container = Box(destinationKey, originKey)
-      # verify the signature
-      rawResult = originVerify.verify(self.payload)
-      # decrypt it
-      rawResult = container.decrypt(rawResult)
-      # verify the signature again
-      result = originVerify.verify(rawResult)
-      
-      return result
+    #if self.destination is not config.get('global', 'nodename'):
+      #return False;
+  #else:
+    # grab my private key
+    with open( config.get('global', 'keypath') + '/' + self.destination + '.private', 'r' ) as destinationPrivateKey:
+      destinationKey = self.deserialize(destinationPrivateKey)
+    # grab the origin's public key
+    with open( config.get('global', 'keypath') + '/' + self.origin + '.public', 'r' ) as originPublicKey:
+      originKey = self.deserialize(originPublicKey)
+    # grab the origin's verification keyhg
+    with open( config.get('global', 'keypath') + '/' + self.origin + '.sighex', 'r' ) as originSigHex:
+      originSigKey = self.deserialize(originSigHex)
+      originVerify = nacl.signing.VerifyKey(originSigKey, encoder=nacl.encoding.HexEncoder)
+    # create a box to decrypt this sucker
+    container = Box(destinationKey, originKey)
+    # verify the signature
+    rawResult = originVerify.verify(self.payload)
+    # decrypt it
+    rawResult = container.decrypt(rawResult)
+    # verify the signature again
+    result = originVerify.verify(rawResult)
+    
+    return result
             
   # grab a git bundle from a repo and create a payload
   # args: 
