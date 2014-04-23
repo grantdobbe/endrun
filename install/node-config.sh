@@ -28,6 +28,9 @@ echo "copying in repo installation files"
 rsync -a $SRC/$NODE-deploy $HOME/
 mv $HOME/$NODE-deploy $HOME/plp
 
+echo "adding ~/libnatasha to your path"
+echo "export PATH=$PATH:$HOME/libnatasha" >> $HOME/.bashrc
+
 echo "changing host-specific settings"
 sudo sed -i "s/$HOSTNAME/$NODE/g" /etc/hostname
 sudo sed -i "s/127\.0\.1\.1	$HOSTNAME/127\.0\.1\.1	$NODE/g" /etc/hosts

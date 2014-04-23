@@ -19,5 +19,5 @@ def main():
   dtn.receive(payload)
 	
 if __name__ == '__main__':
-	main()
+  main()
 

@@ -15,7 +15,7 @@ def main():
   
   destination = sys.argv[1]
   
-  transmit(destination)
+  dtn.transmit(destination)
 
 if __name__ == '__main__':
 	main()
