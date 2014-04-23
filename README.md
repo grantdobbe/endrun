@@ -58,7 +58,7 @@ cp ~/libnatasha/install/config.rb ~/plp/config.rb
 sudo update-rc.d gollum-server defaults
 sudo cp ~/libnatasha/install/natasha-serial /etc/init.d/
 sudo update-rc.d natasha-serial defaults
-
+sudo cp ~/libnatasha/install/hostapd /etc/init.d/
 ```
 
 Generate your certificate and key. (Add script to make this easier later.) Then:

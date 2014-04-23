@@ -35,6 +35,7 @@ sudo cp /home/$USER/libnatasha/install/gollum-server /etc/init.d/
 sudo chmod 755 /etc/init.d/gollum-server
 cp $HOME/libnatasha/install/config.rb $HOME/plp/config.rb
 sudo update-rc.d gollum-server defaults
+sudo cp $HOME/libnatasha/install/hostapd /etc/init.d/
 
 echo "installing serial daemon"
 sudo cp $HOME/libnatasha/install/natasha-serial /etc/init.d/
