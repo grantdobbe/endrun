@@ -4,18 +4,27 @@
 NODE=$1
 SRC=$2
 
+HOSTNAME=$(hostname)
+
+echo "updating libnatasha repo"
 cd /home/$USER/libnatasha 
 git pull origin master
 
 cd /home/$USER/
 
-rsync -av $SRC/$NODE-deploy /home/$USER/plp
+echo "copying in repo installation files"
+rsync -av $SRC/$NODE-deploy $HOME/
+mv $HOME/$NODE-deploy $HOME/plp
 
-sudo echo nodeX > /etc/hostname
-sudo sed -i "s/127.0.1.1 raspberrypi/127.0.1.1 $NODE/g" /etc/hosts
+echo "changing host-specific settings"
+sudo sed -i "s/$HOSTNAME/$NODE/g" /etc/hostname
+sudo sed -i "s/127.0.1.1 $HOSTNAME/127.0.1.1 $NODE/g" /etc/hosts
 sudo cp /home/$USER/libnatasha/install/gollum-server /etc/init.d/
 sudo chmod 755 /etc/init.d/gollum-server
-cp /home/$USER/libnatasha/install/config.rb /home/$USER/plp/config.rb
+cp $HOME/libnatasha/install/config.rb $HOME/plp/config.rb
 sudo update-rc.d gollum-server defaults
 
-sed -i "s/\/home\/gdobbe\/plp-test\/node1-deploy/\/home\/$USER\/plp/g" /home/$USER/plp/repo/.git/config
+echo "changing bundle paths"
+sed -i "s/\/home\/gdobbe\/plp-test\/node1-deploy/$HOME\/plp/g" /home/$USER/plp/repo/.git/config
+
+echo "all done!"
