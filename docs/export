@@ -7,7 +7,7 @@ git bundle create /tmp/node2.bundle HEAD
 git tag bundle-node2-1 HEAD
 git checkout master
 cd /tmp
-dtn_transmit.py node1 node2.bundle
+dtn_transmit.py node1
 
 node1:
 

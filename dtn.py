@@ -51,7 +51,7 @@ class Payload:
   payload = ''
   
   def __init__(self):
-    self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=config.get('global', 'ttl'))
+    self.ttl = datetime.datetime.now() + + datetime.timedelta(int(hours=config.get('global', 'ttl')))
     self.origin = config.get('global', 'nodename')
     self.destination = ''
     self.nonce = nacl.utils.random(NONCE_SIZE)
@@ -369,8 +369,9 @@ def receive(payload):
 # transmit a payload
 def transmit(destination):
   try:
-    payload = dtn.Payload()
+    payload = Payload()
     payload.pack(destination)
   except:
     print "Error with creating payload. Please check repo integrity."
     return False
+  
