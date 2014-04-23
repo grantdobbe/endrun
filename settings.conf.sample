@@ -3,8 +3,8 @@ nodename:     nodeX
 repopath:     /home/pi/plp/repo
 keypath:      /home/pi/plp/keys
 bundlepath:   /home/pi/plp/bundles
-; default payload time-to-live in seconds
-ttl:          86400
+; default payload time-to-live in hours
+ttl:          24
 
 [transmission]
 ; default transmission method -- options are currently xbee and sneakernet

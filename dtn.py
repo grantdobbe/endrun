@@ -51,7 +51,7 @@ class Payload:
   payload = ''
   
   def __init__(self):
-    self.ttl = datetime.datetime.now() + + datetime.timedelta(int(hours=config.get('global', 'ttl')))
+    self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=int(config.get('global', 'ttl')))
     self.origin = config.get('global', 'nodename')
     self.destination = ''
     self.nonce = nacl.utils.random(NONCE_SIZE)
