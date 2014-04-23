@@ -6,7 +6,6 @@
 #  Copyright 2013 Grant Dobbe <grant@dobbe.us>
 #  
 
-import pynacl
 import datetime, os, pickle, ConfigParser, git, shutil
 import warnings
 
