@@ -6,6 +6,7 @@
 #  Copyright 2013 Brendan O'Connor <ussjoin@ussjoin.com>
 #  
 
+import dtn
 import serial
 import threading
 import sys
@@ -47,6 +48,14 @@ logout = open(logfile, 'a')
 
 ser = serial.Serial(sys.argv[1], 19200, timeout=1)
 
+# the actual bundle processing
+def processBundle(filename):
+  logthis("Opened file " + filename +  " for processing by Natasha.")  
+  try:
+    dtn.receive(filename)
+  except:
+    logthis("Bundle processing for " + filename + " failed. Please check validity of file." )
+
 def logthis(data):
   output = "["+time.ctime()+"]"
   logout.write(output+" "+data+"\n")
@@ -72,8 +81,11 @@ def handleincomingdata(data):
   outfile.close()
 
   pipeout.write(plp_incoming_dir+'/'+randomname+"\n")
-  pipeout.flush() # Write it out RIGHT NOW.
+  pipeout.flush() 
+  # Write it out RIGHT NOW.
   # But you could do anything else you wanted here.
+
+  processBundle(plp_incoming_dir+'/'+randomname)
 
 def listen():
   while 1:

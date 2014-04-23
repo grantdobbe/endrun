@@ -28,6 +28,10 @@ echo "copying in repo installation files"
 rsync -a $SRC/$NODE-deploy $HOME/
 mv $HOME/$NODE-deploy $HOME/plp
 
+echo "creating a config file"
+cp $HOME/libnatasha/settings.conf.sample $HOME/libnatasha/settings.conf
+sed -i "s/nodeX/$NODE/g" $HOME/libnatasha/settings.conf
+
 echo "adding ~/libnatasha to your path"
 echo "export PATH=$PATH:$HOME/libnatasha" >> $HOME/.bashrc
 
