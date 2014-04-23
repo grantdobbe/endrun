@@ -19,6 +19,9 @@ outgoing_pipe_name = '/tmp/received'
 logfile = '/var/log/plp_serial.log'
 plp_incoming_dir = '/tmp/plp_incoming'
 
+ticketprinter = None
+path_to_printer = '/dev/usb/lp0'
+
 outgoing_data_global = []
 
 if len(sys.argv) != 2:
@@ -34,6 +37,9 @@ if not os.path.exists(outgoing_pipe_name):
 if not os.path.exists(plp_incoming_dir):
   os.makedirs(plp_incoming_dir)
 
+if os.path.exists(path_to_printer):
+  ticketprinter = open(path_to_printer, 'w')
+
 pipeinfd = os.open(incoming_pipe_name, os.O_RDONLY | os.O_NONBLOCK)
 pipeout = open(outgoing_pipe_name, 'w+')
 
@@ -42,8 +48,15 @@ logout = open(logfile, 'a')
 ser = serial.Serial(sys.argv[1], 19200, timeout=1)
 
 def logthis(data):
-  logout.write("["+time.ctime()+"] "+data+"\n");
+  output = "["+time.ctime()+"]"
+  logout.write(output+" "+data+"\n")
   logout.flush()
+  if ticketprinter is not None:
+    ticketprinter.write("********************************\n")
+    ticketprinter.write(output+"\n"+data+"\n")
+    ticketprinter.write("********************************\n")
+    ticketprinter.write("\n\n\n\n")
+    ticketprinter.flush()
 
 def handleincomingdata(data):
   #print data

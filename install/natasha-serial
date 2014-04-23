@@ -40,6 +40,10 @@ case "$1" in
     echo "Starting Natasha Serial"
     touch /var/log/plp_serial.log
     chown $USER:$GROUP /var/log/plp_serial.log
+    if [ -c /dev/usb/lp0 ]
+    then
+	chmod a+rw /dev/usb/lp0
+    fi
     start-stop-daemon --start --quiet -b -m -p $PID --chuid $USER:$GROUP --exec $DAEMON $DAEMON_OPT
     #$DAEMON $DAEMON_OPT
   ;;
