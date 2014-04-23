@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  dtndaemon.py
+#  
+#  Copyright 2013 Grant Dobbe <grant@dobbe.us>
+#  
 
 import dtn
 import threading
@@ -55,10 +61,12 @@ def listen():
 
 logthis("Starting up.")
 
+# the actual thread
 listenthread = threading.Thread(target=listen)
 listenthread.daemon = True
 listenthread.start()
 
+# keep things running regardless of whether or not there's anything to do
 while 1:
   time.sleep(1)
 

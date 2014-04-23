@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  serialdaemon.py
+#  
+#  Copyright 2013 Brendan O'Connor <ussjoin@ussjoin.com>
+#  
 
 import serial
 import threading
