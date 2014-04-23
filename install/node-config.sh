@@ -25,7 +25,7 @@ cp $HOME/libnatasha/install/config.rb $HOME/plp/config.rb
 sudo update-rc.d gollum-server defaults
 
 echo "installing serial daemon"
-sudo cp ~/libnatasha/install/natasha-serial /etc/init.d/
+sudo cp $HOME/libnatasha/install/natasha-serial /etc/init.d/
 sudo update-rc.d natasha-serial defaults
 
 echo "changing bundle paths"
