@@ -56,6 +56,8 @@ sudo cp ~/libnatasha/install/gollum-server /etc/init.d/
 sudo chmod 755 /etc/init.d/gollum-server
 cp ~/libnatasha/install/config.rb ~/plp/config.rb
 sudo update-rc.d gollum-server defaults
+sudo cp ~/libnatasha/install/natasha-serial /etc/init.d/
+sudo update-rc.d natasha-serial defaults
 
 ```
 
