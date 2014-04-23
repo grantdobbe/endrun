@@ -53,6 +53,7 @@ def processBundle(filename):
   logthis("Opened file " + filename +  " for processing by Natasha.")  
   try:
     dtn.receive(filename)
+    
   except:
     logthis("Bundle processing for " + filename + " failed. Please check validity of file." )
 
