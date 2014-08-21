@@ -6,7 +6,7 @@
 #  Copyright 2014 Grant Dobbe <grant@dobbe.us>
 #    
 
-import os, dtn, time, sys
+import os, endrun, time, sys
   
 def main():
   
@@ -22,11 +22,11 @@ def main():
   start = time.time()
   
   # generate the keys
-  dtn.generateKeys(number, path)
+  endrun.generateKeys(number, path)
   # create the repo
-  dtn.repoInit(number, path)
+  endrun.repoInit(number, path)
   # create a directory for each node following the convention nodeX-deploy with the appropriate info
-  dtn.nodeInit(number, path)
+  endrun.nodeInit(number, path)
   
   end = time.time()
   

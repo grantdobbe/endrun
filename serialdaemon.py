@@ -6,7 +6,7 @@
 #  Copyright 2013 Brendan O'Connor <ussjoin@ussjoin.com>
 #  
 
-import dtn
+import endrun
 import serial
 import threading
 import sys
@@ -17,8 +17,8 @@ import time
 incoming_pipe_name = '/tmp/tobesent'
 outgoing_pipe_name = '/tmp/received'
 
-logfile = '/var/log/plp_serial.log'
-plp_incoming_dir = '/tmp/plp_incoming'
+logfile = '/var/log/endrun_serial.log'
+endrun_incoming_dir = '/tmp/endrun_incoming'
 
 ticketprinter = None
 path_to_printer = '/dev/usb/lp0'
@@ -35,8 +35,8 @@ if not os.path.exists(incoming_pipe_name):
 if not os.path.exists(outgoing_pipe_name):
   os.mkfifo(outgoing_pipe_name)
 
-if not os.path.exists(plp_incoming_dir):
-  os.makedirs(plp_incoming_dir)
+if not os.path.exists(endrun_incoming_dir):
+  os.makedirs(endrun_incoming_dir)
 
 if os.path.exists(path_to_printer):
   ticketprinter = open(path_to_printer, 'w')
@@ -50,9 +50,9 @@ ser = serial.Serial(sys.argv[1], 19200, timeout=1)
 
 # the actual bundle processing
 def processBundle(filename):
-  logthis("Opened file " + filename +  " for processing by Natasha.")  
+  logthis("Opened file " + filename +  " for processing by Endrun.")  
   try:
-    dtn.receive(filename)
+    endrun.receive(filename)
   except:
     logthis("Bundle processing for " + filename + " failed. Please check validity of file." )
 
@@ -73,19 +73,19 @@ def handleincomingdata(data):
   
   randomname = 'incoming-'+str(time.time())+'.data'
 
-  outfile = open(plp_incoming_dir+'/'+randomname, 'w')
+  outfile = open(endrun_incoming_dir+'/'+randomname, 'w')
 
   for ditem in data:
     outfile.write(ditem)
   
   outfile.close()
 
-  pipeout.write(plp_incoming_dir+'/'+randomname+"\n")
+  pipeout.write(endrun_incoming_dir+'/'+randomname+"\n")
   pipeout.flush() 
   # Write it out RIGHT NOW.
   # But you could do anything else you wanted here.
 
-  processBundle(plp_incoming_dir+'/'+randomname)
+  processBundle(endrun_incoming_dir+'/'+randomname)
 
 def listen():
   while 1:

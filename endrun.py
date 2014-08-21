@@ -50,7 +50,7 @@ class Payload:
   # empty by default
   payload = ''
   # custodychain - a json multi-dimensional array containing the complete chain of custody for an endrun payload
-  custodychain = 
+  custodychain = '{}'
   
   def __init__(self):
     self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=int(config.get('global', 'ttl')))
@@ -189,6 +189,16 @@ class Payload:
     repo.git.checkout('master')
     # clean up after ourselves (delete the encrypted payload and the tarball)
     os.remove('/tmp/' + bundleName)
+    
+  # record a receipt entry
+  def receipt(self, recepientPubKey):
+    # get the current datetime
+    # perform a SHA-256 hash of the encrypted payload
+    # format a json array consisting of the datetime, the recipient's pubkey, and the hash
+    # attach one copy to the end of custodychain
+    # return the json array to whomever has requested it
+    pass
+
 
 '''
 ---------------
@@ -384,4 +394,18 @@ def transmit(destination):
   except:
     print "Error with creating payload. Please check repo integrity."
     return False
+
+'''
+Chain of custody functions
+'''
+def chainRecord(receipt):
+  #record the chain of custody info here
+  pass
   
+def chainLookup(datetime=1, payloadHash=1, keyFingerPrint=1):
+  # figure out how to do a chain lookup here
+  pass
+
+def chainFlush():
+  # figure out how to flush the chain of custody here
+  pass

@@ -30,7 +30,7 @@ def logthis(data):
 
 # the actual bundle processing
 def processBundle(filename):
-  logthis("Opened file " + filename +  " for processing by Natasha.")  
+  logthis("Opened file " + filename +  " for processing by Endrun.")  
   try:
     endrun.receive(filename)
   except:
