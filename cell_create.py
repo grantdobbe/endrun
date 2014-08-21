@@ -6,12 +6,14 @@
 #  Copyright 2014 Grant Dobbe <grant@dobbe.us>
 #    
 
-import os, dtn, time
+import os, dtn, time, sys
   
 def main():
   
+  if len(sys.argv) != 3:
+    
   # grab the user's home directory
-  home = os.path.expanduser("~") + "/plp"
+  home = os.path.expanduser("~") + "/endrun"
   
   # fetch our intial config data
   number = int(raw_input("Enter the number of nodes to create (default is 8): ") or 8 )

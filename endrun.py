@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  dtn.py
+#  endrun.py
 #  
 #  Copyright 2013 Grant Dobbe <grant@dobbe.us>
 #  
@@ -49,6 +49,8 @@ class Payload:
   # payload - nacl encrypted git bundle 
   # empty by default
   payload = ''
+  # custodychain - a json multi-dimensional array containing the complete chain of custody for an endrun payload
+  custodychain = 
   
   def __init__(self):
     self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=int(config.get('global', 'ttl')))
@@ -140,7 +142,7 @@ class Payload:
     with open(outputTarget + bundleName, 'r') as payloadInput:
        self.wrap(payloadInput.read())
     # export the entire payload with headers into a file
-    with open(outputTarget + bundleName + '.dtn', 'w') as payloadFile:
+    with open(outputTarget + bundleName + '.endrun', 'w') as payloadFile:
       pickle.dump(self, payloadFile)
     # clean up after ourselves (delete the .bundle file)
     os.remove(outputTarget + bundleName)
@@ -157,7 +159,7 @@ class Payload:
     # decrypt the bundle as a bytestream 
     payload = bytes(self.unwrap())
     
-    if payload is False:
+    if payload False:
       print "Bundle is not for this node. Aborting."
       return False
 
@@ -226,7 +228,7 @@ def keyMake(node):
 '''
 Node setup and configuration
 '''
-# generate the DTN keys we need for each node
+# generate the keys we need for each node
 def generateKeys(nodeTotal, path):
   nodes = []
   keyPath = path + "/keys"

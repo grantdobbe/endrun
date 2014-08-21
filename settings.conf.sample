@@ -1,13 +1,19 @@
 [global]
 nodename:     nodeX
-repopath:     /home/pi/plp/repo
-keypath:      /home/pi/plp/keys
-bundlepath:   /home/pi/plp/bundles
+repopath:     /home/pi/endrun/repo
+keypath:      /home/pi/endrun/keys
+bundlepath:   /home/pi/endrun/bundles
 ; default payload time-to-live in hours
-ttl:          24
+ttl:          48
 
 [transmission]
+intracell: true
+intracell: false
 ; default transmission method -- options are currently xbee and sneakernet
-method:       xbee
+method:       sneakernet
 ; define the transmission interval in minutes
 interval:     60
+
+[receipts]
+; how often (in hours) should the receipt cache be flushed? recommended is 1.5x your ttl
+cachelife: 72

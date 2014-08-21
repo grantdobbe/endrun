@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  dtndaemon.py
+#  endrun-daemon.py
 #  
 #  Copyright 2013 Grant Dobbe <grant@dobbe.us>
 #  
 
-import dtn
+import endrun
 import threading
 import sys
 import os
@@ -14,7 +14,7 @@ import errno
 import time
 
 # specify log file and incoming pipe
-logfile = '/var/log/dtn_transfer.log'
+logfile = '/var/log/endrun_transfer.log'
 incoming_pipe = '/tmp/received'
 
 # open the log file
@@ -32,7 +32,7 @@ def logthis(data):
 def processBundle(filename):
   logthis("Opened file " + filename +  " for processing by Natasha.")  
   try:
-    dtn.receive(filename)
+    endrun.receive(filename)
   except:
     logthis("Bundle processing for " + filename + " failed. Please check validity of file." )
 
