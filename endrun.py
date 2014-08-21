@@ -159,7 +159,7 @@ class Payload:
     # decrypt the bundle as a bytestream 
     payload = bytes(self.unwrap())
     
-    if payload False:
+    if payload is False:
       print "Bundle is not for this node. Aborting."
       return False
 
