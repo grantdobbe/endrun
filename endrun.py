@@ -227,7 +227,7 @@ def keyMake(node):
   
   # write all of the keys to file
   with open(config.get('global', 'keypath') + '/' + node + '.sig', 'w+') as signing_key:
-    pickle.dump(config.get('global', 'keypath') + '/' + sig, signing_key) 
+    pickle.dump(sig, signing_key) 
   with open(config.get('global', 'keypath') + '/' + node + '.sighex', 'w+') as verify_hex:
     pickle.dump(sig_hex, verify_hex)
   with open(config.get('global', 'keypath') + '/' + node + '.private', 'w+') as private:
