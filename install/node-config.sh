@@ -51,9 +51,23 @@ if ["$confirm" == "y"]; then
   echo "export PATH=$PATH:$HOME/endrun" >> $HOME/.bashrc
   echo "Done."
   
+  echo "Installing LibSodium..."
+  wget -c "https://github.com/jedisct1/libsodium/releases/download/0.7.0/libsodium-0.7.0.tar.gz"
+  tar xzf libsodium-0.7.0.tar.gz
+  cd libsodium-0.7.0/
+  ./configure
+  make && make check
+  sudo make install
+  cd /home/$USER/
+  rm -rf libsodium-0.7.0*
+  echo "Done"
+  
+  
   echo "Installing dependencies..."
-  sudo apt-get -y install ruby ruby-dev libz-dev libicu-dev build-essential
+  sudo apt-get -y install python-dev python-pip libffi-dev ruby ruby-dev libz-dev libicu-dev build-essential
   sudo gem install gollum
+  sudo pip install pynacl
+  sudo easy_install GitPython
   echo "Done."
   
   echo "Changing host-specific settings..."
