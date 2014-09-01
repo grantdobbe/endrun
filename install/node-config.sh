@@ -29,6 +29,10 @@ sed -i "s/nodeX/$NODE/g" $HOME/endrun/settings.conf
 echo "adding ~/endrun to your path"
 echo "export PATH=$PATH:$HOME/endrun" >> $HOME/.bashrc
 
+echo "installing dependencies"
+sudo apt-get -y install aptitude ruby ruby-dev libz-dev libicu-dev build-essential
+sudo gem install gollum
+
 echo "changing host-specific settings"
 sudo sed -i "s/$HOSTNAME/$NODE/g" /etc/hostname
 sudo sed -i "s/127\.0\.1\.1	$HOSTNAME/127\.0\.1\.1	$NODE/g" /etc/hosts
