@@ -2,19 +2,12 @@
 
 
 NODE=$1
-SRC=$2
 
 HOSTNAME=$(hostname)
 
 if [ -z $1] 
   then
-    echo "USE: configure-node nodename /path/containing/node-deploy"
-    exit
-fi
-
-if [ -z $2] 
-  then
-    echo "USE: configure-node nodename /path/containing/node-deploy"
+    echo "USE: configure-node nodename"
     exit
 fi
 
