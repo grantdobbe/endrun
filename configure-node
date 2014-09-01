@@ -31,7 +31,7 @@ if [ "$confirm" == "y" ]; then
   cd /home/$USER/
   
   echo "Copying deployment files and setting up endrun repo..."
-  rsync -a $SRC/$NODE-deploy $HOME/
+  rsync -a $HOME/endrun-deploy/$NODE-deploy $HOME/
   mv $HOME/$NODE-deploy $HOME/endrun-data
   echo "Done."
   

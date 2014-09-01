@@ -6,7 +6,7 @@ disruption-tolerant, delay-tolerant, opsec-friendly communications network where
 any means available.
 
 
-Installation Instructions
+Installation Steps
 =======================
 
 download libsodium and install according to instructions
@@ -17,10 +17,10 @@ Install the following packages:
 - libffi-dev
 
 Then run:
-```
+``` 
 sudo pip install pynacl
 sudo easy_install GitPython
-```
+``` 
 
 
 Add the following to your path:
@@ -31,16 +31,31 @@ export PATH=$PATH:/path/to/endrun
 
 Finally, copy settings.conf.sample to settings.conf and change the settings to match your node's deployment schema
 
+Automatic Node Configuration
+=========================
+
+on host:
+```
+rsync -avz endrun-deploy node-address.local:~/
+```
+
+on node (as root):
+apt-get install git
+apt-get install sudo
+
+git clone git@github.com:grantdobbe/endrun.git
+
 
 Manual Configuration Steps
 ========================
 
 on host:
 ```
-rsync -avz nodeX-deploy node-address.local:~/
+rsync -avz endrun-deploy node-address.local:~/
 ```
 
 on node (as root):
+
 ```
 echo nodeX > /etc/hostname
 nano /etc/hosts
