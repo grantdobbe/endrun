@@ -216,7 +216,7 @@ def keyCheck(node):
     result = True
   return result
   
-def keyMake(node):
+def keyMake(node, path):
   ## create a public, private, and signature key set
   # generate the encryption keypair
   key = PrivateKey.generate()
@@ -226,20 +226,20 @@ def keyMake(node):
   sig_hex = verify.encode(encoder=nacl.encoding.HexEncoder)
   
   # write all of the keys to file
-  with open(config.get('global', 'keypath') + '/' + node + '.sig', 'w+') as signing_key:
+  with open(path + '/' + node + '.sig', 'w+') as signing_key:
     pickle.dump(sig, signing_key) 
-  with open(config.get('global', 'keypath') + '/' + node + '.sighex', 'w+') as verify_hex:
+  with open(path + '/' + node + '.sighex', 'w+') as verify_hex:
     pickle.dump(sig_hex, verify_hex)
-  with open(config.get('global', 'keypath') + '/' + node + '.private', 'w+') as private:
+  with open(path + '/' + node + '.private', 'w+') as private:
     pickle.dump(key, private)
-  with open(config.get('global', 'keypath') + '/' + node + '.public', 'w+') as public:
+  with open(path + '/' + node + '.public', 'w+') as public:
     pickle.dump(key.public_key, public)
 
 '''
 Node setup and configuration
 '''
 # generate the keys we need for each node
-def generateKeys(nodeTotal, path):
+def generateKeys(nodeTotal, path, prefix = 'node'):
   nodes = []
   keyPath = path + "/keys"
   
@@ -251,15 +251,15 @@ def generateKeys(nodeTotal, path):
   print 'Generating keys: ',
   # create one key set for each node
   for node in range (1, nodeTotal + 1):
-    nodeName = 'node' + str(node)
-    keyMake(nodeName)
+    nodeName = prefix + str(node)
+    keyMake(nodeName, keyPath)
     print("."),
   
   # print a progress message for the user
   print "\nKey generation complete."
 
 # generate an empty repo with the correct number of branches for each node
-def repoInit(nodeTotal, path):
+def repoInit(nodeTotal, path, prefix = 'node'):
   # set up the actual deployment path
   deployPath = path + '/repo'
   
@@ -283,7 +283,7 @@ def repoInit(nodeTotal, path):
   
   # create a branch for each node we need to work with
   for node in range(1, nodeTotal + 1):
-    nodeName = 'node' +  str(node)
+    nodeName = prefix +  str(node)
     repo.git.checkout(b=nodeName)
     print '.',
   # checkout the master branch again
@@ -293,7 +293,7 @@ def repoInit(nodeTotal, path):
   print "\nMaster repo creation complete."
 
 # create the node-specific config directories and run the "round robin"
-def nodeInit(nodeTotal, path):
+def nodeInit(nodeTotal, path, prefix = "node"):
   
   print "Creating node deployment files: ",
   # define the parent repo
@@ -308,7 +308,7 @@ def nodeInit(nodeTotal, path):
   # set up the deploy directory and set up everything except bundles
   for node in range(1, nodeTotal + 1):
     # define some variables we'll need
-    nodeName = "node" + str(node)
+    nodeName = prefix + str(node)
     nodePath = path + '/' + nodeName + '-deploy'
     repoPath = nodePath + '/repo'
     keyPath = nodePath + '/keys'
@@ -350,7 +350,7 @@ def nodeInit(nodeTotal, path):
   print "Adding bundles as remote repos and creating tracking branches: ",
   for node in range(1, nodeTotal + 1):
     # define some variables we'll need ..
-    nodeName = "node" + str(node)
+    nodeName = prefix + str(node)
     nodePath = path + '/' + nodeName + '-deploy'
     repoPath = nodePath + '/repo'
     bundlePath = nodePath + '/bundles'  

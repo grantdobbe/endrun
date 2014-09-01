@@ -6,49 +6,46 @@ SRC=$2
 
 HOSTNAME=$(hostname)
 
-if [ -z $1 ] 
+if [ -z $1 -o -z $2] 
   then
     echo "USE: node-config.sh nodename /path/containing/node-deploy"
     exit
 fi
 
-if [ -z $2 ] 
-  then
-    echo "USE: node-config.sh nodename /path/containing/node-deploy"
-    exit
-fi
-
-echo "updating libnatasha repo"
-cd /home/$USER/libnatasha 
+echo "updating endrun repo"
+cd /home/$USER/endrun 
 git pull origin master
 
 cd /home/$USER/
 
 echo "copying in repo installation files"
 rsync -a $SRC/$NODE-deploy $HOME/
-mv $HOME/$NODE-deploy $HOME/plp
+mv $HOME/$NODE-deploy $HOME/endrun-data
 
 echo "creating a config file"
-cp $HOME/libnatasha/settings.conf.sample $HOME/libnatasha/settings.conf
-sed -i "s/nodeX/$NODE/g" $HOME/libnatasha/settings.conf
+cp $HOME/endrun/settings.conf.sample $HOME/endrun/settings.conf
+sed -i "s/nodeX/$NODE/g" $HOME/endrun/settings.conf
 
-echo "adding ~/libnatasha to your path"
-echo "export PATH=$PATH:$HOME/libnatasha" >> $HOME/.bashrc
+echo "adding ~/endrun to your path"
+echo "export PATH=$PATH:$HOME/endrun" >> $HOME/.bashrc
 
 echo "changing host-specific settings"
 sudo sed -i "s/$HOSTNAME/$NODE/g" /etc/hostname
 sudo sed -i "s/127\.0\.1\.1	$HOSTNAME/127\.0\.1\.1	$NODE/g" /etc/hosts
-sudo cp /home/$USER/libnatasha/install/gollum-server /etc/init.d/
+sudo cp /home/$USER/endrun/install/gollum-server /etc/init.d/
+sudo sed -i "s;/home/pi/endrun-data/repo;$HOME/endrun-data/repo;g" /etc/init.d/gollum-server
 sudo chmod 755 /etc/init.d/gollum-server
-cp $HOME/libnatasha/install/config.rb $HOME/plp/config.rb
-sudo update-rc.d gollum-server defaults
-sudo cp $HOME/libnatasha/install/hostapd /etc/init.d/
+cp $HOME/endrun/install/config.rb $HOME/endrun-data/config.rb
+sed -i "s/nodeX/$NODE/g" $HOME/endrun-data/config.rb
 
-echo "installing serial daemon"
-sudo cp $HOME/libnatasha/install/natasha-serial /etc/init.d/
-sudo update-rc.d natasha-serial defaults
+sudo update-rc.d gollum-server defaults
+sudo cp $HOME/endrun/install/hostapd /etc/init.d/
+
+#echo "installing serial daemon"
+#sudo cp $HOME/endrun/endrun-daemon /etc/init.d/
+#sudo update-rc.d endrun-daemon default
 
 echo "changing bundle paths"
-sed -i "s;/home/gdobbe/plp-test/$NODE-deploy;$HOME/plp;g" $HOME/plp/repo/.git/config
+sed -i "s;/home/(.*)/endrun-deploy/$NODE-deploy;$HOME/endrun-data;g" $HOME/endrun-data/repo/.git/config
 
 echo "all done!"

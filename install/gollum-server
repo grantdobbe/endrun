@@ -21,7 +21,7 @@
 PID="/var/run/gollum-server.pid"
 
 # The location of the git repository
-WIKI="/home/pi/plp/repo"
+WIKI="/home/pi/endrun-data/repo"
 
 # The location if the gollum executable
 DAEMON="/usr/local/bin/gollum"

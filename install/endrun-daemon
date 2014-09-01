@@ -1,27 +1,27 @@
 ### BEGIN INIT INFO
-# Provides:          natasha-serial
+# Provides:          endrun-daemon
 # Required-Start:    $local_fs 
 # Required-Stop:     $local_fs
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: natasha-serial provides PLP with a connection to XBee.
+# Short-Description: endrun-daemon provides PLP with a connection to XBee.
 ### END INIT INFO
 
 #!/bin/bash
 #
-# place this file in /etc/init.d/natasha-serial
+# place this file in /etc/init.d/endrun-daemon
 # change the file permission to executable:
-# $ sudo chmod +x /etc/init.d/natasha-serial
+# $ sudo chmod +x /etc/init.d/endrun-daemon
 # add it to default run levels
-# $ sudo update-rc.d natasha-serial defaults
+# $ sudo update-rc.d endrun-daemon defaults
 
 ######################################################
 ### Configuration
 ######################################################
-PID="/var/run/natasha-serial.pid"
+PID="/var/run/endrun-daemon.pid"
 
 # The location of the serial daemon executable
-DAEMON="/home/pi/libnatasha/serialdaemon.py"
+DAEMON="/home/pi/endrun/serialdaemon.py"
 
 # Set this to the serial port corresponding to the XBee Interface
 DAEMON_OPT="/dev/ttyAMA0"
@@ -37,9 +37,9 @@ GROUP="pi"
 
 case "$1" in
   start)
-    echo "Starting Natasha Serial"
-    touch /var/log/plp_serial.log
-    chown $USER:$GROUP /var/log/plp_serial.log
+    echo "Starting Endrun Daemon"
+    touch /var/log/endrun_daemon.log
+    chown $USER:$GROUP /var/log/endrun_daemon.log
     if [ -c /dev/usb/lp0 ]
     then
 	chmod a+rw /dev/usb/lp0
@@ -48,12 +48,12 @@ case "$1" in
     #$DAEMON $DAEMON_OPT
   ;;
   stop)
-    echo "Stopping Natasha Serial"
+    echo "Stopping Endrun Daemon"
     start-stop-daemon --stop --quiet --pidfile $PID
     rm -f $PID
   ;;
   *)
-    echo "Usage: service natasha-serial {start|stop}"
+    echo "Usage: service endrun-daemon {start|stop}"
     exit 1
   ;;
 esac
