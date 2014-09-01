@@ -1,17 +1,16 @@
 #!/bin/bash
 
-
 NODE=$1
 
 HOSTNAME=$(hostname)
 
-if [ -z $1] 
+if [ -z $1 ] 
   then
     echo "USE: configure-node nodename"
     exit
 fi
 
-echo "=====================\====================================="
+echo "==========================================================="
 echo "This installer will configure this machine to be an endrun"
 echo "node. It will install any missing dependencies and change"
 echo "system settings. Do not do this unless you are absolutely"
@@ -27,22 +26,26 @@ if [ "$confirm" == "y" ]; then
   cd /home/$USER/endrun 
   git pull origin master
   echo "Done."
-  
+  echo "==========================================================="
+
   cd /home/$USER/
   
   echo "Copying deployment files and setting up endrun repo..."
   rsync -a $HOME/endrun-deploy/$NODE-deploy $HOME/
   mv $HOME/$NODE-deploy $HOME/endrun-data
   echo "Done."
+  echo "==========================================================="
   
   echo "Creating endrun's config file..."
   cp $HOME/endrun/settings.conf.sample $HOME/endrun/settings.conf
   sed -i "s/nodeX/$NODE/g" $HOME/endrun/settings.conf
   echo "Done."
+  echo "==========================================================="
   
   echo "Adding ~/endrun to your path..."
   echo "export PATH=$PATH:$HOME/endrun" >> $HOME/.bashrc
   echo "Done."
+  echo "==========================================================="
   
   echo "Installing LibSodium..."
   wget -c "https://github.com/jedisct1/libsodium/releases/download/0.7.0/libsodium-0.7.0.tar.gz"
@@ -54,6 +57,7 @@ if [ "$confirm" == "y" ]; then
   cd /home/$USER/
   rm -rf libsodium-0.7.0*
   echo "Done"
+  echo "==========================================================="
   
   
   echo "Installing dependencies..."
@@ -62,6 +66,7 @@ if [ "$confirm" == "y" ]; then
   sudo pip install pynacl
   sudo easy_install GitPython
   echo "Done."
+  echo "==========================================================="
   
   echo "Changing host-specific settings..."
   sudo sed -i "s/$HOSTNAME/$NODE/g" /etc/hostname
@@ -75,7 +80,6 @@ if [ "$confirm" == "y" ]; then
   cp $HOME/endrun/install/config.rb $HOME/endrun-data/config.rb
   sed -i "s/nodeX/$NODE/g" $HOME/endrun-data/config.rb
   echo "+ Gollum configured"
-  echo "Done."
   
   sudo update-rc.d gollum-server defaults
   #sudo cp $HOME/endrun/install/hostapd /etc/init.d/
@@ -84,9 +88,14 @@ if [ "$confirm" == "y" ]; then
   #sudo cp $HOME/endrun/endrun-daemon /etc/init.d/
   #sudo update-rc.d endrun-daemon default
   
+  echo "Done."
+  echo "==========================================================="
+
+  
   echo "Changing bundle paths..."
   sed -i "s;/home/(.*)/endrun-deploy/$NODE-deploy;$HOME/endrun-data;g" $HOME/endrun-data/repo/.git/config
   echo "Done."
+  echo "==========================================================="
   
   echo "Program complete. You may enter when ready."
 
