@@ -7,8 +7,8 @@
 
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
-\title{Endrun---Secure Digital Communications For Our Modern Dystopia}
-\author{Brendan O'Connor and Grant Dobbe}
+\title{Endrun---Secure Digital Communications For Our Modern Dystopia\footnote{This paper, and the work it describes, represents the work of the authors in their spare time, and represents neither the product, nor the policy, of either author's employer(s). Conclusions of law in this work are not ``legal advice,'' do not establish an attorney-client relationship, and may be neither sane nor coherent.}}
+\author{Brendan O'Connor\footnote{Senior Security Consultant, Leviathan Security Group} and Grant Dobbe\footnote{Director of Security and Cloud Meteorologist, NuCivic Inc.}}
 \date{October 17, 2014}
 
 \begin{document}
@@ -16,11 +16,45 @@
 	
 	\maketitle
   
-  \section{Abstract}
-  
-  The Internet is no longer trustworthy, having been compromised by bad actors across the globe. Current proposals to work around a compromised Internet rely upon encrypted transport links, mesh networks, or harassing users for being unable to use GPG safely. Each of these strategies fails in different ways that inevitably lead to information leakage or---in the extreme case---death. Endrun, by contrast, takes NASA's Disruption-Tolerant Networking project from a laboratory experiment to a functional system that supports user-friendly encryption in hostile environments. Endrun embraces the nearly-unlimited throughput of a disk-laden station wagon and creates a reliable, eventually-consistent communications system ideal for activists, refugees, and trolls.
+  \begin{quote}
+    \emph{The Internet is no longer trustworthy, having been compromised by bad actors across the globe. Current proposals to work around a compromised Internet rely upon encrypted transport links, mesh networks, or harassing users for being unable to use GPG safely. Each of these strategies fails in different ways that inevitably lead to information leakage or---in the extreme case---death. Endrun, by contrast, takes NASA's Disruption-Tolerant Networking project from a laboratory experiment to a functional system that supports user-friendly encryption in hostile environments. Endrun embraces the nearly-unlimited throughput of a disk-laden station wagon and creates a reliable, eventually-consistent communications system ideal for activists, refugees, and trolls.}
+    \end{quote}
 	
 	\section{Introduction}
 	
+  It's easy to speak when everyone loves you. When people in the US or the rest of the western world discuss ``free speech,'' they generally mean some form of the right to communicate with others, and to assemble with others for the purpose of sharing their message. Some may also refer to a right to anonymous speech, but there are those who would attack the right of anonymity; ``if you have nothing to hide, you have nothing to fear.''\footnote{XXX CITE} In an era when ``privacy is dead, get over it''\footnote{XXX Zuckerberg}, it's easy to say that ``if you're trying to use an anonymity service, you're probably doing something illegal.''\footnote{XXX Comcast}
+  
+  We dissent. The right of public speech was not created to protect those messages everyone loves, but those messages that are reviled (for whatver reason). We believe that the current age of ``registered bloggers''\footnote{XXX Russia} and ``you're only press if you have a \$50,000 camera''\footnote{XXX Ferguson} reflects a misguided and destructive impulse to control thought and expression for the sake of centralization of power. We therefore present a system that we intend to provide a useful counterbalance; an easy-to-use, strongly-encrypted information-sharing network built not upon a reliable Internet source, but upon the distributed, unending movements of people. 
+  
+  \begin{quote}
+    End of hacker manifesto. Can't stop us all, we're all alike.
+  \end{quote}
+  
+  \section{Design Goals for Endrun}
+  
+  Endrun has five major design goals.
+  
+  \begin{enumerate}
+    \item Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.\footnote{While a large portion of the planet is served at least by bidirectional satellite Internet service, if nothing else, such service is often overwhelmingly expensive for all but the largest corporations, and this service does not reach the entire planet.}
+    
+    \item Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
+    
+    \item Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.\footnote{Although this last would almost certainly be illegal in many countries for several reasons, among them Endrun's use of multiple layers of strong encryption, and the fact that messages may not necessarily be originated by ham radio stations.}
+    
+    \item Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
+    
+    \item Endrun is built using standard, well-tested components, combined using Python, rather than using all custom code. Not only does this mean Endrun benefits from the work of thousands of programmers over many years, with all the attendant work on security that implies, but it also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
+    
+  \end{enumerate}
+  
+  \section{Previous Work}
+  
+  \section{Method}
+  
+  \section{Communication Example}
+  
+  XXX I got it from Agnes
+  
+  \section{Future Work}
 
 \end{document}
