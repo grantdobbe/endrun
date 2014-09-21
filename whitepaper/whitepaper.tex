@@ -43,17 +43,27 @@
     
     \item Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
     
-    \item Endrun is built using standard, well-tested components, combined using Python, rather than using all custom code. Not only does this mean Endrun benefits from the work of thousands of programmers over many years, with all the attendant work on security that implies, but it also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
+    \item Endrun is built using standard, well-tested, open source components, combined using Python, rather than using all custom code. Not only does this mean Endrun benefits from the work of thousands of programmers over many years, with all the attendant work on security that implies, but it also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
     
   \end{enumerate}
   
   \section{Previous Work}
   
-  \subsection{Commotion Wireless / Project Byzantium}
+  There has been a great deal of interest in the area of distributed communication tools, both ones that work over the public Internet, and ones that establish their own wireless links. We will examine several of the largest and most influential projects.
   
   \subsection{Tor}
   
-  \subsection{Anonymous AirChat\footnote{\url{https://github.com/lulzlabs/AirChat/}}}
+  Tor\footnote{\url{https://www.torproject.org}} is an incredibly-well-known tool for anonymous Internet access. The core security concept of Tor is called ``onion routing,'' where a client picks several nodes to pass the client's message through, and repeatedly encrypts the message with the public key of each node; the message is then routed in turn through each node. This means that if a client picks nodes A, B, and C to transit the message through, in that order, then node A knows where the message originated but not where it is destined (nor its contents), node C knows the message's destination and contents (assuming that no additional encryption is used), but not where it originated, and node B knows neither the message's contents, nor its source, nor its destination.
+  
+  Tor was originally developed by the U.S. Naval Research Laboratory, subsequently developed by the Defense Advanced Research Projects Agency, and then transferred for ongoing development to The Tor Project, a U.S.-based nonprofit corporation. It is rightly lauded as one of the most important security projects since the invention of networked computing; that said, it has certain deficits which raise concerns for anonymity applications. One of these is that when an adversary is able to monitor both the source and destination networks of a Tor message, a trivial timing analysis will reveal which user sent which message. This was revealed very dramatically through the near-instantaneous reidentification and arrest of Eldo Kim after he used Tor to send a bomb threat to Harvard University, which he attended at the time, apparently to escape a final exam.\footnote{``Harvard Student Receives F For Tor Failure While Sending `Anonymous' Bomb Threat,'' Runa A.\ Sandvik, Forbes, December 18, 2013, \url{http://www.forbes.com/sites/runasandvik/2013/12/18/harvard-student-receives-f-for-tor-failure-while-sending-anonymous-bomb-threat/}} Another, related, issue is that if an adversary controls a significant percentage of the total Tor network, they will nearly always be able to identify both the source and destination of any message (through a timing analysis of any message that both enters and leaves the Tor network through the adversary's systems). Both of these problems were noted in the original Tor paper.\footnote{``Tor does not claim to completely solve end-to-end timing or intersection attacks.'' Page 4 of ``Tor: The Second-Generation Onion Router,'' Roger Dingledine, Nick Mathewson, Paul Syverson, Proceedings of the 13th USENIX Security Symposium, 2004, \url{https://www.usenix.org/legacy/events/sec04/tech/full_papers/dingledine/dingledine.pdf}} At the time, however, it was believed that increased Tor usage, with an attendant increase in Tor nodes, would render controlling a majority of machines impractical.
+  
+  Unfortunately, this assumption is now believed to be incorrect. Tor's public metrics\footnote{\url{https://metrics.torproject.org/network.html}} indicate the daily average number of nodes is approximately 6,000 (as of September 2014). An adversary could match that number of nodes (and thus control 50\% of the total nodes on the network) relatively cheaply; using Amazon Web Services On-Demand Micro Instances, 6,000 nodes would cost just \$56,160 per month to operate (plus bandwidth).\footnote{Pricing data from \url{http://aws.amazon.com/ec2/pricing/}.} An adversary with a relatively small datacenter and sufficient bandwidth could spend significantly less on an ongoing basis to compromise the Tor network, and there are allegations that certain entities have already done so. We believe that Tor is now insufficient for truly-suppressed parties to communicate anonymously in the face of a network-level adversary.
+  
+  \subsection{Anonymous AirChat}
+  
+  Airchat\footnote{\url{https://github.com/lulzlabs/AirChat/}}
+  
+  \subsection{Commotion Wireless / Project Byzantium}
   
   \subsection{NASA Disruption-Tolerant Network}
   
