@@ -5,6 +5,11 @@
 \usepackage{array}
 %\usepackage{longtable}
 
+\usepackage[T1]{fontenc}
+\usepackage[default]{raleway}
+
+
+
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
 \title{Endrun---Secure Digital Communications For Our Modern Dystopia\footnote{This paper, and the work it describes, represents the work of the authors in their spare time, and represents neither the product, nor the policy, of either author's employer(s). Conclusions of law in this work are not ``legal advice,'' do not establish an attorney-client relationship, and may be neither sane nor coherent.}}
@@ -71,22 +76,52 @@
   Commotion Wireless\footnote{\url{https://commotionwireless.net}} and Project Byzantium\footnote{\url{http://project-byzantium.org}} represent two different ideas in mesh WiFi. Commotion is designed to be installed to consumer WiFi routers, providing mesh connectivity that can give wireless Internet access to neighborhoods; Byzantium describes itself as ``Ad-hoc wireless mesh networking for the zombie apocalypse,'' and provides software to turn consumer laptops into mesh nodes that provide communication services without Internet access. While both projects are of course admirable, they necessarily fall victim to the same problem discussed in Section~\ref{subsec:airchat}: long-lived, fixed wireless transmitters are dangerous for environments of censorship. (The hypothetical zombie apocalypse might be an acceptable time for use of these systems, however, since zombies are unlikely to employ automatic direction finding technology, or missiles, according to standard reference sources.\footnote{\emph{See, e.g.,} Zombieland (2009), Day of the Dead (1985), or Plan 9 from Outer Space (1959).}
   
   \subsection{Delay-Tolerant Networking}
+  \label{subsec:dtn}
   
-  The concept of delay- or disruption-tolerant networking has been the subject of a great deal of research, both by NASA, in the context of Vint Cerf's Interplanetary Networking (IPN) proposals,\footnote{\url{http://ipnsig.org}} and by DARPA-funded researchers looking for land-based solutions.\footnote{\url{https://www.fbo.gov/index?s=opportunity&mode=form&id=9e7abdcb0d96df48de122b0ec28e96d1&tab=core&_cview=0}} The concept is the same, with minor differences in application; both groups want to enable networked communication between nodes that may not be able to support bidirectional end-to-end communication, either due to vagaries of remote terrain (for DARPA), or light-speed communications delays across the solar system (for NASA).
+  The concept of delay- or disruption-tolerant networking has been the subject of a great deal of research, both by NASA, in the context of Vint Cerf's Interplanetary Networking (IPN) proposals,\footnote{\url{http://ipnsig.org}} and by DARPA-funded researchers looking for land-based solutions.\footnote{\url{https://www.fbo.gov/index?s=opportunity&mode=form&id=9e7abdcb0d96df48de122b0ec28e96d1&tab=core&_cview=0}} The concept is the same, with minor differences in application; both groups want to enable networked communication between nodes that may not be able to support bidirectional end-to-end communication, either due to vagaries of remote terrain (for DARPA), or light-speed communications delays across the solar system (for NASA). This is achieved through store-and-forward routing, with opportunistic data transmission when nodes indicate that they
   
   The DTN concept is perfect in many ways for decentralized communication between marginalized groups; the current implementations, however, leave much to be desired. There is no common implementation of DTN; rather, there are several different codebases, such as DTN2\footnote{\url{http://sourceforge.net/project/showfiles.php?group_id=101657}}, ION\footnote{\url{https://ion.ocp.ohiou.edu/}}, and IBR-DTN\footnote{\url{http://www.ibr.cs.tu-bs.de/trac/ibr-dtn}}, none of which are considered by their authors to be either complete or stable. The DTNBone project\footnote{\url{https://sites.google.com/site/dtnresgroup/home/dtn-bone}} catalogues the efforts being made to create a continuously operating DTN network in academia. NASA, too, has failed to create a DTN network; while several DTN-capable payloads have been launched, the establishment of the system was delayed due to XXX Grant what were these again?
   
-  The DTN protocol as currently designed suffers from other problems. Message security is an optional add-on layer, rather than being a core part of the protocol. The binary protocol is highly complex and requires a parser to conditionally process different parts of the bundle depending on earlier flags,\footnote{See IETF RFC 5050, \url{http://tools.ietf.org/html/rfc5050}} meaning that parsing protocols must be at least context-sensitive.\footnote{This is undesirable for security functions; for more information, see the work of the Language-theoretic Security Working Group (Bratus, Patterson, Hirsch, Sassaman, Shubina, et al) at \url{http://langsec.org}.} While the DTN concept is highly desirable, then, the implementation is not usable in the field at this time.
+  The DTN protocol as currently designed suffers from other problems. Message security is an optional add-on layer, rather than being a core part of the protocol. The binary protocol is highly complex and requires a parser to conditionally process different parts of the bundle depending on earlier flags,\footnote{See IETF RFC 5050, \url{http://tools.ietf.org/html/rfc5050}} meaning that parsing protocols must be at least context-sensitive.\footnote{This is undesirable for security functions; for more information, see the work of the Language-theoretic Security Working Group (Patterson, Hirsch, Bratus, Goodspeed, Sassaman, Shubina, et al) at \url{http://langsec.org}.} While the DTN concept is highly desirable, then, the implementation is not usable in the field at this time.
   
   \section{Method}
   
-  \subsection{Message Format}
+  As noted in Section~\ref{subsec:dtn}, we believe the concept of DTN, with store-and-forward routing with opportunistic sending, is great for disconnected parties wishing to communicate without Internet access, but the specific protocol is difficult to work with and has security as an afterthought---and even if it were perfect for our needs, no stable implementations exist. We have therefore implemented a new protocol we call NATASHA, or Network Able to Transmit Amid Severely Hostile Activity, based on the DTN concept. The following sections will describe how each major Endrun component works.
   
   \subsection{Routing}
   
-  \subsection{Transport}
-  
+    Delay-Tolerant networking, like TCP/IP, assigns an address to each node in a network, and passes traffic between nodes via whatever route is available. Unlike TCP/IP, however, DTN nodes do not engage in any sort of handshake to exchange data in an end-to-end fashion; instead, each sequential pair of nodes in a communication pathway exchange data and sign a chain of custody showing that they successfully received and have taken responsibility for the data.
+    
+    Data may take any available path between a pair of nodes in a chain; it might use physical data transport (sneakernet), a radio link, or anything else that is available (including TCP/IP, where that is possible). The crucial difference is that there is no expectation that the source and destination node will be communicating simultaneously at any point; instead, only pairs in the chain will communicate.
+    
+    XXX insert simple figure to make this easier.
+    
+    Our implementation of DTN does not use any sort of routing table; instead, it uses the ``spray and wait'' transmission strategy outlined in XXX CITE to pass data bundles on to any node willing to receive them, in the hope that one of them will eventually find the destination.
+    
+    XXX insert another simple figure
+    
   \subsection{User Services}
+  
+  \subsection{Message Format}
+  
+  The Squirrel message format is designed to be very simple to parse. It has the following fields:
+  
+  \begin{enumerate}
+    \item \textbf{\textsc{Source}} - The identifier for the source node.
+    \item \textbf{\textsc{Destination}} - The identifier for the destination node.
+    \item \textbf{\textsc{TTL}} - The message time to live, an integer number representing the epoch time at which the bundle was created. Nodes destroy messages after a configurable amount of time has passed since their creation (by default, 24 hours).
+    \item \textbf{\textsc{Contents}} - The signed, then encrypted, then signed message bundle.
+    \item \textbf{\textsc{Chain of Custody}} - The identifier for the source node.
+
+    \end{enumerate}
+    
+    Bundles are encrypted with the libsodium implementation\footnote{\url{http://doc.libsodium.org}} of Daniel J. Bernstein's NaCl (pronounced ``salt'') library.\footnote{\url{http://nacl.cr.yp.to}} To prevent a variety of attacks,\footnote{XXX is there a good list somewhere?} we use the Sign-Encrypt-Sign methodology, whereby the bundle is signed, the signed bundle is encrypted, and the encrypted payload is then signed again; this lets a recipient verify that the bundle has not been tampered with before decrypting it, then check for message validity afterward.
+    
+    Our implementation uses Git as the primary medium of information exchange; data is stored in Git at each node, and to transmit data, we generate a Git bundle\footnote{XXX explain}, Sign, Encrypt, and Sign it, and then transmit it over the DTN. At the receiving end, after the Verify, Decrypt, and Verify steps, we run a Git pull from the bundle, allowing the data to be absorbed into the local git tree.
+    
+    To generate a shared Git tree base, each tree must set up a Git remote for each other tree, which is an operation with O($n^2$) complexity. As each operation in this sequence is relatively processing-intensive, we ordinarily generate nodes in groups of just eight, allowing node generation to proceed in a reasonable amount of time. We have tested node generation in groups of up to 200, but also note that the sheer number of nodes in such groups would make trees take an exceptionally long amount of time to converge through opportunistic data transmission.
+    
+  \subsection{Transport}
   
   \section{Communication Example}
   
