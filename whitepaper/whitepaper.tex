@@ -135,7 +135,7 @@
       
       \end{itemize}
     
-  Instead of using a formal handshake, like SYN/SYN-ACK/ACK in TCP, most DTN protocols use a system called chain-of-custody. Chain of custody allows us to create an audit trail without maintaining global knowledge, which is crucial in solving the aforementioned problems.
+  Instead of using a formal handshake, like SYN/SYN-ACK/ACK in TCP, most DTN protocols use a system called \textbf{chain of custody}. Chain of custody allows us to create an audit trail without maintaining global knowledge, which is crucial in solving the aforementioned problems.
   
   Chain of custody in Endrun consists of three parts: a JSON array on a payload, a SQLite ``receipt'' table on nodes, and a SQLite ``map'' table on nodes. The JSON array is made up of objects containing the identifier of the most recent node to receive the payload, a fingerprint of that node's public signing key, A signed SHA2 hash of the payload when it was handed off to the next node, and a timestamp in epoch time for when it was handed off to the next node. 
   
