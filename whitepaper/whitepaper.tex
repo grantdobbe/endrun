@@ -123,7 +123,7 @@
     
   \subsection{Transport}
   
-  \subsection{Chain of Custody}
+  \subsubsection{Chain of Custody}
   \label{subsec:chainofcustody}
   
   There are multiple concerns that arise from implementing disruption- and delay-tolerant networking without maintaining a full routing table. Because links between nodes are transient:
@@ -137,11 +137,15 @@
     
   Instead of using a formal handshake, like SYN/SYN-ACK/ACK in TCP, most DTN protocols use a system called chain-of-custody. Chain of custody allows us to create an audit trail without maintaining global knowledge, which is crucial in solving the aforementioned problems.
   
-  Chain of custody in Endrun consists of two parts: a JSON object on a payload, and a SQLite "receipt" table on nodes. The JSON object contains arrays that identify
-  \begin{enumerate}
-    \item The identifier of the most recent node to receive this payload;
-    \item A timestamp in epoch time for when it was handed off to the next node;
-    \item A SHA2 hash of the payload when it was handed off to the next node
+  Chain of custody in Endrun consists of three parts: a JSON array on a payload, a SQLite ``receipt'' table on nodes, and a SQLite ``map'' table on nodes. The JSON array is made up of objects containing the identifier of the most recent node to receive the payload, a fingerprint of that node's public signing key, A signed SHA2 hash of the payload when it was handed off to the next node, and a timestamp in epoch time for when it was handed off to the next node. 
+  
+  The ``receipt'' table records data similar to the chain-of-custody array, but only for the node in question. The table contains columns for entry ID, payload fingerprint, timestamp of when the payload was sent, and the node to which it was sent.
+  
+  The ``map'' table is used to record a list of nodes ``around'' the current node; in other words, nodes we have been able to contact recently, regardless of cell affiliation. This is important for intermediate routing, which we will cover in Section~\ref{subsec:introuting}:. 
+  
+ 
+  \subsubsection{Intermediate Routing}
+  \label{subsec:introuting}
   
   \section{Communication Example}
   
