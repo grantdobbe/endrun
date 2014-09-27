@@ -104,29 +104,50 @@
   
   \subsection{Message Format}
   
-  The Squirrel message format is designed to be very simple to parse. It has the following fields:
+  The Endrun payload message format is designed to be very simple to parse. It has the following fields:
   
   \begin{enumerate}
     \item \textbf{\textsc{Source}} - The identifier for the source node.
     \item \textbf{\textsc{Destination}} - The identifier for the destination node.
     \item \textbf{\textsc{TTL}} - The message time to live, an integer number representing the epoch time at which the bundle was created. Nodes destroy messages after a configurable amount of time has passed since their creation (by default, 24 hours).
     \item \textbf{\textsc{Contents}} - The signed, then encrypted, then signed message bundle.
-    \item \textbf{\textsc{Chain of Custody}} - The identifier for the source node.
+    \item \textbf{\textsc{Chain of Custody}} - A JSON object detailing the transmission path of the payload. See Section~\ref{subsec:chainofcustody}: for more details.
 
     \end{enumerate}
     
-    Bundles are encrypted with the libsodium implementation\footnote{\url{http://doc.libsodium.org}} of Daniel J. Bernstein's NaCl (pronounced ``salt'') library.\footnote{\url{http://nacl.cr.yp.to}} To prevent a variety of attacks,\footnote{\url{http://world.std.com/~dtd/sign_encrypt/sign_encrypt7.html}} we use the Sign-Encrypt-Sign methodology, whereby the bundle is signed, the signed bundle is encrypted, and the encrypted payload is then signed again; this lets a recipient verify that the bundle has not been tampered with before decrypting it, then check for message validity afterward.
+    Payloads are encrypted with the libsodium implementation\footnote{\url{http://doc.libsodium.org}} of Daniel J. Bernstein's NaCl (pronounced ``salt'') library.\footnote{\url{http://nacl.cr.yp.to}} To prevent a variety of attacks,\footnote{\url{http://world.std.com/~dtd/sign_encrypt/sign_encrypt7.html}} we use the Sign-Encrypt-Sign methodology, whereby the bundle is signed, the signed bundle is encrypted, and the encrypted payload is then signed again; this lets a recipient verify that the bundle has not been tampered with before decrypting it, then check for message validity afterward.
     
-    Our implementation uses Git as the primary medium of information exchange; data is stored in Git at each node, and to transmit data, we generate a Git bundle\footnote{XXX explain}, Sign, Encrypt, and Sign it, and then transmit it over the DTN. At the receiving end, after the Verify, Decrypt, and Verify steps, we run a Git pull from the bundle, allowing the data to be absorbed into the local git tree.
+    Our implementation uses Git as the primary medium of information exchange; data is stored in Git at each node, and to transmit data in an Endrun payload, we generate a Git bundle\footnote{\url{http://git-scm.com/docs/git-bundle}}, Sign, Encrypt, and Sign it, and then transmit it over the DTN. At the receiving end, after the Verify, Decrypt, and Verify steps, we run a Git pull from the bundle, allowing the data to be absorbed into the local git tree.
     
     To generate a shared Git tree base, each tree must set up a Git remote for each other tree, which is an operation with O($n^2$) complexity. As each operation in this sequence is relatively processing-intensive, we ordinarily generate nodes in groups of just eight, allowing node generation to proceed in a reasonable amount of time. We have tested node generation in groups of up to 200, but also note that the sheer number of nodes in such groups would make trees take an exceptionally long amount of time to converge through opportunistic data transmission.
     
   \subsection{Transport}
   
+  \subsection{Chain of Custody}
+  \label{subsec:chainofcustody}
+  
+  There are multiple concerns that arise from implementing disruption- and delay-tolerant networking without maintaining a full routing table. Because links between nodes are transient:
+  \begin{itemize}
+  
+      \item Significant amounts of time can pass between a node becoming compromised\footnote{In this case, a compromised node is one that is no longer trustworthy because it cannot be reached by any other nodes in the cell.} and the users of a network realizing that it is compromised;
+      \item It can be non-trivial to identify whether a node has been compromised or whether it is simply unreachable by most of the nodes in a cell; and
+      \item Bandwidth and/or human effort can be wasted in attempting to contact a node, which can jeopardize operational security.
+      
+      \end{itemize}
+    
+  Instead of using a formal handshake, like SYN/SYN-ACK/ACK in TCP, most DTN protocols use a system called chain-of-custody. Chain of custody allows us to create an audit trail without maintaining global knowledge, which is crucial in solving the aforementioned problems.
+  
+  Chain of custody in Endrun consists of two parts: a JSON object on a payload, and a SQLite "receipt" table on nodes. The JSON object contains arrays that identify
+  \begin{enumerate}
+    \item The identifier of the most recent node to receive this payload;
+    \item A timestamp in epoch time for when it was handed off to the next node;
+    \item A SHA2 hash of the payload when it was handed off to the next node
+  
   \section{Communication Example}
   
   XXX I got it from Agnes
   
+
   \section{Future Work}
 
 \end{document}
