@@ -162,7 +162,7 @@
   \begin{itemize}
     \item \textbf{\textsc{Auditing}} - At the moment, the chain of custody can be used manually to trace the path a message took, and to debug problems in a transmission path. However, the chain is stored locally on each node and on each bundle, and so when bundles fail, it is currently labor-intensive to contact each node to find which processed a particular bundle. To rectify this, nodes could be configured periodically to send their lists of known bundles to a centralizer, which could perform traffic analysis after the fact. We have not yet implemented this, as there are significant security concerns about centralizing that level of audit logs, but there are use cases in which it would be helpful.
     
-    \item \textbf{\textsc{Bluetooth Beaconing}} - Both iOS
+    \item \textbf{\textsc{Bluetooth Beaconing}} - Both iOS and Android provide for Bluetooth beacons (for Apple, they are called iBeacons) to identify locations and data sources; these beacons do not require pairing to communicate their (very short) messages, and correctly-programmed applications can use the beacons to trigger additional actions. We could add beacon functionality to native apps implementing the Sneakernet++ functionality we currently use, so that iOS and Android phones could receive a beacon, automatically connect to an Endrun node, download/upload bundles, and disconnect with little or no user interaction. This would allow Endrun nodes to be serviced by mobile platforms that may not have the time or capability for constant human interactions; for instance, mobile nodes could be attached to cars, bicycle couriers, or city buses.
   \end{itemize}
   
   \subsection{Best-Effort Surveillance}
