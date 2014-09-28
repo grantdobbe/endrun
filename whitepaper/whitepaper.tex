@@ -116,6 +116,17 @@
     
   \subsection{User Services}
   
+  The services provided to users within Endrun are fairly simple. In addition to transport-related services, discussed in Section~\ref{subsec:transport}, users have access to Gollum,\footnote{\url{https://github.com/gollum/gollum}}, a Git-based wiki. The wiki provides standard text-based services, and also supports file uploads.
+  
+  On top of Gollum, then, users can implement any of the following that are desired:
+  \begin{itemize}
+    \item Encrypted user-to-user messaging, using GPG or another encryption system.
+    \item Forum/bulletin board functionality, using the wiki directly.
+    \item Encrypted file transfer, using, e.g., Minilock\footnote{\url{https://minilock.io}} or another simple encryption system
+  \end{itemize}
+  
+  These services allow the basic use case---allowing communications between pods of people unable to use the general Internet---to take place, without adding excessive complexity.
+  
   \subsection{Message Format}
   
   The Endrun payload message format is designed to be very simple to parse. It has the following fields:
@@ -137,6 +148,7 @@
     To generate a shared Git tree base, each tree must set up a Git remote for each other tree, which is an operation with O($n^2$) complexity. As each operation in this sequence is relatively processing-intensive, we ordinarily generate nodes in groups of just eight, allowing node generation to proceed in a reasonable amount of time. We have tested node generation in groups of up to 200, but also note that the sheer number of nodes in such groups would make trees take an exceptionally long amount of time to converge through opportunistic data transmission.
     
   \subsection{Transport}
+  \label{subsec:transport}
   
   \subsubsection{Chain of Custody}
   \label{subsec:chainofcustody}
