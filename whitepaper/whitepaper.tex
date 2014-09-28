@@ -30,7 +30,7 @@
 	
 	\section{Introduction}
 	
-  It's easy to speak when everyone loves you. When people in the US or the rest of the western world discuss ``free speech,'' they generally mean some form of the right to communicate with others, and to assemble with others for the purpose of sharing their message. Some may also refer to a right to anonymous speech, but there are those who would attack the right of anonymity; ``if you have nothing to hide, you have nothing to fear.''\footnote{For an excellent response to this common fallacy, see ``Why Privacy Matters Even if You Have `Nothing to Hide,'\,'' Daniel J. Solove, The Chronicle of Higher Education, May 15, 2011 \url{https://chronicle.com/article/Why-Privacy-Matters-Even-if/127461/}.} In an era when ``privacy is dead, get over it''\footnote{Stated by many, including Sun Microsystems' Scott McNealy; \url{http://archive.wired.com/politics/law/news/1999/01/17538}}, it's easy to say that ``Users who try to use anonymity, or cover themselves up on the internet, are usually doing things that aren’t so-to-speak legal.''\footnote{Attributed to Comcast, who has since denied holding this position. \emph{See} ``Comcast Denies It Will Cut Off Customers Who Use Tor, The Web Browser For Criminals,'' James Cook, Business Insider, September 15, 2014, \url{http://www.businessinsider.com/comcast-threatens-to-cut-off-tor-users-2014-9}}
+  It's easy to speak when everyone loves you. When people in the US or the rest of the western world discuss ``free speech,'' they generally mean some form of the right to communicate with others, and to assemble with others for the purpose of sharing their message. Some may also refer to a right to anonymous speech, but there are those who would attack the right of anonymity; ``if you have nothing to hide, you have nothing to fear.''\footnote{For an excellent response to this common fallacy, see ``Why Privacy Matters Even if You Have `Nothing to Hide,'\,'' Daniel J. Solove, The Chronicle of Higher Education, May 15, 2011 \url{https://chronicle.com/article/Why-Privacy-Matters-Even-if/127461/}.} In an era when ``privacy is dead, get over it''\footnote{Stated by many, including Sun Microsystems' Scott McNealy; \url{http://archive.wired.com/politics/law/news/1999/01/17538}}, it's easy to say that ``Users who try to use anonymity, or cover themselves up on the internet, are usually doing things that aren`t so-to-speak legal.''\footnote{Attributed to Comcast, who has since denied holding this position. \emph{See} ``Comcast Denies It Will Cut Off Customers Who Use Tor, The Web Browser For Criminals,'' James Cook, Business Insider, September 15, 2014, \url{http://www.businessinsider.com/comcast-threatens-to-cut-off-tor-users-2014-9}}
   
   We dissent. The right of public speech was not created to protect those messages everyone loves, but those messages that are reviled (for whatver reason). We believe that the current age of ``registered bloggers''\footnote{See, for example, Russia's new law. \url{https://www.techdirt.com/articles/20140423/09130227004/russian-net-clampdown-continues-now-its-turn-blogs-vkontakte.shtml}} and believing that press members are only real if they have a ``\$50,000 camera''\footnote{``Ferguson Police Say They May Arrest More Journalists,'' Jack Mirkinson, The Huffington post, August 19, 2014, \url{http://www.huffingtonpost.com/2014/08/19/ferguson-police-arresting-journalists_n_5691645.html}} reflects a misguided and destructive impulse to control thought and expression for the sake of centralization of power. We therefore present a system that we intend to provide a useful counterbalance; an easy-to-use, strongly-encrypted information-sharing network built not upon a reliable Internet source, but upon the distributed, unending movements of people. 
   
@@ -89,7 +89,7 @@
   
   \section{Method}
   
-  As noted in Section~\ref{subsec:dtn}, we believe the concept of DTN, with store-and-forward routing with opportunistic sending, is great for disconnected parties wishing to communicate without Internet access, but the specific protocol is difficult to work with and has security as an afterthought---and even if it were perfect for our needs, no stable implementations exist. We have therefore implemented a new protocol we call NATASHA, or Network Able to Transmit Amid Severely Hostile Activity, based on the DTN concept. The following sections will describe how each major Endrun component works.
+  As noted in Section~\ref{subsec:dtn}, we believe the concept of DTN, with store-and-forward routing with opportunistic sending, is great for disconnected parties wishing to communicate without Internet access, but the specific protocol is difficult to work with and has security as an afterthought---and even if it were perfect for our needs, no stable implementations exist. We have therefore implemented our own version of the DTN protocol. The following sections will describe how each major Endrun component works.
   
   \subsection{Routing}
   \label{subsec:routing}
@@ -126,7 +126,7 @@
     \item \textbf{\textsc{TTL}} - The message time to live, an integer number representing the epoch time at which the bundle was created. Nodes destroy messages after a configurable amount of time has passed since their creation (by default, 24 hours).
     \item \textbf{\textsc{Contents}} - The signed, then encrypted, then signed message bundle.
     \item \textbf{\textsc{Chain of Custody}} - A JSON object detailing the transmission path of the payload. See Section~\ref{subsec:chainofcustody}: for more details.
-    \item \textbf{\textsc{Transmission Ceiling}} - The maximum number of copies of this payload that should exist per Section~\ref{subsec:routing}:.
+    %\item \textbf{\textsc{Transmission Ceiling}} - The maximum number of copies of this payload that should exist per Section~\ref{subsec:routing}:.
 
     \end{enumerate}
     
@@ -158,10 +158,15 @@
   
   The ``map'' table is used to record a list of nodes ``around'' the current node; in other words, nodes we have been able to contact recently, regardless of cell affiliation. This is important for intermediate routing, which we will cover in Section~\ref{subsec:introuting}:. 
   
- 
+  \subsubsection{Sneakernet}
+  %TODO: Grant
+  \subsubsection{XBee Radio}
+  %TODO: Brendan
+  \subsubsection{Sneakernet+}
+  %TODO: Brendan
   \subsubsection{Intermediate Routing}
   \label{subsec:introuting}
-
+  %TODO: Grant
   
   \section{Communication Example\footnote{With apologies to Tom Lehrer, Emeritus Lecturer in Mathematics, Cowell College, University of California at Santa Cruz.}}
   
