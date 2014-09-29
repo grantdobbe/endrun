@@ -55,6 +55,7 @@
   \end{enumerate}
   
   \section{Previous Work}
+  \label{sec:previouswork}
   
   There has been a great deal of interest in the area of distributed communication tools, both ones that work over the public Internet, and ones that establish their own wireless links. We will examine several of the largest and most influential projects.
   
@@ -171,6 +172,19 @@
   
   \subsubsection{Sneakernet}
   %TODO: Grant
+  
+   \begin{quote}
+    \emph{``Never underestimate the bandwidth of a station wagon full of tapes hurtling down the highway.''}\footnote{Andrew S. Tanenbaum, Computer Networks, page 57, Prentice-Hall Publishing, 1989.}
+  \end{quote}
+
+  As we discussed throughout Section~\ref{sec:previouswork}:, there are significant security issues related to both wired and wireless network connections. One additional issue is that in many situations, traditional network connections may not be available \textit{at all}. Over the last 5 years, we've seen examples in Egypt\footnote{\url{http://www.telegraph.co.uk/news/worldnews/africaandindianocean/egypt/8288163/How-Egypt-shut-down-the-internet.html}}, Turkey\footnote{\url{http://www.theverge.com/2014/3/22/5536230/turkey-reportedly-cuts-off-twitter-backdoor-blocks-google-dns}}, and the United States\footnote{\url{http://www.washingtonpost.com/blogs/worldviews/post/bart-san-francisco-cut-cell-services-to-avert-protest/2011/08/12/gIQAfLCgBJ_blog.html}} where governments have attempted to curtail unrest by cutting off people's access to telecom services. Even in situations where such outages are \textit{not} intentional\footnote{\url{http://www.bostonglobe.com/business/2013/04/16/cellphone-networks-overwhelmed-blast-aftermath/wq7AX6AvnEemM35XTH152K/story.html}}\footnote{\url{http://www.ripe.net/internet-coordination/news/industry-developments/youtube-hijacking-a-ripe-ncc-ris-case-study}}, we still see that people's ability to communicate digitally can be incredibly fragile.
+  
+  These issues are largely responsible for our decision to make removable USB storage Endrun's primary transport method. The benefits are numerous: high-capacity USB storage is inexpensive, easily obtainable, reusable, and (in emergencies) disposable. Most USB flash drives are under 3 centimeters in size and weigh less than 30 grams, making them easily portable and highly concealable. USB also has immeasurable architectural advantages; almost every desktop or laptop PC manufactured in the last decade has at minimum 1 USB port, meaning that Endrun can be used with almost any computing hardware that will still boot.
+  
+  Endrun has both automatic and manual support for Sneakernet. The automatic method requires minimal setup: a user places a hidden text file in the root directory of the USB drive with a list of node identifiers. When the drive is plugged in, the Endrun daemon automatically mounts it, looks for any payloads already on the disk, and attempts to import them. It then looks for the hidden text file and generates payloads for every node on the list for which it has a public encryption key. Once it has finished generating payloads, it unmounts the disk. 
+    
+  The manual method, by comparison, requires a user to log into the node, manually mount a USB drive, and run one or two shell commands (depending on whether payloads are being imported, exported, or both.) While requiring a modest amount of technical knowledge, this method is convenient in situations where a user might need to specify the exact order of import, such as with multiple payloads from a single source. It also allows a user to prevent the automatic mounting of USB storage hardware.
+  
   \subsubsection{XBee Radio}
   
   We also support using Digi XBee modules\footnote{\url{http://www.digi.com/xbee/}} for inter-node communication. XBee modules present a raw serial interface to a client, and handle everything else---mesh formation, link encryption, CTS/RTS, etc.---on their own, which makes it extremely easy to integrate. In addition, XBee modules present a unified form factor and interface, regardless of what frequency band (868MHz, 900MHz, 2.4GHz), protocol (ZigBee, 802.15.4, proprietary meshing, multipoint), or power level (10mW, 16mW, 100mW, 200mW, 250mW) is chosen. For our implementation, we used 900MHz automeshing 250mW modules (XBP9B-DMWT-002 and XBP9B-DMST-002);\footnote{Note that 900MHz is in a license-free ISM (Industrial, Scientific, and Medical) band available in the United States; this frequency band is not available in Europe, but Digi provides modules on appropriate bands for all markets.} which module is correct for a given application will depend on distance to be travelled, throughput requirements, etc. XBee does provide AES-based link encryption; while we enabled it as a matter of course, we believe that our NaCl-based encryption provides sufficient integrity guarantees with or without link encryption. (That said, we found no reason to disable it.)
