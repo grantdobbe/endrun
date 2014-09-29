@@ -89,14 +89,14 @@
   
   \section{Method}
   
-  As noted in Section~\ref{subsec:dtn}, we believe the concept of DTN, store-and-forward routing with opportunistic sending, is great for disconnected parties wishing to communicate without Internet access, but the specific protocol is difficult to work with and has security as an afterthought---and even if it were perfect for our needs, no stable implementations exist. We have therefore implemented our own version of the DTN protocol. The following sections will describe how each major Endrun component works.
+  As noted in Section~\ref{subsec:dtn}, we believe that the DTN concept of store-and-forward routing with opportunistic sending is great for disconnected parties wishing to communicate without Internet access. However, the specific protocol is difficult to work with and has security as an afterthought---and even if it were perfect for our needs, no stable implementations exist. We have therefore implemented our own version of the DTN protocol. The following sections will describe how each major Endrun component works.
   
   \subsection{Routing}
   \label{subsec:routing}
   
-    Delay-Tolerant networking, like TCP/IP, assigns an address to each node in a network, and passes traffic between nodes via whatever route is available. Unlike TCP/IP, however, DTN nodes do not engage in any sort of handshake to exchange data in an end-to-end fashion; instead, each sequential pair of nodes in a communication pathway exchange data and sign a chain of custody showing that they successfully received and have taken responsibility for the data.
+    Delay-Tolerant Networking, like TCP/IP, assigns an address to each node in a network, and passes traffic between nodes via whatever route is available. Unlike TCP/IP, however, DTN nodes do not engage in any sort of handshake to exchange data in an end-to-end fashion; instead, each sequential pair of nodes in a communication pathway exchange data, and the recipient signs a chain of custody showing that it has successfully received and has taken responsibility for the data.
     
-    Data may take any available path between a pair of nodes in a chain; it might use physical data transport (sneakernet), a radio link, or anything else that is available (including TCP/IP, where that is possible). The crucial difference is that there is no expectation that the source and destination node will be communicating simultaneously at any point; instead, only pairs in the chain will communicate, as shown in Figure~\ref{fig:chaincomm}.
+    Data may take any available path between a pair of nodes in a chain. It might use physical data transport (sneakernet), a radio link, or anything else that is available (including TCP/IP, where that is possible). The crucial difference is that there is no expectation that the source and destination node will be communicating simultaneously at any point; instead, only pairs in the chain will communicate, as shown in Figure~\ref{fig:chaincomm}.
     
     \begin{figure}[h]
       \centering
@@ -107,12 +107,12 @@
     
     Because links between nodes are transient, our implementation of DTN does not use anything resembling a traditional routing table. Instead, it uses the ``binary spray and wait'' transmission strategy.\footnote{Spyropoulos, Thrasyvoulos, Konstantinos Psounis, and Cauligi Raghavendra. ``Spray and Wait: An Efficient Routing Scheme for Intermittently Connected Mobile Networks.'' Proceedings of the 2005 ACM SIGCOMM Workshop on Delay-tolerant Networking, 2005.} Binary spray and wait allows for the transmission of data with minimal delay and highest efficiency with regards to network traffic, while still allowing for transience in connectivity.
     
-    Binary spray-and-wait sets a ceiling on the number of payload copies \(L\) that can exist within the network. When a payload is being sent, the originating node starts in ``spray'' mode, where it transmits a copy of the payload to \(floor(L/2)\) nodes; each subsequent node then transmits half of their total payload copies to every other node without a copy of the payload. When a node has 1 copy of the message remaining, it switches to ``wait'' mode, where it holds a copy of the payload until either it makes direct contact with the recipient node or the TTL is reached. Figure~\ref{fig:spraywait} shows an example of how the binary spray-and-wait algorithm works.
+    Binary spray-and-wait sets a ceiling on the number of payload copies \(L\) that can exist within the network. When a payload is being sent, the originating node starts in ``spray'' mode, where it transmits \(L\) copies of the payload to all available nodes; each subsequent node then transmits \(floor(X/2)\) of their total payload copies to every other node without a copy of the payload, where \(X\) is the number of payload copies available to the node. When a node has 1 copy of the message remaining, it switches to ``wait'' mode, where it holds a copy of the payload until either it makes direct contact with the payload's intended recipient or the payload's TTL is reached. Figure~\ref{fig:spraywait} shows an example of how the binary spray-and-wait algorithm works.
     
     \begin{figure}[h]
       \centering{}
       \includegraphics[scale=0.45]{Diagram2.png}
-      \caption{An example of how nodes distribute copies of a payload using the binary spray-and-wait strategy.}
+      \caption{An example of how nodes distribute copies of a payload using the binary spray-and-wait strategy. The green node begins by distributing 8 copies of the payload to every other node it has contact with; the second batch of nodes send 4 copies, the third batch 2 copies, and the final batch holds 1 copy until direct contact with the payload's intended recipient can be made.}
       \label{fig:spraywait}
     \end{figure}
     
