@@ -1,3 +1,4 @@
+*.fdb*
 *.dvi
 *.aux
 *.log
