@@ -125,19 +125,18 @@
     \item Encrypted file transfer, using, e.g., Minilock\footnote{\url{https://minilock.io}} or another simple encryption system
   \end{itemize}
   
-  These services allow the basic use case---allowing communications between pods of people unable to use the general Internet---to take place, without adding excessive complexity.
+  These services allow the basic use case---allowing communications between groups of people unable to use the general Internet---to take place without adding excessive complexity.
   
   \subsection{Message Format}
   
   The Endrun payload message format is designed to be very simple to parse. It has the following fields:
   
   \begin{enumerate}
-    \item \textbf{\textsc{Source}} - The identifier for the source node.
-    \item \textbf{\textsc{Destination}} - The identifier for the destination node.
+    \item \textbf{\textsc{Source}} - The identifier for the source node; by default, the node's public key fingerprint. 
+    \item \textbf{\textsc{Destination}} - The identifier for the destination node; by default, the node's public key fingerprint.
     \item \textbf{\textsc{TTL}} - The message time to live, an integer number representing the epoch time at which the bundle was created. Nodes destroy messages after a configurable amount of time has passed since their creation (by default, 24 hours).
     \item \textbf{\textsc{Contents}} - The signed, then encrypted, then signed message bundle.
-    \item \textbf{\textsc{Chain of Custody}} - A JSON object detailing the transmission path of the payload. See Section~\ref{subsec:chainofcustody}: for more details.
-    %\item \textbf{\textsc{Transmission Ceiling}} - The maximum number of copies of this payload that should exist per Section~\ref{subsec:routing}:.
+    \item \textbf{\textsc{Chain of Custody}} - A JSON array detailing the transmission path of the payload. See Section~\ref{subsec:chainofcustody}: for more details.
 
     \end{enumerate}
     
@@ -166,9 +165,9 @@
   
   Chain of custody in Endrun consists of three parts: a JSON array on a payload, a SQLite ``receipt'' table on nodes, and a SQLite ``map'' table on nodes. The JSON array is made up of objects containing the identifier of the most recent node to receive the payload, a fingerprint of that node's public signing key, A signed SHA2 hash of the payload when it was handed off to the next node, and a timestamp in epoch time for when it was handed off to the next node. 
   
-  The ``receipt'' table records data similar to the chain-of-custody array, but only for the node in question. The table contains columns for entry ID, payload fingerprint, timestamp of when the payload was sent, and the node to which it was sent.
+  The ``receipt'' table records data similar to the chain-of-custody array, but only for the node in question. The table contains columns for entry ID, payload fingerprint, timestamp of when the payload was sent, and the node to which it was sent. Entries expire after a period of $1\frac{1}{2}$ times the node's configured TTL value. The table is also stored in temporary storage and recreated upon each reboot of the node.
   
-  The ``map'' table is used to record a list of nodes ``around'' the current node; in other words, nodes we have been able to contact recently, regardless of cell affiliation. This is important for intermediate routing, which we will cover in Section~\ref{subsec:introuting}:. 
+  The ``map'' table is used to record a list of nodes ``around'' the current node; in other words, nodes we have been able to contact recently, regardless of cell affiliation. This is important for intermediate routing, which we will cover in Section~\ref{subsec:introuting}:. This table has two columns: one for node identifier, and one for a timestamp.  Whenever a node is encountered\footnote{This usually occurs when a payload is received from an Endrun node.}, an entry is added to the table; the timestamp for an entry is updated with every subsequent encounter. Entries expire after a period of $1\frac{1}{2}$ times the node's configured TTL; this ensures that we do not attempt to contact a ``familiar'' node ad infinitum.
   
   \subsubsection{Sneakernet}
   %TODO: Grant
@@ -200,7 +199,7 @@
   %TODO: Grant
   One limitation of the original Endrun design was that the nodes of a cell could only talk to one another. Intermediate routing---the ability to move data between Endrun nodes using any other Endrun node, regardless of its cell affiliation---has significant consequences for the overall utility of the project, and thus became the focus of much of our development.
   
-  When a payload arrives at an Endrun node, the Endrun daemon first attempts to verify and import the payload. If the payload does not match any existing public key that the node has available to it, the daemon then compares the payload's destination node identifier to the ones stored in the 'map' table of its SQLite database.\footnote{See Section~\ref{subsec:chainofcustody}: for more information.} If the node has access to the destination node, it queues the payload for direct transmission at the next available opportunity. Otherwise, the payload is queued for transmission to all available nodes. This continues until the payload either reaches its destination or its TTL expires.
+  When a payload arrives at an Endrun node, the Endrun daemon first attempts to verify and import the payload. If the payload does not match any existing public key that the node has available to it, the daemon then compares the payload's destination node identifier to the ones stored in the 'map' table of its SQLite database.\footnote{See Section~\ref{subsec:chainofcustody}: for more information.} If the node has access to the destination node, it queues the payload for direct transmission at the next available opportunity. Otherwise, an entry is added to the ``map'' table for the payload's source node, and the payload is queued for transmission to all available nodes. This continues until the payload either reaches its destination or its TTL expires.
   
   In theory, given sufficient internal storage on nodes and a long enough TTL, intermediate routing should permit Endrun cells to function in similar fashion to existing packet-switched networks. However, due to Endrun's relative nascency, we have not yet had the opportunity to sufficiently test this.
     
