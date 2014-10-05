@@ -43,8 +43,19 @@
 	<section><!--takeaways section-->
 	  <section>
 	    <h2>The Takeaways</h2>
-	    <p>
-	    We're making an end run around the Internet. Because someone has to.
+	    <ul>
+	      <li>No Internet Use</li>
+	      <li>By Any Means Necessary</li>
+	      <li>Old-School Cellular Communication</li>
+	      <li>Disruption/Delay-Tolerant</li>
+	      <li>Modifiable On the Fly</li>
+	    </ul>  
+	  </section>
+	      
+	  <section>
+	    <h2>The Takeaways</h2>
+	    <h3>No Internet Use</h3>
+	    <p>We're making an end run around the Internet. Because someone has to.
 	    </p>
 	    <aside class="notes">
 	    Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
@@ -61,7 +72,7 @@
 	      <li>Amateur Radio*</li>
 	    </ul>
 	    <aside class="notes">
-	    Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
+	    Endrun is "by any means necessary." Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
 	    </aside>
 	  </section>
 	  <section>
@@ -98,10 +109,10 @@
 	  <section>
 	    <h2>Previous Work</h2>
 	    <ul>
-	    <li>Tor</li>
-	    <li>AirChat</li>
-	    <li>Commotion Wireless / Project Byzantium</li>
-	    <li>NASA/ESA Delay-Tolerant Networking</li>
+	      <li>Tor</li>
+	      <li>AirChat</li>
+	      <li>Commotion Wireless / Project Byzantium</li>
+	      <li>NASA/ESA Delay-Tolerant Networking</li>
 	    </ul>
 	  </section>
 	  <section>
@@ -143,9 +154,9 @@
 	    <h2>Endrun 101</h2>
 	    <p>Endrun is a secure implementation of the DTN protocol using:</p>
 	    <ul>
-	    <li>Git</li>
-	    <li>LibSodium</li>
-	    <li>Some Python to glue everything together</li>
+	      <li>Git</li>
+	      <li>LibSodium</li>
+	      <li>Some Python to glue everything together</li>
 	    </ul>
 	    <aside class="notes">
 	    </aside>
@@ -155,9 +166,9 @@
 	    <h3>Git</h3>
 	    <p>Git solves many of the problems that a DTN faces.</p>
 	    <ul>
-	    <li>Information order</li>
-	    <li>Information integrity</li>
-	    <li>Information divergence</li>
+	      <li>Information order</li>
+	      <li>Information integrity</li>
+	      <li>Information divergence</li>
 	    </ul>
 	  </section>
 	  <section>
@@ -179,9 +190,9 @@
 	    <h3>NaCl</h3>
 	    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
 	    <ul>
-	    <li>Bleeding-edge elliptical-curve cryptography</p></li>
-	    <li>Fast and efficient</li>
-	    <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
+	      <li>Bleeding-edge elliptical-curve cryptography</p></li>
+	      <li>Fast and efficient</li>
+	      <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
 	    </ul>
 	  </section>
 	  <section>
@@ -189,8 +200,8 @@
 	    <h3>LibSodium</h3>
 	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
 	    <ul>
-	    <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
-	    <li>Much easier to work with</li>
+	      <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
+	      <li>Much easier to work with</li>
 	    </ul>
 	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
 	  </section>
@@ -199,22 +210,26 @@
 	    <h3>Payload Format</h3>
 	    <p>Payloads are how Endrun moves data around. Each payload contains:</p>
 	    <ul>
-	    <li>Origin node identifier</li>
-	    <li>Destination node identifier</li>
-	    <li>Timestamp (TTL)</li>
-	    <li>Contents</li>
-	    <li>Chain of Custody data</li>
+	      <li>Origin node identifier</li>
+	      <li>Destination node identifier</li>
+	      <li>Timestamp (TTL)</li>
+	      <li>Contents</li>
+	      <li>Chain of Custody data</li>
 	    </ul>
 	  </section>
 	</section>
 	<section><!--routing section-->
 	  <section>
 	    <h2>Routing</h2>
+	    <ul>
+	      <li>Pairwise Communication</li>
+	      <li>"Spray and Wait"</li>
+	    </ul>
 	  </section>
 	  <section>
-	    <p>
+	    <h2>Routing</h2>
+	    <h3>Pairwise Communication</h3>
 	    <img class="stretch" src="./Diagram1Trans.png" />
-	    </p>
 	    <p>DTN routing occurs between pairs of nodes. </p>
 	    <aside class="notes">
 	    Imagine a bucket brigade. 
@@ -222,18 +237,21 @@
 	  </section>
 	  <section>
 	  <h2>Routing</h2>
-	    <p>
-	    Spray and <span style="text-decoration:line-through">Pray</span> Wait
-	    </p>
+	    <h3>Spray and <span style="text-decoration:line-through">Pray</span> Wait</h3>
+	    <ul>
+	      <li>Epidemic routing uses too much bandwidth.</li>
+	      <li>Other routing methods can't handle transient links.</li>
+	      <li>Spray and Wait combines store-and-forward with a limit on message copies.</li>
+	    </ul>
 	    <aside class="notes">
 	    We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
 	    </aside>
 	  </section>
 	  <section>
 	    <h2>Routing</h2>
-	    <p>
+	    <h3>Spray and Wait</h3>
 	    <img width="400" src="./Diagram2Trans.png" />
-	    </p>
+	    
 	  </section>
 	</section>
 	<section><!--user services section-->
