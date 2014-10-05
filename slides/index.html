@@ -1,438 +1,401 @@
 <!doctype html>
 <html lang="en">
-
-	<head>
-		<meta charset="utf-8">
-
-		<title>Endrun - Secure Digital Communications For Our Modern Dystopia</title>
-
-		<meta name="description" content="Secure Digital Communications For Our Modern Dystopia">
-		<meta name="author" content="Grant Dobbe and Brendan O'Connor">
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
-
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-
-		<div class="reveal">
-
-
-
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Endrun</h1>
-					<h2>Secure Digital Communications For Our Modern Dystopia</h2>
-					<p>
-						<small>By Grant Gobbe and Brendan O'Connor</small>
-					</p>
-					<p>
-						<small><a href="mailto:grant@dobbe.us">grant@dobbe.us</a></small>
-					</p>
-					<p>
-						<small><a href="mailto:ussjoin@ussjoin.com">ussjoin@ussjoin.com</a></small>
-					</p>
-          <p>
-            NOTE: Please go to <a href="http://github.com/grantdobbe/endrun">http://github.com/grantdobbe/endrun</a> for the most up-to-date version of these slides.
-          </p>
-				</section>
-
-
-
-				<section>
-					<h2>The Takeaways</h2>
-					<p>
-						We're making an end run around the Internet. Because someone has to.
-					</p>
-				  <aside class="notes">
-				    Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
-				  </aside>
-				</section>
-				<section>
-					<h2>The Takeaways</h2>
-					<p>
-						By Any Means Necessary.
-					</p>
-				  <aside class="notes">
-				    Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
-				  </aside>
-				</section>
-				<section>
-					<h2>The Takeaways</h2>
-					<p>
-						Old-School Cellular Communications
-					</p>
-				  <aside class="notes">
-				    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
-				  </aside>
-				</section>
-				<section>
-					<h2>The Takeaways</h2>
-					<p>
-						Disruption/Delay-Tolerant
-					</p>
-				  <aside class="notes">
-				    Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
-				  </aside>
-				</section>
-				<section>
-					<h2>The Takeaways</h2>
-					<p>
-						Modifiable On the Fly
-					</p>
-				  <aside class="notes">
-				    Endrun is built using standard, well-tested, open source components and combined using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
-				  </aside>
-				</section>
-				<section>
-					<h2>Previous Work</h2>
-					<h3>Tor</h3>
-					<p>
-					<em>The choice of dissidents and activists everywhere.</em>
-					</p>
-				  <aside class="notes">
-				  Add notes here.
-				  Basic idea: Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes.
-				  </aside>
-				</section>
-				<section>
-					<h2>Previous Work</h2>
-					<h3>AirChat, by Anonymous</h3>
-					<p>
-					<em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
-					</p>
-				  <aside class="notes">
-				  Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missle". 
-				  </aside>
-				</section>
-				<section>
-					<h2>Previous Work</h2>
-					<h3>Commotion Wireless / Project Byzantium</h3>
-					<p>
-					<em>Neighborhood mesh networks for the Zombie apocalypse</em>
-					</p>
-				  <aside class="notes">
-				  Commotion Wireless creates ad-hoc mesh networks using regular 802.11a/b/g/n hardware. Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
-				  </aside>
-				</section>
-				<section>
-					<h2>Previous Work</h2>
-					<h3>Delay-Tolerant Networking</h3>
-					<p><em>Close, but no appropriations</em></p>
-				  <aside class="notes">
-				    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths, etc. However, there is no standard implementation of DTN, and security is a second-tier concern at best.
-				  </aside>
-				</section>
-				<section>
-				  <section>
-				    <h2>Endrun</h2>
-				    <p>
-				    Endrun is a secure implementation of the DTN protocol using:
-				    <ul>
-				      <li>Git</li>
-				      <li>LibSodium</li>
-				      <li>Some Python to glue everything together</li>
-				    </ul>
-				    </p>
-				    
-				    <aside class="notes">
-				    </aside>
-				  </section>
-				  <section>
-				  <h2>Git</h2>
-				    <p>Git solves many of the problems that a DTN faces.</p>
-				    <ul>
-				    <li>Information order</li>
-				    <li>Information integrity</li>
-				    <li>Information divergence</li>
-				    </ul>
-				    </section>
-				  <section>
-				    <h2>Git Bundles</h2>
-				    <p>Bundles let us "fake" remote repos.</p>
-				    <p>From the man page:</p>
-				    
-				    <pre>
-				      This command provides support for git fetch and git pull to 
-				      operate by packaging objects and references in an archive at 
-				      the originating machine, then importing those into another 
-				      repository using git fetch and git pull after moving the 
-				      archive by some means.
-				      </pre>
-				    
-				    <p>Look, ma! No network connection!</p>
-				  </section>
-				  <section>
-				    <h2>NaCl</h2>
-				    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
-				    <ul>
-				    <li>Bleeding-edge elliptical-curve cryptography</p></li>
-				    <li>Fast and efficient</li>
-				    <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
-				    </ul>
-				  </section>
-				  <section>
-				    <h2>LibSodium</h2>
-				    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
-				    <ul>
-				    <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
-				    <li>Much easier to work with</li>
-				    </ul>
-				    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
-				  </section>
-				  <section>
-				    <h2>Payload Format</h2>
-				    <p>Payloads are how Endrun moves data around. Each payload contains:</p>
-				    <ul>
-				      <li>Origin node identifier</li>
-				      <li>Destination node identifier</li>
-				      <li>Timestamp (TTL)</li>
-				      <li>Contents</li>
-				      <li>Chain of Custody data</li>
-				    </ul>
-				  </section>
-				</section>
-				<section>
-				  <section>
-				    <h2>Routing</h2>
-				    </section>
-				    <section>
-					  <p>
-						  <img class="stretch" src="./Diagram1Trans.png" />
-					  </p>
-				      <p>DTN routing occurs between pairs of nodes. </p>
-				      <aside class="notes">
-				      Imagine a bucket brigade. 
-				      </aside>
-				  </section>
-				  <section>
-					  <h2>Routing</h2>
-					  <p>
-						  Spray and <span style="text-decoration:line-through">Pray</span> Wait
-					  </p>
-				    <aside class="notes">
-				      We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
-				    </aside>
-				  </section>
-				  <section>
-					  <h2>Routing</h2>
-					  <p>
-						  <img width="400" src="./Diagram2Trans.png" />
-					  </p>
-				  </section>
-				</section>
-				<section>
-					<h2>User Services</h2>
-					<p>
-						Gollum
-					</p>
-				</section>
-				<section>
-					<h2>User Services</h2>
-					<p>
-						Gollum + GPG
-					</p>
-				</section>
-				<section>
-					<h2>User Services</h2>
-					<p>
-						Gollum + Minilock
-					</p>
-				</section>
-				
-				<section>
-					<h2>Message Format</h2>
-					<p>
-						<span style="text-decoration:line-through">NaCl</span> LibSodium
-					</p>
-				</section>
-				<section>
-					<h2>Message Format</h2>
-					<p>
-						Git Bundles
-					</p>
-				</section>
-				<section>
-          <section>
-  					<h2>Transport</h2>
-  					<p>
-  						Chain of Custody
-  					</p>
-          </section>
-  				<section>
-  					<h2>Chain of Custody</h2>
-  					<p>
-  						Receipt Table
-  					</p>
-  				</section>
-  				<section>
-  					<h2>Chain of Custody</h2>
-  					<p>
-  						Map Table
-  					</p>
-  				</section>
-				</section>
-				<section>
-					<h2>Transport Options</h2>
-					<p>
-						Sneakernet
-					</p>
-				</section>
-				<section>
-					<h2>Transport Options</h2>
-					<p>
-						XBee
-					</p>
-				</section>
-				<section>
-					<h2>Transport Options</h2>
-					<p>
-						Sneakernet+
-					</p>
-				</section>
-				<section>
-					<h2>Transport Options</h2>
-					<p>
-						Other Radio?
-					</p>
-				</section>
-				<section>
-					<h2>Intermediate Routing</h2>
-					<p>
-						Route all the things!
-					</p>
-				</section>
-				<section>
-          <section>
-  					<h2>Complex Data Pathways</h2>
-  					<p>
-  						With our apologies to Mr. Lehrer.
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						Tom got it from Agnes.
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						She got it from Jim..
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						It must have been Louise who gave it to him.
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						She got it from Harry.
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						Who got it from Marie.
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						Everybody knows that Marie got it from Tom.
-  					</p>
-          </section>
-          <section>
-  					<p>
-  						And so on.
-  					</p>
-            <img width="800" src="./Diagram3Trans.png" />
-          </section>
-				</section>
-				<section>
-					<h2>Demonstration</h2>
-					<p>
-						Sneakernet, Sneakernet+
-					</p>
-				</section>
-				<section>
-					<h2>Future Work</h2>
-					<p>
-						Long-Distance Debt Systems
-					</p>
-				</section>
-				<section>
-					<h2>Future Work</h2>
-					<p>
-						Ultra-Large-Scale Surveillance
-					</p>
-				</section>
-				<section>
-					<h2>Thanks</h2>
-					<p>
-						Particularly to Caroline, for letting Grant come
-					</p>
-				</section>
-        
-
-
-			</div>
-
-		</div>
-
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
-
-		<script>
-
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
-
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
-
-		</script>
-
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Endrun - Secure Digital Communications For Our Modern Dystopia</title>
+    <meta name="description" content="Secure Digital Communications For Our Modern Dystopia">
+    <meta name="author" content="Grant Dobbe and Brendan O'Connor">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section><!--title slide-->
+	  <h1>Endrun</h1>
+	  <h2>Secure Digital Communications For Our Modern Dystopia</h2>
+	  <p>
+	  <small>By Grant Gobbe and Brendan O'Connor</small>
+	  </p>
+	  <p>
+	  <small><a href="mailto:grant@dobbe.us">grant@dobbe.us</a></small>
+	  </p>
+	  <p>
+	  <small><a href="mailto:ussjoin@ussjoin.com">ussjoin@ussjoin.com</a></small>
+	  </p>
+	  <p>
+	  NOTE: Please go to <a href="http://github.com/grantdobbe/endrun">http://github.com/grantdobbe/endrun</a> for the most up-to-date version of these slides.
+	</p>
+	</section>
+	<section><!--takeaways section-->
+	  <section>
+	    <h2>The Takeaways</h2>
+	    <p>
+	    We're making an end run around the Internet. Because someone has to.
+	    </p>
+	    <aside class="notes">
+	    Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>The Takeaways</h2>
+	    <p>
+	    By Any Means Necessary.
+	    </p>
+	    <aside class="notes">
+	    Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>The Takeaways</h2>
+	    <p>
+	    Old-School Cellular Communications
+	    </p>
+	    <aside class="notes">
+	    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>The Takeaways</h2>
+	    <p>
+	    Disruption/Delay-Tolerant
+	    </p>
+	    <aside class="notes">
+	    Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>The Takeaways</h2>
+	    <p>
+	    Modifiable On the Fly
+	    </p>
+	    <aside class="notes">
+	    Endrun is built using standard, well-tested, open source components and combined using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
+	    </aside>
+	  </section>
+	</section>
+	<section><!--previous work section-->
+	  <section>
+	    <h2>Previous Work</h2>
+	    <ul>
+	    <li>Tor</li>
+	    <li>AirChat</li>
+	    <li>Commotion Wireless / Project Byzantium</li>
+	    <li>Delay-Tolerant Networking</li>
+	    </ul>
+	  </section>
+	  <section>
+	  <h2>Previous Work</h2>
+	    <h3>Tor</h3>
+	    <em>The choice of dissidents and activists everywhere.</em>
+	    <aside class="notes">
+	    Add notes here.
+	    Basic idea: Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes.
+	    </aside>
+	    </section>
+	  <section>
+	    <h2>Previous Work</h2>
+	    <h3>AirChat, by Anonymous</h3>
+	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
+	    <aside class="notes">
+	    Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missle". 
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>Previous Work</h2>
+	    <h3>Commotion Wireless / Project Byzantium</h3>
+	    <em>Neighborhood mesh networks for the Zombie apocalypse</em>
+	    <aside class="notes">
+	    Commotion Wireless creates ad-hoc mesh networks using regular 802.11a/b/g/n hardware. Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>Previous Work</h2>
+	    <h3>Delay-Tolerant Networking</h3>
+	    <em>Close, but no appropriations</em>
+	    <aside class="notes">
+	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths, etc. However, there is no standard implementation of DTN, and security is a second-tier concern at best.
+	    </aside>
+	  </section>
+	</section>
+	<section><!--Endrun basics section-->
+	  <section>
+	    <h2>Endrun 101</h2>
+	    <p>Endrun is a secure implementation of the DTN protocol using:</p>
+	    <ul>
+	    <li>Git</li>
+	    <li>LibSodium</li>
+	    <li>Some Python to glue everything together</li>
+	    </ul>
+	    <aside class="notes">
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>Git</h2>
+	    <p>Git solves many of the problems that a DTN faces.</p>
+	    <ul>
+	    <li>Information order</li>
+	    <li>Information integrity</li>
+	    <li>Information divergence</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Git Bundles</h2>
+	    <p>Bundles let us "fake" remote repos.</p>
+	    <p>From the man page:</p>
+	    <pre>
+	    This command provides support for git fetch and git pull to 
+	    operate by packaging objects and references in an archive at 
+	    the originating machine, then importing those into another 
+	    repository using git fetch and git pull after moving the 
+	    archive by some means.
+	    </pre>
+	    <p>Look, ma! No network connection!</p>
+	  </section>
+	  <section>
+	    <h2>NaCl</h2>
+	    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
+	    <ul>
+	    <li>Bleeding-edge elliptical-curve cryptography</p></li>
+	    <li>Fast and efficient</li>
+	    <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>LibSodium</h2>
+	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
+	    <ul>
+	    <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
+	    <li>Much easier to work with</li>
+	    </ul>
+	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
+	  </section>
+	  <section>
+	    <h2>Payload Format</h2>
+	    <p>Payloads are how Endrun moves data around. Each payload contains:</p>
+	    <ul>
+	    <li>Origin node identifier</li>
+	    <li>Destination node identifier</li>
+	    <li>Timestamp (TTL)</li>
+	    <li>Contents</li>
+	    <li>Chain of Custody data</li>
+	    </ul>
+	  </section>
+	</section>
+	<section><!--routing section-->
+	  <section>
+	    <h2>Routing</h2>
+	  </section>
+	  <section>
+	    <p>
+	    <img class="stretch" src="./Diagram1Trans.png" />
+	    </p>
+	    <p>DTN routing occurs between pairs of nodes. </p>
+	    <aside class="notes">
+	    Imagine a bucket brigade. 
+	    </aside>
+	  </section>
+	  <section>
+	  <h2>Routing</h2>
+	    <p>
+	    Spray and <span style="text-decoration:line-through">Pray</span> Wait
+	    </p>
+	    <aside class="notes">
+	    We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
+	    </aside>
+	  </section>
+	  <section>
+	    <h2>Routing</h2>
+	    <p>
+	    <img width="400" src="./Diagram2Trans.png" />
+	    </p>
+	  </section>
+	</section>
+	<section><!--user services section-->
+	  <section>
+	    <h2>User Services</h2>
+	  </section>
+	  <section>
+	    <h2>User Services</h2>
+	    <p>Gollum</p>
+	  </section>
+	  <section>
+	    <h2>User Services</h2>
+	    <p>Gollum + GPG</p>
+	  </section>
+	  <section>
+	    <h2>User Services</h2>
+	    <p>Gollum + Minilock</p>
+	  </section>
+	</section>
+	<section>
+	<h2>Transport</h2>
+	<p>
+	Chain of Custody
+	</p>
+	</section>
+	<section>
+	<h2>Chain of Custody</h2>
+	<p>
+	Receipt Table
+	</p>
+	</section>
+	<section>
+	<h2>Chain of Custody</h2>
+	<p>
+	Map Table
+	</p>
+	</section>
+	</section>
+	<section>
+	<h2>Transport Options</h2>
+	<p>
+	Sneakernet
+	</p>
+	</section>
+	<section>
+	<h2>Transport Options</h2>
+	<p>
+	XBee
+	</p>
+	</section>
+	<section>
+	<h2>Transport Options</h2>
+	<p>
+	Sneakernet+
+	</p>
+	</section>
+	<section>
+	<h2>Transport Options</h2>
+	<p>
+	Other Radio?
+	</p>
+	</section>
+	<section>
+	<h2>Intermediate Routing</h2>
+	<p>
+	Route all the things!
+	</p>
+	</section>
+	<section>
+	<section>
+	<h2>Complex Data Pathways</h2>
+	<p>
+	With our apologies to Mr. Lehrer.
+	</p>
+	</section>
+	<section>
+	<p>
+	Tom got it from Agnes.
+	</p>
+	</section>
+	<section>
+	<p>
+	She got it from Jim..
+	</p>
+	</section>
+	<section>
+	<p>
+	It must have been Louise who gave it to him.
+	</p>
+	</section>
+	<section>
+	<p>
+	She got it from Harry.
+	</p>
+	</section>
+	<section>
+	<p>
+	Who got it from Marie.
+	</p>
+	</section>
+	<section>
+	<p>
+	Everybody knows that Marie got it from Tom.
+	</p>
+	</section>
+	<section>
+	<p>
+	And so on.
+	</p>
+	<img width="800" src="./Diagram3Trans.png" />
+	</section>
+	</section>
+	<section>
+	<h2>Demonstration</h2>
+	<p>
+	Sneakernet, Sneakernet+
+	</p>
+	</section>
+	<section>
+	<h2>Future Work</h2>
+	<p>
+	Long-Distance Debt Systems
+	</p>
+	</section>
+	<section>
+	<h2>Future Work</h2>
+	<p>
+	Ultra-Large-Scale Surveillance
+	</p>
+	</section>
+	<section>
+	<h2>Thanks</h2>
+	<p>
+	Particularly to Caroline, for letting Grant come
+	</p>
+	</section>
+      </div><!--/.slides-->
+    </div><!--/.reveal-->
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+    
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+    
+    // Parallax scrolling
+    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+    // parallaxBackgroundSize: '2100px 900px',
+    
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+    });
+    
+    </script>
+  </body>
 </html>
