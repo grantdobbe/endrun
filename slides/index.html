@@ -68,69 +68,82 @@
 					<p>
 						We're making an end run around the Internet. Because someone has to.
 					</p>
-          <aside class="notes">
-            Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
-          </aside>
+				  <aside class="notes">
+				    Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
+				  </aside>
 				</section>
 				<section>
 					<h2>The Takeaways</h2>
 					<p>
 						By Any Means Necessary.
 					</p>
-          <aside class="notes">
-            Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
-          </aside>
+				  <aside class="notes">
+				    Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
+				  </aside>
 				</section>
 				<section>
 					<h2>The Takeaways</h2>
 					<p>
 						Old-School Cellular Communications
 					</p>
-          <aside class="notes">
-            Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
-          </aside>
+				  <aside class="notes">
+				    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
+				  </aside>
 				</section>
 				<section>
 					<h2>The Takeaways</h2>
 					<p>
 						Disruption/Delay-Tolerant
 					</p>
-          <aside class="notes">
-            Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
-          </aside>
+				  <aside class="notes">
+				    Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
+				  </aside>
 				</section>
 				<section>
 					<h2>The Takeaways</h2>
 					<p>
 						Modifiable On the Fly
 					</p>
-          <aside class="notes">
-            Endrun is built using standard, well-tested, open source components and combined using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
-          </aside>
+				  <aside class="notes">
+				    Endrun is built using standard, well-tested, open source components and combined using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
+				  </aside>
 				</section>
 				<section>
 					<h2>Previous Work</h2>
 					<p>
 						Tor
 					</p>
+				  <aside class="notes">
+				  Add notes here.
+				  Basic idea: Tor provides privacy by encrypting communication at every relay. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes.
+				  </aside>
 				</section>
 				<section>
 					<h2>Previous Work</h2>
 					<p>
 						AirChat, by Anonymous
 					</p>
+				  <aside class="notes">
+				  Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missle". 
+				  </aside>
 				</section>
 				<section>
 					<h2>Previous Work</h2>
 					<p>
 						Commotion Wireless / Project Byzantium
 					</p>
+				  <aside class="notes">
+				  Commotion Wireless creates ad-hoc mesh networks using regular 802.11a/b/g/n hardware. Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
+				  </aside>
 				</section>
 				<section>
 					<h2>Previous Work</h2>
 					<p>
 						Delay-Tolerant Networking
 					</p>
+				  <aside class="notes">
+				    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths.
+				  </aside>
 				</section>
 				<section>
 					<h2>Routing</h2>
