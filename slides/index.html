@@ -33,16 +33,10 @@
 	<section><!--title slide-->
 	  <h1>Endrun</h1>
 	  <h2>Secure Digital Communications For Our Modern Dystopia</h2>
-	  <p>
-	  <small>By Grant Gobbe and Brendan O'Connor</small>
-	  </p>
-	  <p>
-	  <small><a href="mailto:grant@dobbe.us">grant@dobbe.us</a></small>
-	  </p>
-	  <p>
-	  <small><a href="mailto:ussjoin@ussjoin.com">ussjoin@ussjoin.com</a></small>
-	  </p>
-	  <p>
+	  
+	  <h3>By <a href="mailto:grant@dobbe.us">Grant Dobbe</a> and <a href="mailto:ussjoin@ussjoin.com">Brendan O'Connor</a></h3>
+	  
+	  <p class="small">
 	  NOTE: Please go to <a href="http://github.com/grantdobbe/endrun">http://github.com/grantdobbe/endrun</a> for the most up-to-date version of these slides.
 	</p>
 	</section>
@@ -58,36 +52,43 @@
 	  </section>
 	  <section>
 	    <h2>The Takeaways</h2>
-	    <p>
-	    By Any Means Necessary.
-	    </p>
+	    <h3>By Any Means Necessary</h3>
+	    <ul>
+	      <li>Sneakernet</li>
+	      <li>XBee</li>
+	      <li>Sneakernet+</li>
+	      <li>Carrier Pigeon</li>
+	      <li>Amateur Radio*</li>
+	    </ul>
 	    <aside class="notes">
 	    Endrun is ``by any means necessary.'' Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
 	    </aside>
 	  </section>
 	  <section>
 	    <h2>The Takeaways</h2>
-	    <p>
-	    Old-School Cellular Communications
-	    </p>
+	    <h3>Old-School Cellular Communications</h3>
+	    <p>Cell as in "group", not cell as in "for the enjoyment of all patrons, please turn off your"</p>
 	    <aside class="notes">
 	    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
 	    </aside>
 	  </section>
 	  <section>
 	    <h2>The Takeaways</h2>
-	    <p>
-	    Disruption/Delay-Tolerant
-	    </p>
+	    <h3>Disruption/Delay-Tolerant</h3>
+	    <ul>
+	      <li>Conflict zones</li>
+	      <li>Disaster areas</li>
+	      <li>Hostile terrain (inc. N. Scotland, Scandinavia, the southern U.S.)</li>
+	      <li>SPAAAAAAAAAACE!</li>
+	    </ul>
 	    <aside class="notes">
 	    Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
 	    </aside>
 	  </section>
 	  <section>
 	    <h2>The Takeaways</h2>
-	    <p>
-	    Modifiable On the Fly
-	    </p>
+	    <h3>Modifiable On the Fly</h3>
+	    <p>This isn't an Exchange Server. You know your needs better than we do.</p>
 	    <aside class="notes">
 	    Endrun is built using standard, well-tested, open source components and combined using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
 	    </aside>
@@ -100,7 +101,7 @@
 	    <li>Tor</li>
 	    <li>AirChat</li>
 	    <li>Commotion Wireless / Project Byzantium</li>
-	    <li>Delay-Tolerant Networking</li>
+	    <li>NASA/ESA Delay-Tolerant Networking</li>
 	    </ul>
 	  </section>
 	  <section>
@@ -130,7 +131,7 @@
 	  </section>
 	  <section>
 	    <h2>Previous Work</h2>
-	    <h3>Delay-Tolerant Networking</h3>
+	    <h3>NASA/ESA Delay-Tolerant Networking</h3>
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
 	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths, etc. However, there is no standard implementation of DTN, and security is a second-tier concern at best.
@@ -150,7 +151,8 @@
 	    </aside>
 	  </section>
 	  <section>
-	    <h2>Git</h2>
+	    <h2>Endrun 101</h2>
+	    <h3>Git</h3>
 	    <p>Git solves many of the problems that a DTN faces.</p>
 	    <ul>
 	    <li>Information order</li>
@@ -159,7 +161,8 @@
 	    </ul>
 	  </section>
 	  <section>
-	    <h2>Git Bundles</h2>
+	    <h2>Endrun 101</h2>
+	    <h3>Git Bundles</h3>
 	    <p>Bundles let us "fake" remote repos.</p>
 	    <p>From the man page:</p>
 	    <pre>
@@ -172,7 +175,8 @@
 	    <p>Look, ma! No network connection!</p>
 	  </section>
 	  <section>
-	    <h2>NaCl</h2>
+	    <h2>Endrun 101</h2>
+	    <h3>NaCl</h3>
 	    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
 	    <ul>
 	    <li>Bleeding-edge elliptical-curve cryptography</p></li>
@@ -181,7 +185,8 @@
 	    </ul>
 	  </section>
 	  <section>
-	    <h2>LibSodium</h2>
+	    <h2>Endrun 101</h2>
+	    <h3>LibSodium</h3>
 	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
 	    <ul>
 	    <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
@@ -190,7 +195,8 @@
 	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
 	  </section>
 	  <section>
-	    <h2>Payload Format</h2>
+	    <h2>Endrun 101</h2>
+	    <h3>Payload Format</h3>
 	    <p>Payloads are how Endrun moves data around. Each payload contains:</p>
 	    <ul>
 	    <li>Origin node identifier</li>
