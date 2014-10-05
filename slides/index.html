@@ -148,45 +148,102 @@
 				  </aside>
 				</section>
 				<section>
-				  <h2>Endrun</h2>
-				  <p>
-				  Endrun is a secure implementation of the DTN protocol using:
-				  <ul>
-				    <li>Git</li>
-				    <li>LibSodium</li>
-				    <li>Some Python to glue everything together</li>
-				  </ul>
-				  </p>
-				  <p>
-				  It also has some user services that sit atop.
-				  </p>
-				  <aside class="notes">
-				  </aside>
-				</section>
-				<section>
-					<h2>Routing</h2>
-					<p>
-						<img class="stretch" src="./Diagram1Trans.png" />
-					</p>
-				    <p>DTN routing occurs between pairs of nodes. </p>
+				  <section>
+				    <h2>Endrun</h2>
+				    <p>
+				    Endrun is a secure implementation of the DTN protocol using:
+				    <ul>
+				      <li>Git</li>
+				      <li>LibSodium</li>
+				      <li>Some Python to glue everything together</li>
+				    </ul>
+				    </p>
+				    
 				    <aside class="notes">
-				    Imagine a bucket brigade. 
 				    </aside>
+				  </section>
+				  <section>
+				  <h2>Git</h2>
+				    <p>Git solves many of the problems that a DTN faces.</p>
+				    <ul>
+				    <li>Information order</li>
+				    <li>Information integrity</li>
+				    <li>Information divergence</li>
+				    </ul>
+				    </section>
+				  <section>
+				    <h2>Git Bundles</h2>
+				    <p>Bundles let us "fake" remote repos.</p>
+				    <p>From the man page:</p>
+				    
+				    <pre>
+				      This command provides support for git fetch and git pull to 
+				      operate by packaging objects and references in an archive at 
+				      the originating machine, then importing those into another 
+				      repository using git fetch and git pull after moving the 
+				      archive by some means.
+				      </pre>
+				    
+				    <p>Look, ma! No network connection!</p>
+				  </section>
+				  <section>
+				    <h2>NaCl</h2>
+				    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
+				    <ul>
+				    <li>Bleeding-edge elliptical-curve cryptography</p></li>
+				    <li>Fast and efficient</li>
+				    <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
+				    </ul>
+				  </section>
+				  <section>
+				    <h2>LibSodium</h2>
+				    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
+				    <ul>
+				    <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
+				    <li>Much easier to work with</li>
+				    </ul>
+				    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
+				  </section>
+				  <section>
+				    <h2>Payload Format</h2>
+				    <p>Payloads are how Endrun moves data around. Each payload contains:</p>
+				    <ul>
+				      <li>Origin node identifier</li>
+				      <li>Destination node identifier</li>
+				      <li>Timestamp (TTL)</li>
+				      <li>Contents</li>
+				      <li>Chain of Custody data</li>
+				    </ul>
+				  </section>
 				</section>
 				<section>
-					<h2>Routing</h2>
-					<p>
-						Spray and <span style="text-decoration:line-through">Pray</span> Wait
-					</p>
-				  <aside class="notes">
-				    We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
-				  </aside>
-				</section>
-				<section>
-					<h2>Routing</h2>
-					<p>
-						<img width="400" src="./Diagram2Trans.png" />
-					</p>
+				  <section>
+				    <h2>Routing</h2>
+				    </section>
+				    <section>
+					  <p>
+						  <img class="stretch" src="./Diagram1Trans.png" />
+					  </p>
+				      <p>DTN routing occurs between pairs of nodes. </p>
+				      <aside class="notes">
+				      Imagine a bucket brigade. 
+				      </aside>
+				  </section>
+				  <section>
+					  <h2>Routing</h2>
+					  <p>
+						  Spray and <span style="text-decoration:line-through">Pray</span> Wait
+					  </p>
+				    <aside class="notes">
+				      We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
+				    </aside>
+				  </section>
+				  <section>
+					  <h2>Routing</h2>
+					  <p>
+						  <img width="400" src="./Diagram2Trans.png" />
+					  </p>
+				  </section>
 				</section>
 				<section>
 					<h2>User Services</h2>
@@ -206,18 +263,7 @@
 						Gollum + Minilock
 					</p>
 				</section>
-				<section>
-					<h2>Message Format</h2>
-					<p>
-						SQUIRREL
-					</p>
-				</section>
-				<section>
-					<h2>Message Format</h2>
-					<p>
-						NaCl
-					</p>
-				</section>
+				
 				<section>
 					<h2>Message Format</h2>
 					<p>
