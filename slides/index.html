@@ -142,7 +142,23 @@
 						Delay-Tolerant Networking
 					</p>
 				  <aside class="notes">
-				    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths.
+				    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths, etc. However, there is no standard implementation of DTN, and security is a second-tier concern at best.
+				  </aside>
+				</section>
+				<section>
+				  <h2>Endrun</h2>
+				  <p>
+				  Endrun is a secure implementation of the DTN protocol using:
+				  <ul>
+				    <li>Git</li>
+				    <li>LibSodium</li>
+				    <li>Some Python to glue everything together</li>
+				  </ul>
+				  </p>
+				  <p>
+				  It also has some user services that sit atop.
+				  </p>
+				  <aside class="notes">
 				  </aside>
 				</section>
 				<section>
@@ -150,12 +166,19 @@
 					<p>
 						<img class="stretch" src="./Diagram1Trans.png" />
 					</p>
+				    <p>DTN routing occurs between pairs of nodes. </p>
+				    <aside class="notes">
+				    Imagine a bucket brigade. 
+				    </aside>
 				</section>
 				<section>
 					<h2>Routing</h2>
 					<p>
 						Spray and <span style="text-decoration:line-through">Pray</span> Wait
 					</p>
+				  <aside class="notes">
+				    We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
+				  </aside>
 				</section>
 				<section>
 					<h2>Routing</h2>
