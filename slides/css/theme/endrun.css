@@ -57,7 +57,7 @@ body {
   background: #ff5e99;
   text-shadow: none; }
 
-section {
+section[data-background] {
   background-color: rgba(0,0,0,0.75);
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
