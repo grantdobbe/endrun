@@ -78,7 +78,7 @@ body {
 .reveal header.corner-header { 
   position: absolute;
   top: 1rem;
-  left:30rem;
+  left: 1rem;
   z-index: 500;
   font-family: "Cooper Hewitt Book", Impact, sans-serif;
   font-size: 1.15em;
