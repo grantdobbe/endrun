@@ -69,7 +69,6 @@ body {
   font-family: "Cooper Hewitt Book", Impact, sans-serif;
   line-height: 0.9em;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); }
 
 .reveal h1 {
@@ -82,10 +81,18 @@ body {
   z-index: 500;
   font-family: "Cooper Hewitt Book", Impact, sans-serif;
   font-size: 1.15em;
-  text-transform: uppercase;
 }
 
 .takeaways header.corner-header:after { content: "The Takeaways"; }
+.previous-work header.corner-header:after { content: "Previous Work"; }
+.endrun-101 header.corner-header:after { content: "Endrun 101"; }
+.routing header.corner-header:after { content: "Routing"; }
+.user-services header.corner-header:after { content: "User Services"; }
+.transport header.corner-header:after { content: "Transport"; }
+.int-routing header.corner-header:after { content: "Intermediate Routing"; }
+.complex-data header.corner-header:after { content: "Complex Data"; }
+.demos header.corner-header:after { content: "Demonstrations"; }
+.future-work header.corner-header:after { content: "Future Work"; }
 
 /*********************************************
  * LINKS
