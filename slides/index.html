@@ -37,9 +37,6 @@
 	  
 	  <h3>By <a href="mailto:grant@dobbe.us">Grant Dobbe</a> and <a href="mailto:ussjoin@ussjoin.com">Brendan O'Connor</a></h3>
 	  
-	  <p class="small">
-	  NOTE: Please go to <a href="http://github.com/grantdobbe/endrun">http://github.com/grantdobbe/endrun</a> for the most up-to-date version of these slides.
-	</p>
 	</section>
 	<section><!--takeaways section-->
 	  <section class="category">
@@ -97,14 +94,9 @@
 	  <section>
 	    <h2>Previous Work</h2>
 	    <ul>
-	      <li>Tor</li>
-	      <li>AirChat</li>
-	      <li>Commotion Wireless / Project Byzantium</li>
-	      <li>NASA/ESA Delay-Tolerant Networking</li>
 	    </ul>
 	  </section>
-	  <section>
-	  <h2>Previous Work</h2>
+	  <section data-state="previous-work">
 	    <h3>Tor</h3>
 	    <em>The choice of dissidents and activists everywhere.</em>
 	    <aside class="notes">
@@ -112,24 +104,21 @@
 	    Basic idea: Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes.
 	    </aside>
 	    </section>
-	  <section>
-	    <h2>Previous Work</h2>
+	  <section data-state="previous-work">
 	    <h3>AirChat, by Anonymous</h3>
 	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
 	    <aside class="notes">
 	    Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missile". 
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>Previous Work</h2>
+	  <section data-state="previous-work">
 	    <h3>Commotion Wireless / Project Byzantium</h3>
 	    <em>Neighborhood mesh networks for the Zombie apocalypse</em>
 	    <aside class="notes">
 	    Commotion Wireless creates ad-hoc mesh networks using regular 802.11a/b/g/n hardware. Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>Previous Work</h2>
+	  <section data-state="previous-work">
 	    <h3>NASA/ESA Delay-Tolerant Networking</h3>
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
@@ -140,17 +129,16 @@
 	<section><!--Endrun basics section-->
 	  <section>
 	    <h2>Endrun 101</h2>
-	    <p>Endrun is a secure implementation of the DTN protocol using:</p>
-	    <ul>
-	      <li>Git</li>
-	      <li>LibSodium</li>
-	      <li>Some Python to glue everything together</li>
-	    </ul>
 	    <aside class="notes">
+  	    <p>Endrun is a secure implementation of the DTN protocol using:</p>
+  	    <ul>
+  	      <li>Git</li>
+  	      <li>LibSodium</li>
+  	      <li>Some Python to glue everything together</li>
+  	    </ul>
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>Endrun 101</h2>
+	  <section data-state="endrun-101">
 	    <h3>Git</h3>
 	    <p>Git solves many of the problems that a DTN faces.</p>
 	    <ul>
@@ -159,8 +147,7 @@
 	      <li>Information divergence</li>
 	    </ul>
 	  </section>
-	  <section>
-	    <h2>Endrun 101</h2>
+	  <section data-state="endrun-101">
 	    <h3>Git Bundles</h3>
 	    <p>Bundles let us "fake" remote repos.</p>
 	    <p>From the man page:</p>
@@ -173,8 +160,7 @@
 	    </pre>
 	    <p>Look, ma! No network connection!</p>
 	  </section>
-	  <section>
-	    <h2>Endrun 101</h2>
+	  <section data-state="endrun-101">
 	    <h3>NaCl</h3>
 	    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
 	    <ul>
@@ -183,8 +169,7 @@
 	      <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
 	    </ul>
 	  </section>
-	  <section>
-	    <h2>Endrun 101</h2>
+	  <section data-state="endrun-101">
 	    <h3>LibSodium</h3>
 	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
 	    <ul>
@@ -193,8 +178,7 @@
 	    </ul>
 	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
 	  </section>
-	  <section>
-	    <h2>Endrun 101</h2>
+	  <section data-state="endrun-101">
 	    <h3>Payload Format</h3>
 	    <p>Payloads are how Endrun moves data around. Each payload contains:</p>
 	    <ul>
@@ -209,13 +193,8 @@
 	<section><!--routing section-->
 	  <section>
 	    <h2>Routing</h2>
-	    <ul>
-	      <li>Pairwise Communication</li>
-	      <li>"Spray and Wait"</li>
-	    </ul>
 	  </section>
-	  <section>
-	    <h2>Routing</h2>
+	  <section data-state="routing">
 	    <h3>Pairwise Communication</h3>
 	    <img class="stretch" src="./Diagram1Trans.png" />
 	    <p>DTN routing occurs between pairs of nodes. </p>
@@ -223,8 +202,7 @@
 	    Imagine a bucket brigade. 
 	    </aside>
 	  </section>
-	  <section>
-	  <h2>Routing</h2>
+	  <section data-state="routing">
 	    <h3>Spray and <span style="text-decoration:line-through">Pray</span> Wait</h3>
 	    <ul>
 	      <li>Epidemic routing uses too much bandwidth.</li>
@@ -235,8 +213,7 @@
 	    We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>Routing</h2>
+	  <section data-state="routing">
 	    <h3>Spray and Wait</h3>
 	    <img width="400" src="./Diagram2Trans.png" />
 	    
@@ -246,63 +223,40 @@
 	  <section>
 	    <h2>User Services</h2>
 	  </section>
-	  <section>
-	    <h2>User Services</h2>
-	    <p>Gollum</p>
+	  <section data-state="user-services">
+	    <h3>Gollum</h3>
 	  </section>
-	  <section>
-	    <h2>User Services</h2>
-	    <p>Gollum + GPG</p>
+	  <section data-state="user-services">
+	    <h3>Gollum + GPG</h3>
 	  </section>
-	  <section>
-	    <h2>User Services</h2>
-	    <p>Gollum + Minilock</p>
+	  <section data-state="user-services">
+	    <h3>Gollum + Minilock</h3>
 	  </section>
 	</section>
 	<section><!--transport section-->
 	  <section>
 	  <h2>Transport</h2>
 	  </section>
-	  <section>
-	  <p>
-	  Chain of Custody
-	  </p>
+	  <section data-state="transport">
+  	  <h3>Chain of Custody</h3>
 	  </section>
-	  <section>
-	  <h2>Chain of Custody</h2>
-	  <p>
-	  Receipt Table
-	  </p>
+	  <section data-state="transport">
+  	  <h3>Receipt Table</h3>
 	  </section>
-	  <section>
-	  <h2>Chain of Custody</h2>
-	  <p>
-	  Map Table
-	  </p>
+	  <section data-state="transport">
+  	  <h3>Map Table</h3>
 	  </section>
-	  <section>
-	  <h2>Transport Options</h2>
-	  <p>
-	  Sneakernet
-	  </p>
+	  <section data-state="transport">
+  	  <h3>Sneakernet</h3>
 	  </section>
-	  <section>
-	  <h2>Transport Options</h2>
-	  <p>
-	  XBee
-	  </p>
+	  <section data-state="transport">
+      <h3>XBee</h3>
 	  </section>
-	  <section>
-	  <h2>Transport Options</h2>
-	  <p>
-	  Sneakernet+
-	  </p>
+	  <section data-state="transport">
+  	  <h3>Sneakernet+</h3>
 	  </section>
-	  <section>
-	  <h2>Transport Options</h2>
-	  <p>
-	  Other Radio?
-	  </p>
+	  <section data-state="transport">
+  	  <h3>Other Radio?</h3>
 	  </section>
 	</section>
 	<section><!--intermediate routing section-->
@@ -361,36 +315,23 @@
 	  <section>
 	    <h2>Demonstrations</h2>
 	  </section>
-	  <section>
-	    <h2>Sneakernet</h2>
-	  </section>
-	  <section>
-	    <h2>Sneakernet+</h2>
-	  </section>
 	</section>
 	<section><!--future work section-->
 	  <section>
 	    <h2>Future Work</h2>
 	  </section>
-	  <section>
-	    <h2>Future Work</h2>
+	  <section data-state="future-work">
 	    <h3>Addtions to Endrun</h3>
 	    <ul>
 	      <li>Auditing</li>
 	      <li>Bluetooth Beaconing</li>
 	    </ul>
 	  </section>
-	  <section>
-	    <h2>Future Work</h2>
-	    <p>
-	    Long-Distance Debt Systems
-	    </p>
+	  <section data-state="future-work">
+	    <h3>Long-Distance Debt Systems</h3>
 	  </section>
-	  <section>
-	    <h2>Future Work</h2>
-	    <p>
-	    Ultra-Large-Scale Surveillance
-	    </p>
+	  <section data-state="future-work">
+	    <h3>Ultra-Large-Scale Surveillance</h3>
 	  </section>
 	</section>
 	<section>
