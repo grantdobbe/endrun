@@ -78,7 +78,9 @@ section {
   line-height: 0.9em;
   letter-spacing: 0.02em;
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); 
+/*
   background-color: rgba(0,0,0,0.45);
+*/
   }
 
 .reveal h1 {
