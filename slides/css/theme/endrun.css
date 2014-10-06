@@ -49,7 +49,6 @@ body {
   letter-spacing: -0.02em;
 */
   color: #eeeeee; 
-  background-color: rgba(0,0,0,0.45);
 
   }
 
@@ -59,7 +58,10 @@ body {
   text-shadow: none; }
 
 section {
-  background-color: rgba(0,0,0,0.45);
+  background-color: rgba(0,0,0,0.75);
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
 
 }
 
@@ -93,9 +95,11 @@ section {
   z-index: 500;
   font-family: "Cooper Hewitt Book", Impact, sans-serif;
   font-size: 1.15em;
-  background-color: rgba(0,0,0,0.45);
+  background-color: rgba(0,0,0,0.65);
   padding: .33rem;
-
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 }
 
 .takeaways header.corner-header:after { content: "The Takeaways"; }
