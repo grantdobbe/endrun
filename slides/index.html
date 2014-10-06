@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/theme/endrun.css" id="theme">
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
@@ -29,6 +29,7 @@
   <body>
     <div class="reveal">
       <!-- Any section element inside of this container is displayed as a slide -->
+      <header class="corner-header"></header>
       <div class="slides">
 	<section><!--title slide-->
 	  <h1>Endrun</h1>
@@ -41,19 +42,10 @@
 	</p>
 	</section>
 	<section><!--takeaways section-->
-	  <section>
+	  <section class="category">
 	    <h2>The Takeaways</h2>
-	    <ul>
-	      <li>No Internet Use</li>
-	      <li>By Any Means Necessary</li>
-	      <li>Old-School Cellular Communication</li>
-	      <li>Disruption/Delay-Tolerant</li>
-	      <li>Modifiable On the Fly</li>
-	    </ul>  
 	  </section>
-	      
-	  <section>
-	    <h2>The Takeaways</h2>
+	  <section data-state="takeaways">
 	    <h3>No Internet Use</h3>
 	    <p>We're making an end run around the Internet. Because someone has to.
 	    </p>
@@ -61,8 +53,7 @@
 	    Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>The Takeaways</h2>
+ 	  <section data-state="takeaways">
 	    <h3>By Any Means Necessary</h3>
 	    <ul>
 	      <li>Sneakernet</li>
@@ -75,16 +66,14 @@
 	    Endrun is "by any means necessary." Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>The Takeaways</h2>
+	  <section data-state="takeaways">
 	    <h3>Old-School Cellular Communications</h3>
 	    <p>Cell as in "group", not cell as in "for the enjoyment of all patrons, please turn off your"</p>
 	    <aside class="notes">
 	    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>The Takeaways</h2>
+	  <section data-state="takeaways">
 	    <h3>Disruption/Delay-Tolerant</h3>
 	    <ul>
 	      <li>Conflict zones</li>
@@ -96,8 +85,7 @@
 	    Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
 	    </aside>
 	  </section>
-	  <section>
-	    <h2>The Takeaways</h2>
+	  <section data-state="takeaways">
 	    <h3>Modifiable On the Fly</h3>
 	    <p>This isn't an Exchange Server. You know your needs better than we do.</p>
 	    <aside class="notes">
@@ -412,7 +400,7 @@
       </div><!--/.slides-->
     </div><!--/.reveal-->
     <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.min.js"></script>
+    <script src="js/reveal.js"></script>
     <script>
     
     // Full list of configuration options available here:
