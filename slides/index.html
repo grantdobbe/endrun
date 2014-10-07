@@ -60,14 +60,14 @@
 	      <li>Amateur Radio*</li>
 	    </ul>
 	    <aside class="notes">
-	    Endrun is "by any means necessary." Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio.
+	    Endrun is "by any means necessary." Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio. The only firm requirement for Endrun is a USB port; as we'll see later, that's more powerful than you might think.
 	    </aside>
 	  </section>
 	  <section data-state="takeaways" data-background="photos/takeaways_cellular.jpg">
 	    <h3>Old-School Cellular Communications</h3>
 	    <p>Cell as in "group", not cell as in "for the enjoyment of all patrons, please turn off your"</p>
 	    <aside class="notes">
-	    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship.
+	    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship. 
 	    </aside>
 	  </section>
 	  <section data-state="takeaways" data-background="photos/takeaways_disruption.jpg">
@@ -122,7 +122,7 @@
 	    <h3>NASA/ESA Delay-Tolerant Networking</h3>
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
-	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: can handle long delays, can handle transient links, can handle multiple transport paths, etc. However, there is no standard implementation of DTN, and security is a second-tier concern at best.
+	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc. However, security is a second-tier concern if it's considered at all. Also, for the most part, DTN has been an academic exercise, limited to university research teams with grant funding from NASA or ESA. It's never been implemented the same way twice, and the closest we've come to having a standard implementation of it -- in the form of NASA's proposed Mars Telecommunications Orbiter -- fell victim to the Appropriations Committee of the United States Congress.
 	    </aside>
 	  </section>
 	</section>
@@ -130,12 +130,13 @@
 	  <section>
 	    <h2>Endrun 101</h2>
 	    <aside class="notes">
-  	    <p>Endrun is a secure implementation of the DTN protocol using:</p>
+  	    <p>Ok, now we get into the particulars. Like we said, DTN is the closest existing concept to what we want to do. However, it's never been implemented the same way twice, and it has security holes you could drive a boat through. So, using existing software, we put together our own secure implementation of the DTN protocol using:</p>
   	    <ul>
   	      <li>Git</li>
   	      <li>LibSodium</li>
   	      <li>Some Python to glue everything together</li>
   	    </ul>
+	    And called it Endrun. 
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_git.jpg">
@@ -146,19 +147,33 @@
 	      <li>Information integrity</li>
 	      <li>Information divergence</li>
 	    </ul>
+	    <aside class="notes">
+	      <p>There are a lot of problems with putting together a networking protocol; stuff shows up in the wrong order, stuff shows up mangled, stuff... doesn't show up, stuff shows up twice. Same goes for DTN. However, because of the latency concerns, we can't just throw TCP at it and call it good enough.</p>
+	      <p>It turns out this problem already has a solution. Git resolves:</p>
+	      <ul>
+		<li>Information showing up in the wrong order</li>
+	      </ul>
+	    
+	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_bundle.jpg">
 	    <h3>Git Bundles</h3>
 	    <p>Bundles let us "fake" remote repos.</p>
 	    <p>From the man page:</p>
+	    <p>
 	    <pre>
-	    This command provides support for git fetch and git pull to 
-	    operate by packaging objects and references in an archive at 
-	    the originating machine, then importing those into another 
-	    repository using git fetch and git pull after moving the 
-	    archive by some means.
+	    This command provides support for git fetch and git pull 
+	    to operate by packaging objects and references in an 
+	    archive at the originating machine, then importing those 
+	    into another repository using git fetch and git pull after 
+	    moving the archive by some means.
 	    </pre>
+	    </p>
 	    <p>Look, ma! No network connection!</p>
+	    <aside class="notes">
+	    Git bundles are a way of using a file to connect to a remote repo instead of a network connection. They were originally intended for air-gap situations and contexts in which people have either high latency or low bandwidth. We have all three, so naturally, it's a perfect fit.
+	    
+	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_nacl.jpg">
 	    <h3>NaCl</h3>
