@@ -36,7 +36,9 @@
 	  <h2>Secure Digital Communications For Our Modern Dystopia</h2>
 	  
 	  <h3>By <a href="mailto:grant@dobbe.us">Grant Dobbe</a> and <a href="mailto:ussjoin@ussjoin.com">Brendan O'Connor</a></h3>
-	  
+	  <aside class="notes">
+	  Hi! Welcome to our thing.
+	  </aside>
 	</section>
 	<section><!--takeaways section-->
 	  <section class="category">
@@ -47,7 +49,8 @@
 	    <p>We're making an end run around the Internet. Because someone has to.
 	    </p>
 	    <aside class="notes">
-	    Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure, due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.
+	    <p>We've made a system called Endrun for securely communicating without the internet. Here's what we want you to take away from our presentation. </p>
+	    <p>Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.</p>
 	    </aside>
 	  </section>
  	  <section data-state="takeaways" data-background="photos/takeaways_byanymeans.jpg">
@@ -79,14 +82,14 @@
 	      <li>SPAAAAAAAAAACE!</li>
 	    </ul>
 	    <aside class="notes">
-	    Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
+	    Because our system can be used in really nasty places where the trains don't always run on time, Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
 	    </aside>
 	  </section>
 	  <section data-state="takeaways" data-background="photos/takeaways_modifiable.jpg">
 	    <h3>Modifiable On the Fly</h3>
 	    <p>This isn't an Exchange Server. You know your needs better than we do.</p>
 	    <aside class="notes">
-	    Endrun is built using standard, well-tested, open source components and combined using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
+	    We come from the amateur radio community, where any components can be the right components and everything should be interchangeable. With that in mind, Endrun is built using standard, well-tested, open source components and put together using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
 	    </aside>
 	  </section>
 	</section>
@@ -100,15 +103,14 @@
 	    <h3>Tor</h3>
 	    <em>The choice of dissidents and activists everywhere.</em>
 	    <aside class="notes">
-	    Add notes here.
-	    Basic idea: Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes.
+	    You've heard of Tor, of course. Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes. 
 	    </aside>
 	    </section>
 	  <section data-state="previous-work" data-background="photos/previous_airchat.jpg">
 	    <h3>AirChat, by Anonymous</h3>
 	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
 	    <aside class="notes">
-	    Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missile". 
+	    Anonymous came up with a Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missile". 
 	    </aside>
 	  </section>
 	  <section data-state="previous-work" data-background="photos/previous_commotion.jpg">
@@ -122,7 +124,7 @@
 	    <h3>NASA/ESA Delay-Tolerant Networking</h3>
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
-	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc. However, security is a second-tier concern if it's considered at all. Also, for the most part, DTN has been an academic exercise, limited to university research teams with grant funding from NASA or ESA. It's never been implemented the same way twice, and the closest we've come to having a standard implementation of it -- in the form of NASA's proposed Mars Telecommunications Orbiter -- fell victim to the Appropriations Committee of the United States Congress.
+	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc. However, security is a second-tier concern if it's considered at all. Also, for the most part, DTN has been an academic exercise, limited to university research teams with grant funding from NASA or ESA. It's never been implemented the same way twice, and the closest we've come to having a standard implementation of it -- in the form of NASA's proposed Mars Telecommunications Orbiter -- fell victim to the Appropriations Committee of the United States Congress. 
 	    </aside>
 	  </section>
 	</section>
@@ -130,7 +132,7 @@
 	  <section>
 	    <h2>Endrun 101</h2>
 	    <aside class="notes">
-  	    <p>Ok, now we get into the particulars. Like we said, DTN is the closest existing concept to what we want to do. However, it's never been implemented the same way twice, and it has security holes you could drive a boat through. So, using existing software, we put together our own secure implementation of the DTN protocol using:</p>
+  	    <p>Ok, now we get into the particulars. Like we said, DTN is the closest existing concept to what we want to do. However, it's never been implemented the same way twice, and it has a more atrocious approach to security than the sendmail project. So, using existing software, we put together our own secure implementation of the DTN protocol using:</p>
   	    <ul>
   	      <li>Git</li>
   	      <li>LibSodium</li>
@@ -152,7 +154,13 @@
 	      <p>It turns out this problem already has a solution. Git resolves:</p>
 	      <ul>
 		<li>Information showing up in the wrong order</li>
+		<li>Information corruption</li>
+		<li>Stale information</li>
+		<li></li>
 	      </ul>
+	      <p>
+	      Pretty nifty, right? However, you're probably thinking "Don't you need a network connection for Git?" 
+	      </p>
 	    
 	    </aside>
 	  </section>
@@ -171,7 +179,7 @@
 	    </p>
 	    <p>Look, ma! No network connection!</p>
 	    <aside class="notes">
-	    Git bundles are a way of using a file to connect to a remote repo instead of a network connection. They were originally intended for air-gap situations and contexts in which people have either high latency or low bandwidth. We have all three, so naturally, it's a perfect fit.
+	    You can never go wrong by reading the fine manual. Git has a feature called "bundles" that are a way of using a file to connect to a remote repo instead of a network connection. They were originally intended for air-gap situations and contexts in which people have either high latency or low bandwidth. We have all three, so naturally, it's a perfect fit. We can move git bundles from one machine to another incredibly simply.
 	    
 	    </aside>
 	  </section>
@@ -183,6 +191,10 @@
 	      <li>Fast and efficient</li>
 	      <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
 	    </ul>
+	    <aside class="notes">
+	    <p>Git solves our data control problems. However, outside of hashing and the occasional tag or commit signing, it doesn't really do crypto. </p>
+	    <p>We wanted the best crypto we could find. Our intended use cases deserve no less than that. So we looked around, and decided on Salt. Salt is an elliptical-curve cryptography framework developed by Daniel J. Bernstein of the University of Chicago. It is incredibly fast, has very low overhead, and very secure -- OpenDNS uses it to secure their backhaul.  However, it's written in C. With hardware-specific compiler flags. That means unless you have a thing for makefiles, it's only guaranteed to run correctly if your name is Daniel J. Bernstein and you're sitting in front of your office computer.</p>
+	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_libsodium.jpg">
 	    <h3>LibSodium</h3>
@@ -192,6 +204,10 @@
 	      <li>Much easier to work with</li>
 	    </ul>
 	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
+	    <aside class="notes">
+	    <p>Luckily, this problem has *also* been solved for us. The OpenDNS people wanted to use Salt, and didn't want to sentence their devops team to compiling salt on every server architecture variant they have, so they developed libsodium. Libsodium is a platform- and language-independent wrapper around salt. It has good performance compared to the natively-compiled C binaries, has bindings for most of today's common development languages, and will run on pretty much anything with a PRNG.</p>
+	    <p>We can't directly encrypt the data stored *in* a git repository, so instead we sign and encrypt bundles, then sign them again before they're ready for transport. </p>
+	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_payload.jpg">
 	    <h3>Payload Format</h3>
@@ -203,11 +219,17 @@
 	      <li>Contents</li>
 	      <li>Chain of Custody data</li>
 	    </ul>
+	    <aside class="notes">
+	      <p>That brings us to payloads. In Endrun, a payload is a nice little serialized package with the encrypted git bundle and its routing data. We have origin and destination, for which we use the salt public key fingerprints. We have an epoc timestamp that is used for determining time to live, our bundle, and then we have our chain of custody data -- more about that in a minute.</p>
+	    </aside>
 	  </section>
 	</section>
 	<section><!--routing section-->
 	  <section>
 	    <h2>Routing</h2>
+	    <aside class="notes">
+	    <p>Now we talk about routing. </p>
+	    </aside>
 	  </section>
 	  <section data-state="routing">
 	    <h3>Pairwise Communication</h3>
