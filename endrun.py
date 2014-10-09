@@ -6,7 +6,7 @@
 #  Copyright 2013 Grant Dobbe <grant@dobbe.us>
 #  
 
-import datetime, os, pickle, ConfigParser, git, shutil
+import datetime, os, pickle, ConfigParser, git, shutil, hashlib, sqlite, json
 import warnings
 
 with warnings.catch_warnings():
@@ -49,8 +49,8 @@ class Payload:
   # payload - nacl encrypted git bundle 
   # empty by default
   payload = ''
-  # custodychain - a json multi-dimensional array containing the complete chain of custody for an endrun payload
-  custodychain = '{}'
+  # custodychain - a json array containing the complete chain of custody for an endrun payload
+  custodychain = '[]'
   
   def __init__(self):
     self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=int(config.get('global', 'ttl')))
@@ -191,14 +191,22 @@ class Payload:
     os.remove('/tmp/' + bundleName)
     
   # record a receipt entry
-  def receipt(self, recepientPubKey):
+  def issue_receipt(self, recepientPubKey):
     # get the current datetime
-    # perform a SHA-256 hash of the encrypted payload
-    # format a json array consisting of the datetime, the recipient's pubkey, and the hash
-    # attach one copy to the end of custodychain
+    timestamp = datetime.datetime.now()
+    # perform a SHA256 hash of the encrypted payload
+    payload_hash = hashlib.sha256(self)
+    # generate a SHA256 hash of the pubkey
+    key_hash = hashlib.sha256(recipientPubKey)
+    # format a dictionary consisting of the datetime, the recipient's pubkey, and the hash
+    json_receipt = { 'node_id': key_hash.hexdigest(), 'timestamp': timestamp, 'fingerprint': payload_hash.hex_digest(),  }
     # return the json array to whomever has requested it
-    pass
-
+    return json.dumps(json_receipt)
+  
+  def record_receipt(self, receiptJson):
+    tempchain = json.loads(self.custodychain)
+    tempchain.append(json.loads(receiptJson)
+    self.custodychain = json.dumps(tempchain)
 
 '''
 ---------------
@@ -398,12 +406,8 @@ def transmit(destination):
 '''
 Chain of custody functions
 '''
-def chainRecord(receipt):
+def chainRecord():  
   #record the chain of custody info here
-  pass
-  
-def chainLookup(datetime=1, payloadHash=1, keyFingerPrint=1):
-  # figure out how to do a chain lookup here
   pass
 
 def chainFlush():
