@@ -94,7 +94,8 @@
 	    </ul>
 	    <aside class="notes">
 	    <h3>Grant</h3>
-	      <p>Because our system can be used in really nasty places where the trains don't always run on time, Endrun is disruption- and delay-tolerant.</p>
+	      <p>Like Brendan mentioned, we want endrun to be usable in places where the trains don't run on time.</p>
+	      <p>As a result, we've made Endrun is disruption- and delay-tolerant.</p>
 	      <p>It is designed to work where nodes have no real- or bounded-time connection to each other</p> 
 	      <p>Because it's medium-agnostic, will work in places where the internet has traditionally been difficult to use</p>
 	    </aside>
@@ -119,7 +120,8 @@
 	    <em>The choice of dissidents and activists everywhere.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
-	      You've heard of Tor, of course. Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes. 
+	      You've heard of Tor, of course. Tor provides privacy by encrypting communication at every relay using different keys. 
+	      However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes. 
 	    </aside>
 	    </section>
 	  <section data-state="previous-work" data-background="photos/previous_airchat.jpg">
@@ -127,7 +129,13 @@
 	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      Anonymous came up with a Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missile". 
+	      <ul>
+		<li>Back in April, Anonymous announced Airchat, a system for secure internet-free communication using amateur radio.</li>
+		<li>Using encryption over amateur radio is illegal in the US according to FCC rules, part 97</li>
+		<li>Anonymous doesn't care; said "fuck you,NSA"</li>
+		<li>However, it's an online protocol (continuous communication)</li>
+		<li>Handheld ham radios usually broadcast at 5W; this is more than enough to find with ADF and perform "connection reset by missle</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="previous-work" data-background="photos/previous_commotion.jpg">
@@ -147,7 +155,7 @@
 	      <p>It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc.</p>
 	      <p>Most of the funding/research comes from ESA + NASA (delay-tolerant) and DARPA (disruption-tolerant)</p>
 	      <p>However, security is a second-tier concern if it's considered at all.</p>
-	      <p>All implementations to date have been largely academic; the closest thing to standard (MTO) ran into Congress and died a horrible fiery death</p>
+	      <p>All implementations to date have been largely academic; the closest thing to standard (Mars Telecom Orbiter) ran into Congress and died a horrible fiery death</p>
 	    </aside>
 	  </section>
 	</section>
@@ -175,17 +183,15 @@
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>There are a lot of problems with putting together a networking protocol</p> 
 	      <ul>
+		<li>There are a lot of problems with putting together a networking protocol</li>
 		<li>stuff shows up in the wrong order, stuff shows up mangled</li>
 		<li>stuff... doesn't show up, stuff shows up twice. </li>
 		<li>Changes to the same information need to be incorporated back into the whole</li>
 		<li>Same problems occur in distributed software teams</li>
 		<li>Git solves the problem. Beautifully.</li>
+		<li>Pretty nifty, right? However, you're probably thinking "Don't you need a network connection for Git?" </li>
 	      </ul>
-	      <p>
-	      Pretty nifty, right? However, you're probably thinking "Don't you need a network connection for Git?" 
-	      </p>
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_bundle.jpg">
@@ -258,7 +264,7 @@
 	      <p>That brings us to payloads. In Endrun, a payload is a nice little serialized package with the encrypted git bundle and its routing data. We have origin and destination, for which we use the salt public key fingerprints. We have an epoc timestamp that is used for determining time to live, our bundle, and then we have our chain of custody data -- more about that in a minute.</p>
 	    </aside>
 	  </section>
-	  <section data-state="endrun-101" data-background="">
+	  <section data-state="endrun-101" data-background="photos/e101_cell.jpg">
 	    <h3>Provisioning the cell</h3>
 	    <p>When creating an Endrun cell of 8 nodes:</p>
 	    <ul>
@@ -276,7 +282,7 @@
 	      </ul>
 	    </aside>
 	  </section>
-	  <section data-state="endrun-101" data-background="">
+	  <section data-state="endrun-101" data-background="photos/e101_node.jpg">
 	    <h3>Provisioning the nodes</h3>
 	    <p>Then, on each node:</p>
 	    <ul>
@@ -294,7 +300,7 @@
 	      </ul>
 	    </aside>
 	  </section>
-	  <section data-state="endrun-101" data-background="">
+	  <section data-state="endrun-101" data-background="photos/e101_message.jpg">
 	    <h3>Moving data</h3>
 	    <p>When using the node, all commits occur on the master branch.</p>
 	    <p>When we move data:</p>
@@ -529,9 +535,11 @@
 	  </section>
 -->
 	  <section>
+<!--
 	  <p>
 	  And so on.
 	  </p>
+-->
 	  <img width="800" src="./Diagram3Trans.png" />
 	  </section>
 	</section>
@@ -616,6 +624,9 @@
 	    <li>https://www.flickr.com/photos/rickyromero/3745634352</li>
 	    <li>https://www.flickr.com/photos/aigle_dore/8273660863</li>
 	    <li>https://www.flickr.com/photos/mrmorodo/7429248556/</li>
+	    <li>https://www.flickr.com/photos/daniandgeorge/14229225524</li>
+	    <li>https://www.flickr.com/photos/jenniferbatty/6437655477</li>
+	    <li>https://www.flickr.com/photos/dalecalder2003/7780793364</li>
 	  </ul>
 	</section>
       </div><!--/.slides-->
@@ -627,7 +638,7 @@
     // Full list of configuration options available here:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-    controls: true,
+    controls: false,
     progress: true,
     history: true,
     center: true,

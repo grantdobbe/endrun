@@ -64,6 +64,12 @@ section[data-background] {
   border-radius: 25px;
 }
 
+ul.photo-credits {
+  font-size:1rem;
+  list-style: none;
+  line-height: 1rem;
+}
+
 /*********************************************
  * HEADERS
  *********************************************/
