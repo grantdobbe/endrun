@@ -406,8 +406,18 @@ def transmit(destination):
 '''
 Chain of custody functions
 '''
-def chainRecord():  
+def chainRecord(payload):  
   #record the chain of custody info here
+  with open(payload, 'r') as payloadFile:
+    try:
+      with open( config.get('global', 'keypath') + '/' + config.get('global', 'nodename') + '.public', 'r' ) as keyFile:
+        pubKey = pickle.load(keyFile)
+        raw_payload = pickle.load(payloadFile)
+        raw_payload.issue_receipt(self, pubKey)
+        # add sqlite code here
+    except:
+      print "Invalid payload. Cannot record receipt."
+      return False
   pass
 
 def chainFlush():

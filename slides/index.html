@@ -37,20 +37,30 @@
 	  
 	  <h3>By <a href="mailto:grant@dobbe.us">Grant Dobbe</a> and <a href="mailto:ussjoin@ussjoin.com">Brendan O'Connor</a></h3>
 	  <aside class="notes">
+	  <h3>Grant</h3>
 	  Hi! Welcome to our thing.
 	  </aside>
 	</section>
 	<section><!--takeaways section-->
 	  <section class="category">
 	    <h2>The Takeaways</h2>
+	    <aside class="notes">
+	    <h3>Brendan</h3>
+	    <p>We've made a system called Endrun for securely communicating without the internet. Here's what we want you to take away from our presentation. </p>
+	    </aside>
 	  </section>
 	  <section data-state="takeaways" data-background="photos/takeaways_nointernet.jpg">
 	    <h3>No Internet Use</h3>
 	    <p>We're making an end run around the Internet. Because someone has to.
 	    </p>
 	    <aside class="notes">
-	    <p>We've made a system called Endrun for securely communicating without the internet. Here's what we want you to take away from our presentation. </p>
-	    <p>Endrun is designed to make an ``end run'' around the Internet, for the purpose of giving a communications option to people who cannot use the Internet. This could happen for any of several reasons: the Internet could have suffered a major regional or global failure due to natural disaster, accident, or hostility; the Internet might be considered untrustworthy, due to adversary action; or the areas being communicated across might be so remote that Internet connectivity is simply not a useful option.</p>
+	    <h3>Brendan</h3>
+	    <p>Endrun is designed to make an ``end run'' around the Internet. Reasons:</p>
+	    <ul>
+	      <li>internet failure due to natural disaster, accident, hostility</li>
+	      <li>internet is untrustworthy (Warning: don't ramble)</li>
+	      <li>internet connectivity not feasible due to remoteness or terrain</li>
+	    </ul>
 	    </aside>
 	  </section>
  	  <section data-state="takeaways" data-background="photos/takeaways_byanymeans.jpg">
@@ -63,6 +73,7 @@
 	      <li>Amateur Radio*</li>
 	    </ul>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    Endrun is "by any means necessary." Endrun is designed to work across any form of communication that is available, whether that's physical data movement and low-power transient unlicensed radio links, as we would recommend, or by Earth-Moon-Earth (EME) high-powered signals from fix points, or even amateur (ham) radio. The only firm requirement for Endrun is a USB port; as we'll see later, that's more powerful than you might think.
 	    </aside>
 	  </section>
@@ -70,6 +81,7 @@
 	    <h3>Old-School Cellular Communications</h3>
 	    <p>Cell as in "group", not cell as in "for the enjoyment of all patrons, please turn off your"</p>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    Endrun is designed for communications between small groups of people---``cells'' or ``pods.'' It is not designed for open-ended communication between people that have no prior relationship. 
 	    </aside>
 	  </section>
@@ -82,13 +94,17 @@
 	      <li>SPAAAAAAAAAACE!</li>
 	    </ul>
 	    <aside class="notes">
-	    Because our system can be used in really nasty places where the trains don't always run on time, Endrun is disruption- and delay-tolerant. It is designed to work where nodes have no real- or bounded-time connection to each other, for instance, when couriers are moving data stored on physical media either around town or across a continent.
+	    <h3>Grant</h3>
+	    <p>Because our system can be used in really nasty places where the trains don't always run on time, Endrun is disruption- and delay-tolerant.</p>
+	    <p>It is designed to work where nodes have no real- or bounded-time connection to each other</p> 
+	    <p>Because it's medium-agnostic, will work in places where the internet has traditionally been difficult to use</p>
 	    </aside>
 	  </section>
 	  <section data-state="takeaways" data-background="photos/takeaways_modifiable.jpg">
 	    <h3>Modifiable On the Fly</h3>
 	    <p>This isn't an Exchange Server. You know your needs better than we do.</p>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    We come from the amateur radio community, where any components can be the right components and everything should be interchangeable. With that in mind, Endrun is built using standard, well-tested, open source components and put together using Python, rather than using all custom code. This lets Endrun benefit from decades of work from thousands of programmers (with all the attendant work on security that implies). It also means that Endrun is customizable by programmers in the field; in an emergency situation, this can give flexibility that fully-custom solutions cannot.
 	    </aside>
 	  </section>
@@ -103,6 +119,7 @@
 	    <h3>Tor</h3>
 	    <em>The choice of dissidents and activists everywhere.</em>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    You've heard of Tor, of course. Tor provides privacy by encrypting communication at every relay using different keys. However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes. 
 	    </aside>
 	    </section>
@@ -110,6 +127,7 @@
 	    <h3>AirChat, by Anonymous</h3>
 	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
 	    <aside class="notes">
+	    <h3>Grant</h3>
 	    Anonymous came up with a Airchat provides secure encrypted messaging, but uses amateur radio and is illegal in the US under part 97 of the FCC rules. Other countries have similar restrictions, so it's illegal there too. It also relies on semi-permanent high-power radio links, which means anyone with a couple of directional antennas can ruin your day by calling in air support, or as we call it, "connection reset by missile". 
 	    </aside>
 	  </section>
@@ -117,6 +135,7 @@
 	    <h3>Commotion Wireless / Project Byzantium</h3>
 	    <em>Neighborhood mesh networks for the Zombie apocalypse</em>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    Commotion Wireless creates ad-hoc mesh networks using regular 802.11a/b/g/n hardware. Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
 	    </aside>
 	  </section>
@@ -124,6 +143,7 @@
 	    <h3>NASA/ESA Delay-Tolerant Networking</h3>
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
+	    <h3>Grant</h3>
 	    DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc. However, security is a second-tier concern if it's considered at all. Also, for the most part, DTN has been an academic exercise, limited to university research teams with grant funding from NASA or ESA. It's never been implemented the same way twice, and the closest we've come to having a standard implementation of it -- in the form of NASA's proposed Mars Telecommunications Orbiter -- fell victim to the Appropriations Committee of the United States Congress. 
 	    </aside>
 	  </section>
@@ -132,13 +152,14 @@
 	  <section>
 	    <h2>Endrun 101</h2>
 	    <aside class="notes">
-  	    <p>Ok, now we get into the particulars. Like we said, DTN is the closest existing concept to what we want to do. However, it's never been implemented the same way twice, and it has a more atrocious approach to security than the sendmail project. So, using existing software, we put together our own secure implementation of the DTN protocol using:</p>
-  	    <ul>
-  	      <li>Git</li>
-  	      <li>LibSodium</li>
-  	      <li>Some Python to glue everything together</li>
-  	    </ul>
-	    And called it Endrun. 
+	      <h3>Grant</h3>
+	      <ul>
+	      <li>DTN is the closest existing concept to what we want to do.</li>
+	      <li>However, it's never been implemented the same way twice</li>
+	      <li>Binary protocol, which makes it hard to parse</li>
+	      <li>Security is an afterthought at best</li>
+	      <li>So we built our own.</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_git.jpg">
@@ -150,18 +171,18 @@
 	      <li>Information divergence</li>
 	    </ul>
 	    <aside class="notes">
-	      <p>There are a lot of problems with putting together a networking protocol; stuff shows up in the wrong order, stuff shows up mangled, stuff... doesn't show up, stuff shows up twice. Same goes for DTN. However, because of the latency concerns, we can't just throw TCP at it and call it good enough.</p>
-	      <p>It turns out this problem already has a solution. Git resolves:</p>
+	      <h3>Grant</h3>
+	      <p>There are a lot of problems with putting together a networking protocol</p> 
 	      <ul>
-		<li>Information showing up in the wrong order</li>
-		<li>Information corruption</li>
-		<li>Stale information</li>
-		<li></li>
+	      <li>stuff shows up in the wrong order, stuff shows up mangled</li>
+	      <li>stuff... doesn't show up, stuff shows up twice. </li>
+	      <li>Changes to the same information need to be incorporated back into the whole</li>
+	      <li>Same problems occur in distributed software teams</li>
+	      <li>Git solves the problem. Beautifully.</li>
 	      </ul>
 	      <p>
 	      Pretty nifty, right? However, you're probably thinking "Don't you need a network connection for Git?" 
 	      </p>
-	    
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_bundle.jpg">
@@ -179,8 +200,15 @@
 	    </p>
 	    <p>Look, ma! No network connection!</p>
 	    <aside class="notes">
-	    You can never go wrong by reading the fine manual. Git has a feature called "bundles" that are a way of using a file to connect to a remote repo instead of a network connection. They were originally intended for air-gap situations and contexts in which people have either high latency or low bandwidth. We have all three, so naturally, it's a perfect fit. We can move git bundles from one machine to another incredibly simply.
-	    
+	    <h3>Grant</h3>
+	    <p>Git has a feature called "bundles" that are a way of using a file to connect to a remote repo instead of a network connection.</p> 
+	    <p>Originally intended for air-gap situations</p>
+	    <ul>
+	    <li>Create bundle at point A, push to it</li>
+	    <li>Copy file to USB, burn to CD, print in 6-point font with 1cm margins and give to US Attorney</li>
+	    <li>Copy file onto machine at point B, tell git where to find it in config</li>
+	    <li>Git pull from bundle</li>
+	    </ul>	    
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_nacl.jpg">
@@ -192,6 +220,7 @@
 	      <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
 	    </ul>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    <p>Git solves our data control problems. However, outside of hashing and the occasional tag or commit signing, it doesn't really do crypto. </p>
 	    <p>We wanted the best crypto we could find. Our intended use cases deserve no less than that. So we looked around, and decided on Salt. Salt is an elliptical-curve cryptography framework developed by Daniel J. Bernstein of the University of Chicago. It is incredibly fast, has very low overhead, and very secure -- OpenDNS uses it to secure their backhaul.  However, it's written in C. With hardware-specific compiler flags. That means unless you have a thing for makefiles, it's only guaranteed to run correctly if your name is Daniel J. Bernstein and you're sitting in front of your office computer.</p>
 	    </aside>
@@ -205,6 +234,7 @@
 	    </ul>
 	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
 	    <aside class="notes">
+	    <h3>Brendan</h3>
 	    <p>Luckily, this problem has *also* been solved for us. The OpenDNS people wanted to use Salt, and didn't want to sentence their devops team to compiling salt on every server architecture variant they have, so they developed libsodium. Libsodium is a platform- and language-independent wrapper around salt. It has good performance compared to the natively-compiled C binaries, has bindings for most of today's common development languages, and will run on pretty much anything with a PRNG.</p>
 	    <p>We can't directly encrypt the data stored *in* a git repository, so instead we sign and encrypt bundles, then sign them again before they're ready for transport. </p>
 	    </aside>
@@ -218,9 +248,64 @@
 	      <li>Timestamp (TTL)</li>
 	      <li>Contents</li>
 	      <li>Chain of Custody data</li>
+	      <li>Copies</li>
 	    </ul>
 	    <aside class="notes">
+	      <h3>Grant</h3>
 	      <p>That brings us to payloads. In Endrun, a payload is a nice little serialized package with the encrypted git bundle and its routing data. We have origin and destination, for which we use the salt public key fingerprints. We have an epoc timestamp that is used for determining time to live, our bundle, and then we have our chain of custody data -- more about that in a minute.</p>
+	    </aside>
+	  </section>
+	  <section data-state="endrun-101" data-background="">
+	    <h3>Provisioning the cell</h3>
+	    <p>When creating an Endrun cell of 8 nodes:</p>
+	    <ul>
+	      <li>A "source" repo is created with 8 branches</li>
+	      <li>8 double keypairs are created</li>
+	      <li>8 bundles are created, 1 for each branch</li>
+	    </ul>
+	    
+	    <aside class="notes">
+	    <h3>Grant</h3>
+	    <ul>
+	      <li>Provisioning an endrun cell works like this.</li>
+	      <li>the source repo is created because we need a common starting point</li>
+	      <li>When provisioning is complete, we destroy this repo</li>
+	      <li>Double keypairs are encryption keys and signing keys</li>
+	    </ul>
+	    </aside>
+	  </section>
+	  <section data-state="endrun-101" data-background="">
+	    <h3>Provisioning the nodes</h3>
+	    <p>Then, on each node:</p>
+	    <ul>
+	      <li>A repo is created with 7 remotes (everyone except itself) and 8 branches</li>
+	      <li>The public part of 7 double keypairs are copied over</li>
+	      <li>Node gets its own full double keypair</li>
+	      <li>SQLite databases are set up</li>
+	      <li>Endrun daemon is started</li>
+	    </ul>
+	    
+	    <aside class="notes">
+	    <h3>Grant</h3>
+	    <ul>
+	    <li>Provisioning cells is sort of a round robin model</li>
+	    <li>If I have N nodes, each node gets N-1 bundles and N-1 public keys</li>
+	    </ul>
+	    </aside>
+	  </section>
+	  <section data-state="endrun-101" data-background="">
+	    <h3>Moving data</h3>
+	    <p>When using the node, all commits occur on the master branch.</p>
+	    <p>When we move data:</p>
+	    <ul>
+	      <li>Master gets merged into our destination's branch</li>
+	      <li>Branch is pushed to the destination's remote (which is a bundle)</li>
+	      <li>Payload is created and moved to the destination node</li>
+	      <li>Destination does a pull to its named branch</li>
+	      <li>Branch is merged into master</li>
+	    </ul>
+	    <aside class="notes">
+	    <h3>Grant</h3>
 	    </aside>
 	  </section>
 	</section>
@@ -228,7 +313,8 @@
 	  <section>
 	    <h2>Routing</h2>
 	    <aside class="notes">
-	    <p>Now we talk about routing. </p>
+	    <h3>Grant</h3>
+	    <p>Now we talk about routing.</p>
 	    </aside>
 	  </section>
 	  <section data-state="routing">
@@ -236,38 +322,77 @@
 	    <img class="stretch" src="./Diagram1Trans.png" />
 	    <p>DTN routing occurs between pairs of nodes. </p>
 	    <aside class="notes">
-	    Imagine a bucket brigade. 
+	      <h3>Grant</h3>
+	    <ul>
+	      <li>Node connection is pairwise</li>
+	      <li>All data needed to complete the transmission is contained within the payload</li>
+	      <li>Nodes never need to be contacted for more information</li>
+	      <li>Think about passing notes in class: you pass it by looking for the next closest person, destination is written on the note</li>
+	      <li>We can also wait until the teacher isn't looking, then pass: this is store and forward</li>
+	    </ul>
 	    </aside>
 	  </section>
 	  <section data-state="routing" data-background="photos/routing_spray.jpg">
 	    <h3>Spray and <span style="text-decoration:line-through">Pray</span> Wait</h3>
 	    <ul>
-	      <li>Epidemic routing uses too much bandwidth.</li>
-	      <li>Other routing methods can't handle transient links.</li>
-	      <li>Spray and Wait combines store-and-forward with a limit on message copies.</li>
+	      <li>Replication-based routing uses too much bandwidth.</li>
+	      <li>Forwarding-based routing don't handle transient links well.</li>
+	      <li>Spray and Wait combines forwarding-based routing with a limit on message copies to prevent flooding.</li>
 	    </ul>
 	    <aside class="notes">
-	    We use a routing algorithm referred to by its designers as "spray-and-wait" as a way to get the best of store-and-forward routing (hold it until you can move it) without flooding a network with tons of packets (which, if you're using radio, means almost constant radio traffic).
+	      <h3>Grant</h3>
+	      <p>Multiple ways to pass notes: one copy to one person at a time(forwarding-based routing), or multiple copies to everyone (replication-based or epidemic routing)</p>
+	      <ul>
+	      <li>One copy might not get there</li>
+	      <li>Multiple copies to everyone clogs up the network</li>
+	      </ul>
+	      <p>Best approach is spray and wait</p>
+	      <ul>
+	      <li>Developed at university of southern california</li>
+	      <li>Combines the epidemic routing benefits with a limit on copies to prevent congestion</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="routing">
 	    <h3>Spray and Wait</h3>
 	    <img width="400" src="./Diagram2Trans.png" />
-	    
+	    <aside class="notes">
+	      <h3>Grant</h3>
+	      <p>Basic idea</p>
+	      <ul>
+		<li>Set an upper bound, in this case, 8.</li>
+		<li>First round, the payload is sent to 8 nodes (or every node we can find).</li>
+		<li>Second round, every node with a copy sends it to 4 nodes (half rounded down)</li>
+		<li>Third round, every node with a copy sends it to 2 nodes (half rounded down)</li>
+		<li>Fourth round, nodes should only have one copy; they hold onto it and wait for direct contact (or TTL death)</li>
+	      </ul>
+	    </aside>
 	  </section>
 	</section>
 	<section><!--user services section-->
 	  <section>
 	    <h2>User Services</h2>
+	    <aside class="notes">
+	    <h3>Brendan</h3>
+	    </aside>
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_gollum.jpg">
 	    <h3>Gollum</h3>
+	    <aside class="notes">
+	    <h3>Brendan</h3>
+	    </aside>
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_gpg.jpg">
 	    <h3>Gollum + GPG</h3>
+	    <aside class="notes">
+	    <h3>Brendan</h3>
+	    </aside>
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_minilock.jpg">
 	    <h3>Gollum + Minilock</h3>
+	    <aside class="notes">
+	    <h3>Brendan</h3>
+	    </aside>
 	  </section>
 	</section>
 	<section><!--transport section-->
@@ -436,7 +561,11 @@
     { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
     { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
     { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+    { src: 'socket.io/socket.io.js', async: true },
+    { src: 'plugin/notes-server/client.js', async: true },
+    { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+
     ]
     });
     
