@@ -143,7 +143,11 @@
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      DTN has been around since the early 90s when Vint Cerf stated working on the InterPlaNet. It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc. However, security is a second-tier concern if it's considered at all. Also, for the most part, DTN has been an academic exercise, limited to university research teams with grant funding from NASA or ESA. It's never been implemented the same way twice, and the closest we've come to having a standard implementation of it -- in the form of NASA's proposed Mars Telecommunications Orbiter -- fell victim to the Appropriations Committee of the United States Congress. 
+	      <p>DTN has been around since the mid 90s when Vint Cerf stated working on the InterPlanetary Internet.</p>
+	      <p>It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc.</p>
+	      <p>Most of the funding/research comes from ESA + NASA (delay-tolerant) and DARPA (disruption-tolerant)</p>
+	      <p>However, security is a second-tier concern if it's considered at all.</p>
+	      <p>All implementations to date have been largely academic; the closest thing to standard (MTO) ran into Congress and died a horrible fiery death</p>
 	    </aside>
 	  </section>
 	</section>
@@ -155,7 +159,7 @@
 	      <ul>
 	      <li>DTN is the closest existing concept to what we want to do.</li>
 	      <li>However, it's never been implemented the same way twice</li>
-	      <li>Binary protocol, which makes it hard to parse</li>
+	      <li>All implementations are binary protocols, which make them hard to parse</li>
 	      <li>Security is an afterthought at best</li>
 	      <li>So we built our own.</li>
 	      </ul>
@@ -173,11 +177,11 @@
 	      <h3>Grant</h3>
 	      <p>There are a lot of problems with putting together a networking protocol</p> 
 	      <ul>
-	      <li>stuff shows up in the wrong order, stuff shows up mangled</li>
-	      <li>stuff... doesn't show up, stuff shows up twice. </li>
-	      <li>Changes to the same information need to be incorporated back into the whole</li>
-	      <li>Same problems occur in distributed software teams</li>
-	      <li>Git solves the problem. Beautifully.</li>
+		<li>stuff shows up in the wrong order, stuff shows up mangled</li>
+		<li>stuff... doesn't show up, stuff shows up twice. </li>
+		<li>Changes to the same information need to be incorporated back into the whole</li>
+		<li>Same problems occur in distributed software teams</li>
+		<li>Git solves the problem. Beautifully.</li>
 	      </ul>
 	      <p>
 	      Pretty nifty, right? However, you're probably thinking "Don't you need a network connection for Git?" 
@@ -262,15 +266,14 @@
 	      <li>8 double keypairs are created</li>
 	      <li>8 bundles are created, 1 for each branch</li>
 	    </ul>
-	    
 	    <aside class="notes">
-	    <h3>Grant</h3>
-	    <ul>
-	      <li>Provisioning an endrun cell works like this.</li>
-	      <li>the source repo is created because we need a common starting point</li>
-	      <li>When provisioning is complete, we destroy this repo</li>
-	      <li>Double keypairs are encryption keys and signing keys</li>
-	    </ul>
+	      <h3>Grant</h3>
+	      <ul>
+		<li>Provisioning an endrun cell works like this.</li>
+		<li>the source repo is created because we need a common starting point</li>
+		<li>When provisioning is complete, we destroy this repo</li>
+		<li>Double keypairs are encryption keys and signing keys</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="">
@@ -283,13 +286,12 @@
 	      <li>SQLite databases are set up</li>
 	      <li>Endrun daemon is started</li>
 	    </ul>
-	    
 	    <aside class="notes">
 	    <h3>Grant</h3>
-	    <ul>
-	    <li>Provisioning cells is sort of a round robin model</li>
-	    <li>If I have N nodes, each node gets N-1 bundles and N-1 public keys</li>
-	    </ul>
+	      <ul>
+		<li>Provisioning cells is sort of a round robin model</li>
+		<li>If I have N nodes, each node gets N-1 bundles and N-1 public keys</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="">
@@ -342,13 +344,13 @@
 	      <h3>Grant</h3>
 	      <p>Multiple ways to pass notes: one copy to one person at a time(forwarding-based routing), or multiple copies to everyone (replication-based or epidemic routing)</p>
 	      <ul>
-	      <li>One copy might not get there</li>
-	      <li>Multiple copies to everyone clogs up the network</li>
+		<li>One copy might not get there</li>
+		<li>Multiple copies to everyone clogs up the network</li>
 	      </ul>
 	      <p>Best approach is spray and wait</p>
 	      <ul>
-	      <li>Developed at university of southern california</li>
-	      <li>Combines the epidemic routing benefits with a limit on copies to prevent congestion</li>
+		<li>Developed at university of southern california</li>
+		<li>Combines the epidemic routing benefits with a limit on copies to prevent congestion</li>
 	      </ul>
 	    </aside>
 	  </section>
@@ -402,6 +404,10 @@
 	<section><!--transport section-->
 	  <section>
 	  <h2>Transport</h2>
+	  <aside class="notes">
+	    <h3>Grant</h3>
+	    <p>Now we'll talk about transport: first, some of the particulars, then the methods.</p>
+	  </aside>
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_chain.jpg">
 	    <h3>Chain of Custody</h3>
@@ -409,32 +415,43 @@
 	    <ul>
 	      <li>Nodes can be compromised without immediate knowledge</li>
 	      <li>Bandwidth can be wasted trying to contact nodes that have moved or are no longer available</li>
+	      <li>I can't route data to people I don't know</li>
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <p>Chain of custody solves these issues without requiring global knowledge</p>
 	      <p>We set up chain of custody in 3 parts: a record on the payload itself, a receipt table, and a map table</p>
+	      <p>The Chain of custody on the node is just an array of receipts.</p>
+	      <p>Each receipt is recipient node ID, timestamp of receipt, and hash of the payload at that time.</p>
+	      <p>Everytime the payload is passed, a receipt is appended to the array.</p>
 	    </aside>
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_receipt.jpg">
 	    <h3>Receipt Table</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Add notes here.</p>
+	      <p>Receipt table lives on the node's SQLite DB</p>
+	      <p>Same receipt, but only for that node</p>
 	    </aside>
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_map.jpg">
 	    <h3>Map Table</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Add notes here.</p>
+	      <p>Map table is also in SQLite DB</p>
+	      <p>Every time one node encounters another (by receiving data from it) a record is made in the table.</p>
+	      <p>Anytime we prepare to hand off data, we check this table first; if we haven't "seen" a node in a while, we avoid it</p>
 	    </aside>
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_sneakernet.jpg">
 	    <h3>Sneakernet</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Add notes here.</p>
+	      <p>Benefits of USB drives: small, high-capacity, cheap, ubiquitous.</p>
+	      <p>USB is available on pretty much every computer made in the last decade.</p>
+	      <p>Which means Endrun can be run on any hardware that will still boot.</p>
+	      <p>Manual sneakernet: SSH in, run shell command</p>
+	      <p>Automatic sneakernet: disk automounts, Endrun daemon reads file, data is moved, disk is unmounted</p>
 	    </aside>
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_radio.jpg">
@@ -455,7 +472,8 @@
 	    <h3>Other Radio?</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Add notes here.</p>
+	      <p>Endrun daemon is set to watch serial; PySerial is dead simple to use (named pipe)</p>
+	      <p>With a little bit of hacking, we can support any radio you can connect via serial or USB</p>
 	    </aside>
 	  </section>
 	</section>
@@ -465,7 +483,11 @@
 	  <p>Route all the things!</p>
 	  <aside class="notes">
 	    <h3>Grant</h3>
-	    <p>Add notes here.</p>
+	    <ul>
+	      <li>A limitation of the original endrun spec is that it did not support inter-cell communication.</li>
+	      <li>Endrun's utility was self-limiting</li>
+	      <li>Chain of custody lets us move data from one cell to another, thus solving the intermediate routing problem.</li>
+	    </ul>
 	  </aside>
 	  </section>
 	</section>  
@@ -530,7 +552,8 @@
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Add notes here.</p>
+	      <p>Chain of custody gives you everything you need for an audit trail</p>
+	      <p>You'd have to do it by hand ATM. Future work would be to develop something resembling logging and/or forensics tools.</p>
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
 	    </aside>
@@ -546,7 +569,12 @@
 	    <h3>Ultra-Large-Scale Surveillance</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Add notes here.</p>
+	      <ul>
+	      <li>Surveillance can be useful (for solving crimes). It can also be creepy and oppressive (big brother is watching.) </li>
+	      <li>The Ring of Steel in London is ubiquitous surveillance, but is incredibly complex due to the need for centralized CnC</li>
+	      <li>Endrun + camera could let you capture surveillance footage in hard-to-reach places, then pick it up periodically</li>
+	      <li>Adequate for law enforcement, where a delay of hours makes no difference if you just want to ID someone</li>
+	      </ul>
 	    </aside>
 	  </section>
 	</section>
