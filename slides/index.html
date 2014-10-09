@@ -132,9 +132,13 @@
 	      <ul>
 		<li>Back in April, Anonymous announced Airchat, a system for secure internet-free communication using amateur radio.</li>
 		<li>Using encryption over amateur radio is illegal in the US according to FCC rules, part 97</li>
-		<li>Anonymous doesn't care; said "fuck you,NSA"</li>
-		<li>However, it's an online protocol (continuous communication)</li>
-		<li>Handheld ham radios usually broadcast at 5W; this is more than enough to find with ADF and perform "connection reset by missle</li>
+		<li>Anonymous doesn't care; said "fuck you,NSA" (shrug)</li>
+		<li>However, opsec problem: it's an online protocol (continuous communication)</li>
+		<li>Who knows what trangulation is? Who knows what "unidirectional" means?</li>
+		<li>2 or more unidirectional radio antennas + signal strength meters + some math == you can find radio transmitters really well</li>
+		<li>Anyone serving in S. Pacific during WWII will tell you that this can ruin your day</li>
+		<li>It has been reported that Syria may have used missiles that track satellite phones to kill journalists (250mW)</li>
+		<li>Handheld ham radios usually broadcast at 5W; this is more than enough to locate you; you'll end up with "connection reset by missle"</li>
 	      </ul>
 	    </aside>
 	  </section>
@@ -151,11 +155,13 @@
 	    <em>Close, but no appropriations</em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>DTN has been around since the mid 90s when Vint Cerf stated working on the InterPlanetary Internet.</p>
-	      <p>It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc.</p>
-	      <p>Most of the funding/research comes from ESA + NASA (delay-tolerant) and DARPA (disruption-tolerant)</p>
-	      <p>However, security is a second-tier concern if it's considered at all.</p>
-	      <p>All implementations to date have been largely academic; the closest thing to standard (Mars Telecom Orbiter) ran into Congress and died a horrible fiery death</p>
+	      <ul>
+	      <li>DTN has been around since the mid 90s when Vint Cerf stated working on the InterPlanetary Internet.</li>
+	      <li>It solves most of the problems we described above: it'll handle long delays, transient links,  multiple transport paths, etc.</li>
+	      <li>Most of the funding/research comes from ESA + NASA (delay-tolerant) and DARPA (disruption-tolerant)</li>
+	      <li>it's never been implemented the same way twice; the closest thing to standard (Mars Telecom Orbiter) ran into Congress and died a horrible fiery death</p>
+	      <li>All implementations to date are binary protocols, which make them hard to parse (hard to parse == hard to secure)</li>
+	      </ul>
 	    </aside>
 	  </section>
 	</section>
@@ -165,11 +171,12 @@
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
-	      <li>DTN is the closest existing concept to what we want to do.</li>
-	      <li>However, it's never been implemented the same way twice</li>
-	      <li>All implementations are binary protocols, which make them hard to parse</li>
-	      <li>Security is an afterthought at best</li>
-	      <li>So we built our own.</li>
+		<li>DTN is the closest existing concept to what we want to do, but none of the implementations match all of our goals</li>
+		<li>So we built our own. First problem: protocol</li>
+		<li>There are a lot of problems with putting together a networking protocol</li>
+		<li>stuff shows up in the wrong order, stuff shows up mangled</li>
+		<li>stuff... doesn't show up, stuff shows up twice. </li>
+		<li>Changes to the same information need to be incorporated back into the whole</li>
 	      </ul>
 	    </aside>
 	  </section>
@@ -184,10 +191,6 @@
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
-		<li>There are a lot of problems with putting together a networking protocol</li>
-		<li>stuff shows up in the wrong order, stuff shows up mangled</li>
-		<li>stuff... doesn't show up, stuff shows up twice. </li>
-		<li>Changes to the same information need to be incorporated back into the whole</li>
 		<li>Same problems occur in distributed software teams</li>
 		<li>Git solves the problem. Beautifully.</li>
 		<li>Pretty nifty, right? However, you're probably thinking "Don't you need a network connection for Git?" </li>
