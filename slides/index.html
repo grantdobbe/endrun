@@ -120,8 +120,11 @@
 	    <em>The choice of dissidents and activists everywhere.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
-	      You've heard of Tor, of course. Tor provides privacy by encrypting communication at every relay using different keys. 
-	      However, exit nodes are the weakpoint, and an adversary with sufficient resources could control the majority of end nodes. 
+	      <p>You've heard of Tor, of course. Tor provides privacy by encrypting communication at every relay using different keys.</p>
+
+	      <p>Here's the issue: the original Tor paper stated that any adversary who could observe either the entry and exit nodes, or who can control a simple majority of all Tor nodes, can compromise the privacy guarantees. Just using Amazon EC2, it would only take about US$50K/month to double the amount of Tor nodes (thus controlling 50%), so that's a realistic threat from *any* large organization.</p>
+
+	      <p>With respect to entry/exit monitoring, a Harvard undergraduate who wanted to skip a business ethics final found this out the great way.</p>
 	    </aside>
 	    </section>
 	  <section data-state="previous-work" data-background="photos/previous_airchat.jpg">
@@ -147,7 +150,7 @@
 	    <em>Neighborhood mesh networks for the Zombie apocalypse</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
-	      Commotion Wireless creates ad-hoc mesh networks using regular 802.11a/b/g/n hardware. Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
+	      Commotion Wireless creates community mesh networks using regular 802.11a/b/g/n routers. Byzantium uses consumer laptops, and provides services Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
 	    </aside>
 	  </section>
 	  <section data-state="previous-work" data-background="photos/previous_nasa.jpg">
