@@ -28,8 +28,9 @@ try:
   config = ConfigParser.ConfigParser()
   config.read(os.path.dirname(os.path.realpath(__file__)) + '/settings.conf')
   assert(config.get('global', 'nodename'))
-except:
+except ConfigParser.NoSectionError:
   print "Your config file does not appear to be valid. Please verify that settings.conf exists and follows the syntax of settings.conf.sample"
+  
 
 '''
 -----------------
@@ -50,7 +51,7 @@ class Payload:
   # empty by default
   payload = ''
   # custodychain - a json array containing the complete chain of custody for an endrun payload
-  custodychain = '[]'
+  #custodychain = []
   
   def __init__(self):
     self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=int(config.get('global', 'ttl')))
@@ -199,14 +200,14 @@ class Payload:
     # generate a SHA256 hash of the pubkey
     key_hash = hashlib.sha256(recipientPubKey)
     # format a dictionary consisting of the datetime, the recipient's pubkey, and the hash
-    json_receipt = { 'node_id': key_hash.hexdigest(), 'timestamp': timestamp, 'fingerprint': payload_hash.hex_digest(),  }
+    json_receipt = { 'node_id': key_hash.hexdigest(), 'timestamp': timestamp, 'fingerprint': payload_hash.hex_digest()  }
     # return the json array to whomever has requested it
     return json.dumps(json_receipt)
   
   def record_receipt(self, receiptJson):
     tempchain = json.loads(self.custodychain)
-    tempchain.append(json.loads(receiptJson)
-    self.custodychain = json.dumps(tempchain)
+    tempchain.append(json.loads(receiptJson))
+    self.custodychain = tempchain
 
 '''
 ---------------
@@ -423,3 +424,14 @@ def chainRecord(payload):
 def chainFlush():
   # figure out how to flush the chain of custody here
   pass
+
+#logging functions
+
+def initReceiptTable():
+  pass
+  
+def initMapTable():
+  pass
+  
+
+
