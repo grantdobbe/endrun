@@ -44,7 +44,7 @@
     <h2>The Dirty Hippie and the Lawyer</h2>
     <aside class="notes">
       <h3>Brendan</h3>
-      <p>Grant here spent two years in the US Peace Corps, teaching computer literacy in Ghana. I'm a lawyer, with a double concentration in criminal and public international law---as in, treaties and war crimes. Our weird backgrounds bring us to this conclusion:</p>
+      <p>Grant here spent two years in the US Peace Corps, teaching computer literacy at a high school in Ghana. I'm a lawyer, with a double concentration in criminal and public international law---as in, treaties and war crimes. Our weird backgrounds bring us to this conclusion:</p>
     </aside>
   </section>
   <section class="category">
@@ -52,14 +52,23 @@
     <p>- John Gilmore, Electronic Frontier Foundation</p>
     <aside class="notes">
       <h3>Brendan</h3>
-      <p>This is the old and busted, tired, and generally overused sentiment.</p>
+      <p>This is the old and busted, tired, and generally overused sentiment. Not that there's anything wrong with John Gilmore's sentiment; it just doesn't work anymore. Unfortunately.</p>
     </aside>
   </section>
   <section class="category">
-    <h2>The Hacker interprets the NSA as damage, and routes without it.</h2>
+    <h2>The Hacker interprets the NSA as damage, and routes without it. XXX Cube</h2>
+    <p>- Us</p>
     <aside class="notes">
       <h3>Brendan</h3>
       <p>This is what's new. All new systems should be designed to route around harasser nation-states for the betterment of all of humanity. We present Endrun as a first model.</p>
+    </aside>
+  </section>
+  <section class="category">
+    <h2>Caveat Revolucionaire</h2>
+    <em>If you're gonna start a war, we'd recommend using double-ROT26 for extra cryptography</em>
+    <aside class="notes">
+      <h3>Brendan</h3>
+      <p>We explicitly do not claim that Endrun will keep you safe, will keep you from getting arrested, or is ready for use in any life-critical situations. Endrun is our attempt to set out a different model for resistance communications, not a complete system.</p>
     </aside>
   </section>
 	<section><!--takeaways section-->
@@ -151,7 +160,8 @@
 	    </section>
 	  <section data-state="previous-work" data-background="photos/previous_airchat.jpg">
 	    <h3>AirChat, by Anonymous</h3>
-	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
+	    <em><p>Internet-free, end-to-end encrypted text and low-bandwidth voice communication.</p>
+        <p>By Anonymous: the people who brought you Sabu.</p></em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
@@ -250,7 +260,7 @@
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_nacl.jpg">
 	    <h3>NaCl</h3>
-	    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
+	    <em>Daniel J. Bernstein, University of Illinois - Chicago</em>
 	    <ul>
 	      <li>Bleeding-edge elliptical-curve cryptography</p></li>
 	      <li>Fast and efficient</li>
@@ -264,12 +274,12 @@
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_libsodium.jpg">
 	    <h3>LibSodium</h3>
+      <em><p>NaCl, as fixed by OpenDNS.
 	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
 	    <ul>
-	      <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
+	      <li>Has bindings in a number of different languages (Python, Ruby, PHP, even Haskell!)</li>
 	      <li>Much easier to work with</li>
-	    </ul>
-	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
+	    </ul></em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Luckily, this problem has *also* been solved for us. The OpenDNS people wanted to use Salt, and didn't want to sentence their devops team to compiling salt on every server architecture variant they have, so they developed libsodium. Libsodium is a platform- and language-independent wrapper around salt. It has good performance compared to the natively-compiled C binaries, has bindings for most of today's common development languages, and will run on pretty much anything with a PRNG.</p>
@@ -416,6 +426,7 @@
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_gollum.jpg">
 	    <h3>Gollum</h3>
+      <em>Wiki without Wikipedia's editors.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Developed by Github (this code runs Github wikis)</p>
@@ -424,6 +435,7 @@
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_gpg.jpg">
 	    <h3>Gollum + GPG</h3>
+      <em>We've got user friendly, so let's add GPG. That will help!</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -431,6 +443,7 @@
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_minilock.jpg">
 	    <h3>Gollum + Minilock</h3>
+      <em>Nadim's right: everything is better with cats.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -492,6 +505,7 @@
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_radio.jpg">
 	    <h3>XBee</h3>
+      <em>Bees?</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -499,6 +513,7 @@
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_sneakernetplus.jpg">
 	    <h3>Sneakernet+</h3>
+      <em>Or as 4chan calls it, the Sneakerning.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -585,11 +600,13 @@
 	  <section data-state="future-work" data-background="photos/future_bluetooth.jpg">
 	    <h3>Addtions to Endrun</h3>
 	    <ul>
+        <li>Fingerprint Rotation</li>
 	      <li>Auditing</li>
 	      <li>Bluetooth Beaconing</li>
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
+        <p>Rotating fingerprints in some time period allows nodes to prevent long-term data leakage from identifying the nodes on capture. It's just a good additional precaution, and it's possible, e.g., in GPG.</p>
 	      <p>Chain of custody gives you everything you need for an audit trail</p>
 	      <p>You'd have to do it by hand ATM. Future work would be to develop something resembling logging and/or forensics tools.</p>
 	      <h3>Brendan</h3>
@@ -598,6 +615,7 @@
 	  </section>
 	  <section data-state="future-work" data-background="photos/future_money.jpg">
 	    <h3>Long-Distance Debt Systems</h3>
+      <em>Now you can owe money to hackerspaces!</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -605,6 +623,7 @@
 	  </section>
 	  <section data-state="future-work" data-background="photos/future_surveillance.jpg">
 	    <h3>Ultra-Large-Scale Surveillance</h3>
+      <em>Evil really pays the bills.</em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
@@ -619,8 +638,8 @@
 	<section>
 	  <h1>The End</h1>
 	  <h2>Thanks</h2>
-	  <p>Particularly to Caroline, for letting Grant come</p>
-	  <p>Questions? Meet us in the bar.</p>
+	  <p>To Caroline, for letting Grant come</p>
+	  <p>Questions? Meet us afterward.</p>
 	</section>
 	<section>
 	  <h2>Photo Credits</h2>
