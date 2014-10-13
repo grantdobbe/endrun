@@ -423,19 +423,47 @@
 	      </ul>
 	    </aside>
 	  </section>
-	  <section data-state="routing">
-<!--
-	    <h3>Spray and Wait</h3>
--->
-	    <img src="./Diagram2Trans.png" />
+	  <section class="category" data-state="routing" data-background="photos/spray0.png">
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <p>Basic idea</p>
 	      <ul>
 		<li>Set an upper bound, in this case, 8.</li>
+	      </ul>
+	    </aside>
+	  </section>
+	  <section class="category" data-state="routing" data-background="photos/spray1.png">
+	    <aside class="notes">
+	      <h3>Grant</h3>
+	      <p>Basic idea</p>
+	      <ul>
 		<li>First round, the payload is sent to 8 nodes (or every node we can find).</li>
+	      </ul>
+	    </aside>
+	  </section>
+	  <section class="category" data-state="routing" data-background="photos/spray2.png">
+	    <aside class="notes">
+	      <h3>Grant</h3>
+	      <p>Basic idea</p>
+	      <ul>
 		<li>Second round, every node with a copy sends it to 4 nodes (half rounded down)</li>
+	      </ul>
+	    </aside>
+	  </section>
+	  <section class="category" data-state="routing" data-background="photos/spray3.png">
+	    <aside class="notes">
+	      <h3>Grant</h3>
+	      <p>Basic idea</p>
+	      <ul>
 		<li>Third round, every node with a copy sends it to 2 nodes (half rounded down)</li>
+	      </ul>
+	    </aside>
+	  </section>
+	  <section class="category" data-state="routing" data-background="photos/spray4.png">
+	    <aside class="notes">
+	      <h3>Grant</h3>
+	      <p>Basic idea</p>
+	      <ul>
 		<li>Fourth round, nodes should only have one copy; they hold onto it and wait for direct contact (or TTL death)</li>
 	      </ul>
 	    </aside>
@@ -701,6 +729,7 @@
 	    <li>https://www.flickr.com/photos/daniandgeorge/14229225524</li>
 	    <li>https://www.flickr.com/photos/jenniferbatty/6437655477</li>
 	    <li>https://www.flickr.com/photos/dalecalder2003/7780793364</li>
+      <li>https://firstlook.org/theintercept/2014/02/10/new-photos-of-nsa-and-others/</li>
 	  </ul>
 	</section>
       </div><!--/.slides-->
@@ -732,9 +761,9 @@
     { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
     { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
     { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-    { src: 'socket.io/socket.io.js', async: true },
-    { src: 'plugin/notes-server/client.js', async: true },
-    { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+    //{ src: 'socket.io/socket.io.js', async: true },
+    //{ src: 'plugin/notes-server/client.js', async: true },
+    //{ src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
 
     ]
     });

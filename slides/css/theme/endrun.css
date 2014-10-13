@@ -209,11 +209,8 @@ ul.photo-credits {
 .reveal .slide-number {
   color: #13daec; }
 
-  h3 {
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    hyphens: none;
-
-    word-break: break-all;
-    word-break: break-word;
-  }
+.reveal h3 {
+  /*The hyphen is evil and must be punished.*/
+  -webkit-hyphens: none;
+  word-break: keep-all;
+}
