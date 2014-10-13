@@ -56,17 +56,14 @@ body {
   background: #ff5e99;
   text-shadow: none; }
 
-section[data-background] {
+.reveal section[data-background] {
   background-color: rgba(0,0,0,0.75);
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
-  padding: 10rem;
+  padding: 1rem !important;
 }
 
-.reveal section[data-background] ul {
-  padding: 0 1em;
-}
 
 ul.photo-credits {
   font-size:1rem;
