@@ -33,8 +33,8 @@
       <div class="slides">
 	<section><!--title slide-->
 	  <h1>Endrun</h1>
-	  <h2>Secure Digital Communications For Our Modern Dystopia</h2>
-	  <h3>By <a href="mailto:grant@dobbe.us">Grant Dobbe</a> and <a href="mailto:ussjoin@ussjoin.com">Brendan O'Connor</a></h3>
+	  <h3>Secure Digital Communications For Our Modern Dystopia</h2>
+	  <p>Grant Dobbe <a href="mailto:grant@dobbe.us">grant@dobbe.us</a></p><p>Brendan O'Connor <a href="mailto:ussjoin@ussjoin.com">ussjoin@ussjoin.com</a></p>
 	  <aside class="notes">
 	    <h3>Grant</h3>
 	    Hi! Welcome to our talk.
@@ -44,27 +44,61 @@
     <h2>The Dirty Hippie and the Lawyer</h2>
     <aside class="notes">
       <h3>Brendan</h3>
-      <p>Grant here spent two years in the US Peace Corps, teaching computer literacy in Ghana. I'm a lawyer, with a double concentration in criminal and public international law---as in, treaties and war crimes. Our weird backgrounds bring us to this conclusion:</p>
+      <p>Grant here spent two years in the US Peace Corps, teaching computer literacy at a high school in Ghana. I'm a lawyer, with a double concentration in criminal and public international law---as in, treaties and war crimes. Our weird backgrounds bring us to this conclusion:</p>
     </aside>
   </section>
   <section class="category">
-    <h2>The Internet interprets censorship as damage and routes around it.</h2>
+    <h3>The Internet interprets censorship as damage and routes around it.</h3>
     <p>- John Gilmore, Electronic Frontier Foundation</p>
     <aside class="notes">
       <h3>Brendan</h3>
-      <p>This is the old and busted, tired, and generally overused sentiment.</p>
+      <p>This is the old and busted, tired, and generally overused sentiment. Not that there's anything wrong with John Gilmore's sentiment; it just doesn't work anymore. Unfortunately.</p>
     </aside>
   </section>
-  <section class="category">
-    <h2>The Hacker interprets the NSA as damage, and routes without it.</h2>
+  <section class="category" data-background="photos/intro_nsa.jpg">
+    <h3>The Hacker interprets the NSA as damage, and routes without it.</h3>
+    <p>- Us</p>
     <aside class="notes">
       <h3>Brendan</h3>
       <p>This is what's new. All new systems should be designed to route around harasser nation-states for the betterment of all of humanity. We present Endrun as a first model.</p>
     </aside>
   </section>
+  <section> <!--intro section-->
+    <section data-state="intro" data-background="photos/XXX.xxx">
+      <h2>Endrun Is</h2>
+      <ul>
+        <li>Designed to provide censorship-resistant communications to <em>extremely</em> marginalized groups</li>
+        <li>Intended to work within a larger OPSEC scheme</li>
+      </ul>
+      <aside class="notes">
+        <h3>Brendan</h3>
+        <p></p>
+      </aside>
+    </section>
+    <section data-state="intro" data-background="photos/XXX.xxx">
+      <h2>Endrun Is Not</h2>
+      <ul>
+        <li>A complete solution in itself</li>
+        <li>Sufficient to replace trusted couriers or compartmentation</li>
+        <li>Bees?</li>
+      </ul>
+      <aside class="notes">
+        <h3>Brendan</h3>
+        <p></p>
+      </aside>
+    </section>
+    <section data-state="intro" data-background="photos/XXX.xxx">
+      <h2>Caveat Revolucionaire</h2>
+      <em>If you're gonna start a war, we'd recommend using double-ROT26 for extra cryptography</em>
+      <aside class="notes">
+        <h3>Brendan</h3>
+        <p>We explicitly do not claim that Endrun will keep you safe, will keep you from getting arrested, or is ready for use in any life-critical situations. Endrun is our attempt to set out a different model for resistance communications, not a complete system.</p>
+      </aside>
+    </section>
+  </section>
 	<section><!--takeaways section-->
 	  <section class="category">
-	    <h2>The Takeaways</h2>
+	    <h2>The Big Ideas</h2>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>We've made a system called Endrun for securely communicating without the internet. Here's what we want you to take away from our presentation. </p>
@@ -151,7 +185,8 @@
 	    </section>
 	  <section data-state="previous-work" data-background="photos/previous_airchat.jpg">
 	    <h3>AirChat, by Anonymous</h3>
-	    <em>Internet-free, end-to-end encrypted text and low-bandwidth voice communication</em>
+	    <em><p>Internet-free, end-to-end encrypted text and low-bandwidth voice communication.</p>
+        <p>By Anonymous: the people who brought you Sabu.</p></em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
@@ -172,7 +207,7 @@
 	    <em>Neighborhood mesh networks for the Zombie apocalypse</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
-	      Commotion Wireless creates community mesh networks using regular 802.11a/b/g/n routers. Byzantium uses consumer laptops, and provides services Pretty cool. In a "zombie apocalypse", this would work pretty well. However, wifi is semi-permanent wireless radio. Wifi has the same problems we described above.
+	      Commotion Wireless creates community mesh networks using special firmware for Linksys WiFi routers; it's designed to share an Internet connection in an underserved area. Byzantium uses consumer laptops, and is designed to provide simple user services (chat, wiki, etc.) with no Internet at all---they bill themselves as a mesh network for a zombie apocalypse. We assume, and have citations in our whitepaper on this point, that zombies don't know how to use automatic direction finding missiles. For non-zombie situations, however, we think this is problematic as discussed with AirChat.
 	    </aside>
 	  </section>
 	  <section data-state="previous-work" data-background="photos/previous_nasa.jpg">
@@ -250,7 +285,7 @@
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_nacl.jpg">
 	    <h3>NaCl</h3>
-	    <p>NaCl is a cryptography suite that was developed by Daniel J. Bernstein of the University of Chicago.<p>
+	    <em>Daniel J. Bernstein, University of Illinois - Chicago</em>
 	    <ul>
 	      <li>Bleeding-edge elliptical-curve cryptography</p></li>
 	      <li>Fast and efficient</li>
@@ -264,12 +299,12 @@
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_libsodium.jpg">
 	    <h3>LibSodium</h3>
+      <em><p>NaCl, as fixed by OpenDNS.
 	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
 	    <ul>
-	      <li>Has bindings in a number of different languages (Python, Ruby, PHP, etc.)</li>
+	      <li>Has bindings in a number of different languages (Python, Ruby, PHP, even Haskell!)</li>
 	      <li>Much easier to work with</li>
-	    </ul>
-	    <p>Endrun uses LibSodium to sign, encrypt, and sign bundles before they are added to Endrun payloads.</p>
+	    </ul></em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Luckily, this problem has *also* been solved for us. The OpenDNS people wanted to use Salt, and didn't want to sentence their devops team to compiling salt on every server architecture variant they have, so they developed libsodium. Libsodium is a platform- and language-independent wrapper around salt. It has good performance compared to the natively-compiled C binaries, has bindings for most of today's common development languages, and will run on pretty much anything with a PRNG.</p>
@@ -416,6 +451,7 @@
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_gollum.jpg">
 	    <h3>Gollum</h3>
+      <em>Wiki without Wikipedia's editors.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Developed by Github (this code runs Github wikis)</p>
@@ -424,6 +460,7 @@
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_gpg.jpg">
 	    <h3>Gollum + GPG</h3>
+      <em>We've got user friendly, so let's add GPG. That will help!</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -431,6 +468,7 @@
 	  </section>
 	  <section data-state="user-services" data-background="photos/user_minilock.jpg">
 	    <h3>Gollum + Minilock</h3>
+      <em>Nadim's right: everything is better with cats.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -492,6 +530,7 @@
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_radio.jpg">
 	    <h3>XBee</h3>
+      <em>Bees?</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -499,6 +538,7 @@
 	  </section>
 	  <section data-state="transport" data-background="photos/transport_sneakernetplus.jpg">
 	    <h3>Sneakernet+</h3>
+      <em>Or as 4chan calls it, the Sneakerning.</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -585,11 +625,13 @@
 	  <section data-state="future-work" data-background="photos/future_bluetooth.jpg">
 	    <h3>Addtions to Endrun</h3>
 	    <ul>
+        <li>Fingerprint Rotation</li>
 	      <li>Auditing</li>
 	      <li>Bluetooth Beaconing</li>
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
+        <p>Rotating fingerprints in some time period allows nodes to prevent long-term data leakage from identifying the nodes on capture. It's just a good additional precaution, and it's possible, e.g., in GPG.</p>
 	      <p>Chain of custody gives you everything you need for an audit trail</p>
 	      <p>You'd have to do it by hand ATM. Future work would be to develop something resembling logging and/or forensics tools.</p>
 	      <h3>Brendan</h3>
@@ -598,6 +640,7 @@
 	  </section>
 	  <section data-state="future-work" data-background="photos/future_money.jpg">
 	    <h3>Long-Distance Debt Systems</h3>
+      <em>Now you can owe money to hackerspaces!</em>
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
@@ -605,6 +648,7 @@
 	  </section>
 	  <section data-state="future-work" data-background="photos/future_surveillance.jpg">
 	    <h3>Ultra-Large-Scale Surveillance</h3>
+      <em>Evil really pays the bills.</em>
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
@@ -619,8 +663,8 @@
 	<section>
 	  <h1>The End</h1>
 	  <h2>Thanks</h2>
-	  <p>Particularly to Caroline, for letting Grant come</p>
-	  <p>Questions? Meet us in the bar.</p>
+	  <p>To Caroline, for letting Grant come</p>
+	  <p>Questions? Meet us afterward.</p>
 	</section>
 	<section>
 	  <h2>Photo Credits</h2>
