@@ -61,6 +61,11 @@ section[data-background] {
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
+  padding: 10rem;
+}
+
+.reveal section[data-background] ul {
+  padding: 0 1em;
 }
 
 ul.photo-credits {
@@ -99,14 +104,15 @@ ul.photo-credits {
   z-index: 500;
   font-family: "Cooper Hewitt Book", Impact, sans-serif;
   font-size: 1.15em;
-  background-color: rgba(0,0,0,0.65);
+/*
+*/
   padding: .33rem;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
 }
 
-.intro header.corner-header:after { content: "In Very Short"; }
+.intro header.corner-header:after { content: "In Very Short"; background-color: rgba(0,0,0,0.65); }
 .takeaways header.corner-header:after { content: "The Big Ideas"; }
 .previous-work header.corner-header:after { content: "Previous Work"; }
 .endrun-101 header.corner-header:after { content: "Endrun 101"; }
@@ -210,10 +216,7 @@ ul.photo-credits {
   color: #13daec; }
 
 .reveal h3 {
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    hyphens: none;
-
-    word-break: break-all;
-    word-break: break-word;
-  }
+ /*The hyphen is evil and must be punished.*/
+  -webkit-hyphens: none;
+  word-break: keep-all;
+}
