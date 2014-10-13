@@ -38,7 +38,6 @@ body {
   background: -ms-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
   background: radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
   background-color: #2b2b2b; 
-
   }
 
 .reveal {
@@ -107,7 +106,8 @@ ul.photo-credits {
   border-radius: 15px;
 }
 
-.takeaways header.corner-header:after { content: "The Takeaways"; }
+.intro header.corner-header:after { content: "In Very Short"; }
+.takeaways header.corner-header:after { content: "The Big Ideas"; }
 .previous-work header.corner-header:after { content: "Previous Work"; }
 .endrun-101 header.corner-header:after { content: "Endrun 101"; }
 .routing header.corner-header:after { content: "Routing"; }
@@ -208,3 +208,12 @@ ul.photo-credits {
  *********************************************/
 .reveal .slide-number {
   color: #13daec; }
+
+  h3 {
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+
+    word-break: break-all;
+    word-break: break-word;
+  }
