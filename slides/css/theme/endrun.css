@@ -209,7 +209,7 @@ ul.photo-credits {
 .reveal .slide-number {
   color: #13daec; }
 
-  h3 {
+.reveal h3 {
     -webkit-hyphens: none;
     -moz-hyphens: none;
     hyphens: none;

@@ -51,7 +51,9 @@ class Payload:
   # empty by default
   payload = ''
   # custodychain - a json array containing the complete chain of custody for an endrun payload
-  #custodychain = []
+  custodychain = []
+  # copies - upper limit on number of copies that a node should send of this payload
+  copies = 10
   
   def __init__(self):
     self.ttl = datetime.datetime.now() + + datetime.timedelta(hours=int(config.get('global', 'ttl')))
@@ -96,6 +98,10 @@ class Payload:
   #   a decrypted git bundle or False otherwise
   def unwrap(self):
     # don't process the bundle if it's not meant for us
+    # check the key fingerprint against our own
+    # if it doesn't match
+    # return false
+    #TODO: Write this code
     #if self.destination is not config.get('global', 'nodename'):
       #return False;
   #else:
@@ -191,8 +197,8 @@ class Payload:
     # clean up after ourselves (delete the encrypted payload and the tarball)
     os.remove('/tmp/' + bundleName)
     
-  # record a receipt entry
-  def issue_receipt(self, recepientPubKey):
+  # issues a receipt entry
+  def issueReceipt(self, recepientPubKey):
     # get the current datetime
     timestamp = datetime.datetime.now()
     # perform a SHA256 hash of the encrypted payload
@@ -204,11 +210,22 @@ class Payload:
     # return the json array to whomever has requested it
     return json.dumps(json_receipt)
   
-  def record_receipt(self, receiptJson):
+  # record a receipt on the chain of custody
+  # arguments
+  #   receiptJson - a JSON object containing receipt data
+  def recordChainReceipt(self, receiptJson):
     tempchain = json.loads(self.custodychain)
     tempchain.append(json.loads(receiptJson))
     self.custodychain = tempchain
-
+    
+  # a function for queueing a node for delivery
+  # arguments
+  #   destination: target destination
+  def queue(self, destination):
+    #TODO: figure out what this needs to do
+    pass
+    
+    
 '''
 ---------------
 Helper Functions
@@ -391,6 +408,7 @@ def receive(payload):
     try:
       raw_payload = pickle.load(payloadFile) 
       raw_payload.unpack()
+      #TODO: catch payloads that don't belong to us and shunt them into the queue
     except:
       print "The payload is invalid. Please check the file's validity."
       return False
@@ -421,17 +439,23 @@ def chainRecord(payload):
       return False
   pass
 
-def chainFlush():
-  # figure out how to flush the chain of custody here
-  pass
-
 #logging functions
-
+#TODO: all of this
 def initReceiptTable():
   pass
   
 def initMapTable():
   pass
   
+def mapRecord():
+  pass
+  
+def receiptRecord():
+  pass
 
+def receiptFlush():
+  pass
 
+def mapFlush():
+  pass
+  
