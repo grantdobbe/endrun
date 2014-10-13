@@ -104,15 +104,9 @@ ul.photo-credits {
   z-index: 500;
   font-family: "Cooper Hewitt Book", Impact, sans-serif;
   font-size: 1.15em;
-/*
-*/
-  padding: .33rem;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border-radius: 15px;
 }
 
-.intro header.corner-header:after { content: "In Very Short"; background-color: rgba(0,0,0,0.65); }
+.intro header.corner-header:after { content: "In Very Short";  }
 .takeaways header.corner-header:after { content: "The Big Ideas"; }
 .previous-work header.corner-header:after { content: "Previous Work"; }
 .endrun-101 header.corner-header:after { content: "Endrun 101"; }
@@ -123,6 +117,22 @@ ul.photo-credits {
 .complex-data header.corner-header:after { content: "Complex Data"; }
 .demos header.corner-header:after { content: "Demonstrations"; }
 .future-work header.corner-header:after { content: "Future Work"; }
+
+.intro header.corner-header:after, .takeaways header.corner-header:after, 
+.previous-work header.corner-header:after, .endrun-101 header.corner-header:after, 
+.routing header.corner-header:after, .user-services header.corner-header:after,
+.transport header.corner-header:after, .int-routing header.corner-header:after,
+.complex-data header.corner-header:after, .demos header.corner-header:after,
+.future-work header.corner-header:after {
+  background-color: rgba(0,0,0,0.65);
+  padding: .33rem;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+
+
 
 /*********************************************
  * LINKS
