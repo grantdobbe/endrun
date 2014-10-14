@@ -442,31 +442,39 @@ def chainRecord(payload):
 
 #logging functions
 #TODO: all of this
-def initDB():
-  conn = sqlite3.connect(':memory:')
-  c = conn.cursor()
-  c.execute('''CREATE TABLE receipts (date text)''')
+
+def dbConnect(dbName):
+  conn = sqlite3.connect(dbName)
+  return conn.cursor()
+
+# initialize our DBs
+def initDB( c = dbConnect(':memory:') ):
+  c.execute('''CREATE TABLE receipts (date text, nodeID text, payloadHash text)''')
   c.execute('''CREATE TABLE map (date text, nodeID text)''')
-  
+
 def mapRecord(mapdata):
-  conn = sqlite3.connect(':memory:')
-  c = conn.cursor()
+  c = dbConnect(':memory:')
+  c.   
   
   pass
   
 def receiptRecord(receipt):
   # validate inputs
-  
+  inputs = (receipt[0],)
   # connect to db
   conn = sqlite3.connect(':memory:')
   c = conn.cursor()
   
-  # insert data into db
+  # insert data into record db
+  
+  
+  
   pass
 
+# clear out the DBs
 def flushDB():
-  
   conn = sqlite3.connect(':memory:')
   c = conn.cursor()
   # drop and recreate the tables
+  
   pass

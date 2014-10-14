@@ -138,7 +138,8 @@
     \item \textbf{\textsc{Destination}} - The identifier for the destination node; by default, the node's public key fingerprint.
     \item \textbf{\textsc{TTL}} - The message time to live, an integer number representing the epoch time at which the bundle was created. Nodes destroy messages after a configurable amount of time has passed since their creation (by default, 24 hours).
     \item \textbf{\textsc{Contents}} - The signed, then encrypted, then signed message bundle.
-    \item \textbf{\textsc{Chain of Custody}} - A JSON array detailing the transmission path of the payload. See Section~\ref{subsec:chainofcustody} for more details.
+    \item \textbf{\textsc{Chain of Custody}} - An array detailing the transmission path of the payload. See Section~\ref{subsec:chainofcustody} for more details.
+    \item \textbf{\textsc{Copies}} - The number of copies of a message that should be transmitted by nodes.
 
     \end{enumerate}
     
@@ -167,7 +168,7 @@
   
   Chain of custody in Endrun consists of three parts: a JSON array on the payload, a ``receipt'' table on the node's SQLite database, and a SQLite ``map'' table on the SQLite database. The JSON array consists of objects containing a receiving node's identifier, a fingerprint of that node's public signing key, a signed SHA2 hash of the payload when it was handed off from one node to another, and a timestamp in epoch time for when it was handed off to the next node. Every time a node changes custody, a new object is appended to the array.
   
-  The ``receipt'' table records data similar to the objects in the chain of custody array, but only for the recipient node. The table contains columns for entry ID, payload fingerprint, timestamp of when the payload was sent, and the identifier of the node to which the payload was sent. Entries expire after a period of $1\frac{1}{2}$ times the TTL value in the node's configuration file. The table is also stored in temporary storage and recreated upon each reboot of the node.
+  The ``receipt'' table records data similar to the objects in the chain of custody array, but only for the recipient node. The table contains columns for entry ID, payload fingerprint, and timestamp of when the payload was sent. Entries expire after a period of $1\frac{1}{2}$ times the TTL value in the node's configuration file. The table is also stored in temporary storage and recreated upon each reboot of the node.
   
   The ``map'' table is used to record a list of nodes ``around'' the current node; in other words, nodes we have been able to contact recently, regardless of cell affiliation. This is important for intermediate routing, which we will cover in Section~\ref{subsec:introuting}. This table has three columns: one for entry ID, one for node identifier, and one for timestamp.  Whenever a new node is encountered\footnote{This usually occurs when a payload is received from an Endrun node.}, an entry is added to the table; the timestamp for an entry is updated with every subsequent encounter. Entries expire after a period of $1\frac{1}{2}$ times the TTL value in the node's configuration file; this ensures that we do not attempt to contact once-familiar nodes ad infinitum.
   

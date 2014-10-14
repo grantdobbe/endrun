@@ -337,16 +337,13 @@
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_cell.jpg">
 	    <h3>Provisioning the cell</h3>
-	    <p>When creating an Endrun cell of 8 nodes:</p>
-	    <ul>
-	      <li>A "source" repo is created with 8 branches</li>
-	      <li>8 double keypairs are created</li>
-	      <li>8 bundles are created, 1 for each branch</li>
-	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
 		<li>Provisioning an endrun cell works like this.</li>
+		<li>A "source" repo is created with 8 branches</li>
+		<li>8 double keypairs are created</li>
+		<li>8 bundles are created, 1 for each branch</li>
 		<li>the source repo is created because we need a common starting point</li>
 		<li>When provisioning is complete, we destroy this repo</li>
 		<li>Double keypairs are encryption keys and signing keys</li>
@@ -355,17 +352,14 @@
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_node.jpg">
 	    <h3>Provisioning the nodes</h3>
-	    <p>Then, on each node:</p>
-	    <ul>
-	      <li>A repo is created with 7 remotes (everyone except itself) and 8 branches</li>
-	      <li>The public part of 7 double keypairs are copied over</li>
-	      <li>Node gets its own full double keypair</li>
-	      <li>SQLite databases are set up</li>
-	      <li>Endrun daemon is started</li>
-	    </ul>
 	    <aside class="notes">
 	    <h3>Grant</h3>
 	      <ul>
+		<li>A repo is created with 7 remotes (everyone except itself) and 8 branches</li>
+		<li>The public part of 7 double keypairs are copied over</li>
+		<li>Node gets its own full double keypair</li>
+		<li>SQLite database are set up in memory</li>
+		<li>Endrun daemon is started</li>
 		<li>Provisioning cells is sort of a round robin model</li>
 		<li>If I have N nodes, each node gets N-1 bundles and N-1 public keys</li>
 	      </ul>
@@ -447,7 +441,7 @@
 	      <h3>Grant</h3>
 	      <p>Basic idea</p>
 	      <ul>
-		<li>First round, the payload is sent to 8 nodes (or every node we can find).</li>
+		<li>First round, the origin node sends the payload to 8 nodes (or as close to 8 as possible - every node we can find).</li>
 	      </ul>
 	    </aside>
 	  </section>
@@ -457,7 +451,7 @@
 	      <h3>Grant</h3>
 	      <p>Basic idea</p>
 	      <ul>
-		<li>Second round, every node with a copy sends it to 4 nodes (half rounded down)</li>
+		<li>Second round, every node with a copy looks at the copies field on the payload header, divides the value in half (or copies / 2 ^ len(chainofcustody) rounded down) and sends it to 4 nodes (half rounded down)</li>
 	      </ul>
 	    </aside>
 	  </section>
