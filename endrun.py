@@ -6,9 +6,10 @@
 #  Copyright 2013 Grant Dobbe <grant@dobbe.us>
 #  
 
-import datetime, os, pickle, ConfigParser, git, shutil, hashlib, sqlite, json
+import datetime, os, pickle, ConfigParser, git, shutil, hashlib, sqlite3, json
 import warnings
 
+# we suppress this because otherwise it fills the screen with tons of errors about a file in cache
 with warnings.catch_warnings():
     '''Suppress this warning (for now?):
     /usr/local/lib/python2.7/dist-packages/cffi/vengine_cpy.py:166: UserWarning: reimporting '_cffi__xb217b92x9ad92d80' might overwrite older definitions
@@ -441,21 +442,31 @@ def chainRecord(payload):
 
 #logging functions
 #TODO: all of this
-def initReceiptTable():
+def initDB():
+  conn = sqlite3.connect(':memory:')
+  c = conn.cursor()
+  c.execute('''CREATE TABLE receipts (date text)''')
+  c.execute('''CREATE TABLE map (date text, nodeID text)''')
+  
+def mapRecord(mapdata):
+  conn = sqlite3.connect(':memory:')
+  c = conn.cursor()
+  
   pass
   
-def initMapTable():
-  pass
+def receiptRecord(receipt):
+  # validate inputs
   
-def mapRecord():
-  pass
+  # connect to db
+  conn = sqlite3.connect(':memory:')
+  c = conn.cursor()
   
-def receiptRecord():
+  # insert data into db
   pass
 
-def receiptFlush():
-  pass
-
-def mapFlush():
-  pass
+def flushDB():
   
+  conn = sqlite3.connect(':memory:')
+  c = conn.cursor()
+  # drop and recreate the tables
+  pass
