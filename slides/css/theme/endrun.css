@@ -226,3 +226,15 @@ ul.photo-credits {
   -webkit-hyphens: none;
   word-break: keep-all;
 }
+
+/*********************************************
+ * ToC
+ *********************************************/
+
+h2.currentcat {
+  color: yellow;
+}
+
+h2.noncurrentcat {
+  color: gray;
+}
