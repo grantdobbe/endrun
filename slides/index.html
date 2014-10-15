@@ -41,7 +41,7 @@
 	  </aside>
 	</section>
   <section class="category" data-background="photos/intro_hippie.jpg">
-    <h2>The Dirty Hippie and the Lawyer</h2>
+    <h2>The Activist and the Lawyer</h2>
     <aside class="notes">
       <h3>Brendan</h3>
       <p>Grant here spent two years in the US Peace Corps, teaching computer literacy at a high school in Ghana. I'm a lawyer, with a double concentration in criminal and public international law---as in, treaties and war crimes. Our weird backgrounds bring us to this conclusion:</p>
@@ -56,7 +56,7 @@
     </aside>
   </section>
   <section class="category" data-background="photos/intro_nsa.jpg">
-    <h3>The Hacker interprets the NSA as damage, and routes without it.</h3>
+    <h3>The hacker interprets the NSA as damage, and routes without it.</h3>
     <p>- Us</p>
     <aside class="notes">
       <h3>Brendan</h3>
@@ -310,11 +310,11 @@
 	  <section data-state="endrun-101" data-background="photos/e101_nacl.jpg">
 	    <h3>NaCl</h3>
 	    <em>Daniel J. Bernstein, University of Illinois - Chicago</em>
-	    <ul>
-	      <li>Bleeding-edge elliptical-curve cryptography</p></li>
-	      <li>Fast and efficient</li>
-	      <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
-	    </ul>
+      <!-- <ul>
+        <li>Bleeding-edge elliptical-curve cryptography</p></li>
+        <li>Fast and efficient</li>
+        <li>Unfortunately, not guaranteed to run anywhere but DJB's office</li>
+      </ul> -->
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Git solves our data control problems. However, outside of hashing and the occasional tag or commit signing, it doesn't really do crypto. </p>
@@ -324,11 +324,11 @@
 	  <section data-state="endrun-101" data-background="photos/e101_libsodium.jpg">
 	    <h3>LibSodium</h3>
 	    <em><p>NaCl, as fixed by OpenDNS.</p></em>
-	    <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
-	    <ul>
-	      <li>Has bindings in a number of different languages (Python, Ruby, PHP, even Haskell!)</li>
-	      <li>Much easier to work with</li>
-	    </ul></em>
+      <!-- <p>LibSodium is a wrapper around NaCl developed by the friendly folks at OpenDNS.</p>
+      <ul>
+        <li>Has bindings in a number of different languages (Python, Ruby, PHP, even Haskell!)</li>
+        <li>Much easier to work with</li> 
+	    </ul></em> -->
 	    <aside class="notes">
 	      <h3>Brendan</h3>
 	      <p>Luckily, this problem has *also* been solved for us. The OpenDNS people wanted to use Salt, and didn't want to sentence their devops team to compiling salt on every server architecture variant they have, so they developed libsodium. Libsodium is a platform- and language-independent wrapper around salt. It has good performance compared to the natively-compiled C binaries, has bindings for most of today's common development languages, and will run on pretty much anything with a PRNG.</p>
@@ -585,7 +585,7 @@
 	  </section>
 	  <section>
 	    <h2>Complex Data Pathways</h2>
-	    <p>Using a communications example from Tom Lehrer, University of California - Santa Cruz.</p>
+	    <p>Using a communications example from Tom Lehrer, Emeritus Lecturer in Mathematics, Cowell College, University of California at Santa Cruz.</p>
 	  </section>
 
 	  <section>
@@ -655,7 +655,7 @@
 	  <section data-state="future-work" data-background="photos/future_bluetooth.jpg">
 	    <h3>Addtions to Endrun</h3>
 	    <ul>
-        <li>Fingerprint Rotation</li>
+        <li>Key Rotation / Revocation</li>
 	      <li>Auditing</li>
 	      <li>Bluetooth Beaconing</li>
 	    </ul>
@@ -689,12 +689,6 @@
 	      </ul>
 	    </aside>
 	  </section>
-	</section>
-	<section  data-background="photos/end.jpg">
-	  <h1>The End</h1>
-	  <h2>Thanks</h2>
-	  <p>To Caroline, for letting Grant come</p>
-	  <p>Questions? Meet us afterward.</p>
 	</section>
 	<section>
 	  <h2>Photo Credits</h2>
@@ -739,7 +733,14 @@
       <li>https://www.flickr.com/photos/olivander/68140297</li>
       <li>https://www.flickr.com/photos/103622984@N05/14442449636</li>
       <li>https://www.flickr.com/photos/25080113@N06/8245873172</li>
+      <li>https://www.flickr.com/photos/susanad813/1360017750</li>
 	  </ul>
+	</section>
+	<section  data-background="photos/end.jpg">
+	  <h1>The End</h1>
+	  <h2>Thanks</h2>
+	  <p>To Caroline, for letting Grant come</p>
+	  <p>Questions? Meet us afterward.</p>
 	</section>
       </div><!--/.slides-->
     </div><!--/.reveal-->
