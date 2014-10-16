@@ -214,7 +214,7 @@
 	      <h3>Grant</h3>
 	      <ul>
 		<li>Back in April, Anonymous announced Airchat, a system for secure internet-free communication using amateur radio.</li>
-		<li>Using encryption over amateur radio is illegal in the US according to FCC rules, part 97</li>
+		<li>Using encryption over amateur radio is illegal in the US (and probably everwhere else) according to FCC rules</li>
 		<li>Anonymous doesn't care; said "fuck you,NSA" (shrug)</li>
 		<li>However, opsec problem: it's an online protocol (continuous communication)</li>
 		<li>Who knows what trangulation is? Who knows what "unidirectional" means?</li>
@@ -258,7 +258,7 @@
 	</section>
 	<section><!--Endrun basics section-->
 	  <section>
-	    <h2 class="noncurrentcat">The Big Ideas</h2>
+      <h2 class="noncurrentcat">The Big Ideas</h2>
       <h2 class="noncurrentcat">Previous Work</h2>
       <h2 class="currentcat">Endrun 101</h2>
       <h2 class="noncurrentcat">User Services</h2>
@@ -361,7 +361,11 @@
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>That brings us to payloads. In Endrun, a payload is a nice little serialized package with the encrypted git bundle and its routing data. We have origin and destination, for which we use the salt public key fingerprints. We have an epoc timestamp that is used for determining time to live, our bundle, and then we have our chain of custody data -- more about that in a minute.</p>
+	      <ul><li>In Endrun, a payload is a serialized package with the encrypted git bundle and its routing data.</li> 
+	      <li>We have origin and destination identifiers, which are salt public key fingerprints.</li>
+	      <li>We have an epoc timestamp that is used for determining time to live,</li>
+	      <li>our bundle</li>
+	      <li>Chain of custody data, and copies field</li></ul>
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_cell.jpg">
@@ -369,7 +373,7 @@
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
-		<li>Provisioning an endrun cell works like this.</li>
+		<li>Provisioning an endrun cell of 8 nodes works like this.</li>
 		<li>A "source" repo is created with 8 branches</li>
 		<li>8 double keypairs are created</li>
 		<li>8 bundles are created, 1 for each branch</li>
@@ -384,7 +388,7 @@
 	    <aside class="notes">
 	    <h3>Grant</h3>
 	      <ul>
-		<li>A repo is created with 7 remotes (everyone except itself) and 8 branches</li>
+		<li>A repo is created with 7 bundles (everyone except itself) and 8 branches (everyone including itself)</li>
 		<li>The public part of 7 double keypairs are copied over</li>
 		<li>Node gets its own full double keypair</li>
 		<li>SQLite database are set up in memory</li>
@@ -496,7 +500,7 @@
 	      <p>Best approach is spray and wait</p>
 	      <ul>
 		<li>Developed at university of southern california</li>
-		<li>Combines the epidemic routing benefits with a limit on copies to prevent congestion</li>
+		<li>Combines the epidemic routing benefits with a limit on copies to transmit in order to prevent congestion</li>
 	      </ul>
 	    </aside>
 	  </section>
@@ -560,11 +564,14 @@
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Chain of custody solves these issues without requiring global knowledge</p>
-	      <p>We set up chain of custody in 3 parts: a record on the payload itself, a receipt table, and a map table</p>
-	      <p>The Chain of custody on the node is just an array of receipts.</p>
-	      <p>Each receipt is recipient node ID, timestamp of receipt, and hash of the payload at that time.</p>
-	      <p>Every time the payload is passed, a receipt is appended to the array.</p>
+	      <ul>
+	      <li>Another issue in routing with DTN is that we have no global knowledge. Compromised nodes, wasted bandwidth, no idea where anyone is</li>
+	      <li>Chain of custody solves these issues without requiring global knowledge</li>
+	      <li>We set up chain of custody in 3 parts: a record on the payload itself, a receipt table, and a map table</li>
+	      <li>The Chain of custody on the node is just an array of receipts.</li>
+	      <li>Each receipt is recipient node ID, timestamp of receipt, and hash of the payload at that time.</li>
+	      <li>Every time the payload is passed, a receipt is appended to the array.</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="routing" data-background="photos/transport_receipt.jpg">
@@ -623,7 +630,8 @@
 	    <h3>Sneakernet</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Benefits of USB drives: small, high-capacity, cheap, ubiquitous.</p>
+	      <p>Never underestimate the bandwidth of a station wagon full of tape</p>
+	      <p>Benefits of USB drives: small (opsec), high-capacity (bandwidth), cheap (opsec/bandwidth), ubiquitous (opsec).</p>
 	      <p>USB is available on pretty much every computer made in the last decade.</p>
 	      <p>Which means Endrun can be run on any hardware that will still boot.</p>
 	      <p>Manual sneakernet: SSH in, run shell command</p>
@@ -650,8 +658,8 @@
 	    <h3>Other Radio?</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Endrun daemon is set to watch serial; PySerial is dead simple to use (named pipe)</p>
-	      <p>With a little bit of hacking, we can support any radio you can connect via serial or USB</p>
+	      <p>Because Endrun is platform-agnostic, and because Xbee uses serial, we just baked serial comm support into the endrun daemon.</p>
+	      <p>With a little bit of hacking, we can support any radio/comm method you can attach via serial or USB</p>
 	    </aside>
 	  </section>
 	</section>
@@ -666,17 +674,18 @@
       <h2 class="currentcat">Future Work</h2>
 	  </section>
 	  <section data-state="future-work" data-background="photos/future_bluetooth.jpg">
-	    <h3>Addtions to Endrun</h3>
+	    <h3>Additions to Endrun</h3>
 	    <ul>
-        <li>Key Rotation / Revocation</li>
+	      <li>Key Rotation / Revocation</li>
 	      <li>Auditing</li>
 	      <li>Bluetooth Beaconing</li>
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Rotating fingerprints in some time period allows nodes to prevent long-term data leakage from identifying the nodes on capture. It's just a good additional precaution, and it's possible, e.g., in GPG. It can be done in endrun, but it would take quite a bit of time and would require manually contacting every node to perform.</p>
-	      <p>Chain of custody gives you everything you need for an audit trail</p>
-	      <p>You'd have to do it by hand ATM. Future work would be to develop something resembling traceroute and/or forensics tools.</p>
+	      <p>Periodically rotating keys allows nodes to prevent long-term data leakage from identifying the nodes on capture.</p>
+	      <p>It can be done in endrun, but it would take quite a bit of time and would require manually contacting every node to perform. Same thing is true of key revocation</p>
+	      <p>Chain of custody gives you everything you need for an audit trail. At the moment, you'd have to do it by hand.</p>
+	      <p>Future work would be to develop something resembling traceroute and/or forensics tools.</p>
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
 	    </aside>
