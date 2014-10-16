@@ -618,7 +618,7 @@
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <p>Never underestimate the bandwidth of a station wagon full of tape</p>
-	      <p>Benefits of USB drives: small, high-capacity, cheap, ubiquitous.</p>
+	      <p>Benefits of USB drives: small (opsec), high-capacity (bandwidth), cheap (opsec/bandwidth), ubiquitous (opsec).</p>
 	      <p>USB is available on pretty much every computer made in the last decade.</p>
 	      <p>Which means Endrun can be run on any hardware that will still boot.</p>
 	      <p>Manual sneakernet: SSH in, run shell command</p>
@@ -645,8 +645,8 @@
 	    <h3>Other Radio?</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Endrun daemon is set to watch serial; PySerial is dead simple to use (named pipe)</p>
-	      <p>With a little bit of hacking, we can support any radio you can connect via serial or USB</p>
+	      <p>Because Endrun is platform-agnostic, and because Xbee uses serial, we just baked serial comm support into the endrun daemon.</p>
+	      <p>With a little bit of hacking, we can support any radio/comm method you can attach via serial or USB</p>
 	    </aside>
 	  </section>
 	</section>
@@ -663,15 +663,16 @@
 	  <section data-state="future-work" data-background="photos/future_bluetooth.jpg">
 	    <h3>Addtions to Endrun</h3>
 	    <ul>
-        <li>Key Rotation / Revocation</li>
+	      <li>Key Rotation / Revocation</li>
 	      <li>Auditing</li>
 	      <li>Bluetooth Beaconing</li>
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Rotating fingerprints in some time period allows nodes to prevent long-term data leakage from identifying the nodes on capture. It's just a good additional precaution, and it's possible, e.g., in GPG. It can be done in endrun, but it would take quite a bit of time and would require manually contacting every node to perform.</p>
-	      <p>Chain of custody gives you everything you need for an audit trail</p>
-	      <p>You'd have to do it by hand ATM. Future work would be to develop something resembling traceroute and/or forensics tools.</p>
+	      <p>Periodically rotating keys allows nodes to prevent long-term data leakage from identifying the nodes on capture.</p>
+	      <p>It can be done in endrun, but it would take quite a bit of time and would require manually contacting every node to perform. Same thing is true of key revocation</p>
+	      <p>Chain of custody gives you everything you need for an audit trail. At the moment, you'd have to do it by hand.</p>
+	      <p>Future work would be to develop something resembling traceroute and/or forensics tools.</p>
 	      <h3>Brendan</h3>
 	      <p>Add notes here.</p>
 	    </aside>
