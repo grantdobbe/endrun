@@ -201,7 +201,7 @@
 	      <h3>Grant</h3>
 	      <ul>
 		<li>Back in April, Anonymous announced Airchat, a system for secure internet-free communication using amateur radio.</li>
-		<li>Using encryption over amateur radio is illegal in the US according to FCC rules, part 97</li>
+		<li>Using encryption over amateur radio is illegal in the US (and probably everwhere else) according to FCC rules</li>
 		<li>Anonymous doesn't care; said "fuck you,NSA" (shrug)</li>
 		<li>However, opsec problem: it's an online protocol (continuous communication)</li>
 		<li>Who knows what trangulation is? Who knows what "unidirectional" means?</li>
@@ -245,7 +245,7 @@
 	</section>
 	<section><!--Endrun basics section-->
 	  <section>
-	    <h2 class="noncurrentcat">The Big Ideas</h2>
+      <h2 class="noncurrentcat">The Big Ideas</h2>
       <h2 class="noncurrentcat">Previous Work</h2>
       <h2 class="currentcat">Endrun 101</h2>
       <h2 class="noncurrentcat">User Services</h2>
@@ -348,7 +348,11 @@
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>That brings us to payloads. In Endrun, a payload is a nice little serialized package with the encrypted git bundle and its routing data. We have origin and destination, for which we use the salt public key fingerprints. We have an epoc timestamp that is used for determining time to live, our bundle, and then we have our chain of custody data -- more about that in a minute.</p>
+	      <ul><li>In Endrun, a payload is a serialized package with the encrypted git bundle and its routing data.</li> 
+	      <li>We have origin and destination identifiers, which are salt public key fingerprints.</li>
+	      <li>We have an epoc timestamp that is used for determining time to live,</li>
+	      <li>our bundle</li>, 
+	      <li>Chain of custody data, and copies field</li></ul>
 	    </aside>
 	  </section>
 	  <section data-state="endrun-101" data-background="photos/e101_cell.jpg">
