@@ -351,7 +351,7 @@
 	      <ul><li>In Endrun, a payload is a serialized package with the encrypted git bundle and its routing data.</li> 
 	      <li>We have origin and destination identifiers, which are salt public key fingerprints.</li>
 	      <li>We have an epoc timestamp that is used for determining time to live,</li>
-	      <li>our bundle</li>, 
+	      <li>our bundle</li>
 	      <li>Chain of custody data, and copies field</li></ul>
 	    </aside>
 	  </section>
@@ -360,7 +360,7 @@
 	    <aside class="notes">
 	      <h3>Grant</h3>
 	      <ul>
-		<li>Provisioning an endrun cell works like this.</li>
+		<li>Provisioning an endrun cell of 8 nodes works like this.</li>
 		<li>A "source" repo is created with 8 branches</li>
 		<li>8 double keypairs are created</li>
 		<li>8 bundles are created, 1 for each branch</li>
@@ -375,7 +375,7 @@
 	    <aside class="notes">
 	    <h3>Grant</h3>
 	      <ul>
-		<li>A repo is created with 7 remotes (everyone except itself) and 8 branches</li>
+		<li>A repo is created with 7 bundles (everyone except itself) and 8 branches (everyone including itself)</li>
 		<li>The public part of 7 double keypairs are copied over</li>
 		<li>Node gets its own full double keypair</li>
 		<li>SQLite database are set up in memory</li>
@@ -487,7 +487,7 @@
 	      <p>Best approach is spray and wait</p>
 	      <ul>
 		<li>Developed at university of southern california</li>
-		<li>Combines the epidemic routing benefits with a limit on copies to prevent congestion</li>
+		<li>Combines the epidemic routing benefits with a limit on copies to transmit in order to prevent congestion</li>
 	      </ul>
 	    </aside>
 	  </section>
@@ -551,11 +551,14 @@
 	    </ul>
 	    <aside class="notes">
 	      <h3>Grant</h3>
-	      <p>Chain of custody solves these issues without requiring global knowledge</p>
-	      <p>We set up chain of custody in 3 parts: a record on the payload itself, a receipt table, and a map table</p>
-	      <p>The Chain of custody on the node is just an array of receipts.</p>
-	      <p>Each receipt is recipient node ID, timestamp of receipt, and hash of the payload at that time.</p>
-	      <p>Every time the payload is passed, a receipt is appended to the array.</p>
+	      <ul>
+	      <li>Another issue in routing with DTN is that we have no global knowledge. Compromised nodes, wasted bandwidth, no idea where anyone is</li>
+	      <li>Chain of custody solves these issues without requiring global knowledge</li>
+	      <li>We set up chain of custody in 3 parts: a record on the payload itself, a receipt table, and a map table</li>
+	      <li>The Chain of custody on the node is just an array of receipts.</li>
+	      <li>Each receipt is recipient node ID, timestamp of receipt, and hash of the payload at that time.</li>
+	      <li>Every time the payload is passed, a receipt is appended to the array.</li>
+	      </ul>
 	    </aside>
 	  </section>
 	  <section data-state="routing" data-background="photos/transport_receipt.jpg">
@@ -614,6 +617,7 @@
 	    <h3>Sneakernet</h3>
 	    <aside class="notes">
 	      <h3>Grant</h3>
+	      <p>Never underestimate the bandwidth of a station wagon full of tape</p>
 	      <p>Benefits of USB drives: small, high-capacity, cheap, ubiquitous.</p>
 	      <p>USB is available on pretty much every computer made in the last decade.</p>
 	      <p>Which means Endrun can be run on any hardware that will still boot.</p>
